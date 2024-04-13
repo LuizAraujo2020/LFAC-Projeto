@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>167.0</x>
+			<y>504.0</y>
+			<initial/>
+		</state>
+		<state id="1" name="q1">
+			<x>330.0</x>
+			<y>113.0</y>
+			<final/>
+		</state>
+		<state id="2" name="q2">
+			<x>451.0</x>
+			<y>164.0</y>
+			<final/>
+		</state>
+		<state id="3" name="q3">
+			<x>542.0</x>
+			<y>261.0</y>
+			<final/>
+		</state>
+		<state id="4" name="q4">
+			<x>596.0</x>
+			<y>525.0</y>
+			<final/>
+		</state>
+		<state id="5" name="q5">
+			<x>571.0</x>
+			<y>661.0</y>
+			<final/>
+		</state>
+		<state id="6" name="q6">
+			<x>504.0</x>
+			<y>784.0</y>
+			<final/>
+		</state>
+		<state id="13" name="q13">
+			<x>731.0</x>
+			<y>456.0</y>
+			<final/>
+		</state>
+		<state id="15" name="q15">
+			<x>741.0</x>
+			<y>611.0</y>
+			<final/>
+		</state>
+		<state id="18" name="q18">
+			<x>587.0</x>
+			<y>386.0</y>
+			<final/>
+		</state>
+		<state id="21" name="q21">
+			<x>396.0</x>
+			<y>857.0</y>
+			<final/>
+		</state>
+		<state id="23" name="q23">
+			<x>721.0</x>
+			<y>747.0</y>
+			<final/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>4</from>
+			<to>15</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>5</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>18</to>
+			<read>/</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>13</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>6</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>23</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>21</to>
+			<read>not</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>3</to>
+			<read>*</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>+</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>2</to>
+			<read>-</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>4</to>
+			<read>&lt;</read>
+		</transition>
+		<note>
+			<text>   Será mudado quando juntar tudo    </text>
+			<x>12.0</x>
+			<y>263.0</y>
+		</note>
+	</automaton>
+</structure>
