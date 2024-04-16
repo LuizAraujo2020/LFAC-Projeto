@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>474.0</x>
+			<y>374.0</y>
+			<initial/>
+		</state>
+		<state id="1" name="q5">
+			<x>318.0</x>
+			<y>492.0</y>
+			<final/>
+		</state>
+		<state id="2" name="q7">
+			<x>641.0</x>
+			<y>296.0</y>
+			<final/>
+		</state>
+		<state id="3" name="q8">
+			<x>665.0</x>
+			<y>374.0</y>
+			<final/>
+		</state>
+		<state id="4" name="q9">
+			<x>796.0</x>
+			<y>376.0</y>
+			<final/>
+		</state>
+		<state id="5" name="q10">
+			<x>630.0</x>
+			<y>445.0</y>
+			<final/>
+		</state>
+		<state id="7" name="q11">
+			<x>753.0</x>
+			<y>506.0</y>
+			<final/>
+		</state>
+		<state id="8" name="q6">
+			<x>474.0</x>
+			<y>535.0</y>
+			<final/>
+		</state>
+		<state id="9" name="q1">
+			<x>338.0</x>
+			<y>243.0</y>
+			<final/>
+		</state>
+		<state id="10" name="q2">
+			<x>101.0</x>
+			<y>242.0</y>
+			<final/>
+		</state>
+		<state id="11" name="q3">
+			<x>232.0</x>
+			<y>138.0</y>
+		</state>
+		<state id="12" name="q4">
+			<x>138.0</x>
+			<y>51.0</y>
+			<final/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>9</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>10</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>9</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>10</to>
+			<read>.</read>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>12</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>\n, \t, space</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>w</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>11</to>
+			<read>E</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>5</to>
+			<read>&lt;</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>12</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>W</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>e</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>2</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>/</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>-</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>+</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>*</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>3</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>W</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>11</to>
+			<read>e</read>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>7</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>7</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>w</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>E</read>
+		</transition>
+		<note>
+			<text>  
+   W : letra maiúscula   
+   w : letra minúscula
+   D : dígito / número
+</text>
+			<x>382.0</x>
+			<y>46.0</y>
+		</note>
+	</automaton>
+</structure>
