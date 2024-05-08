@@ -16,6 +16,8 @@
 		6F8B6C452BEBADE000887CE7 /* lfacUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C442BEBADE000887CE7 /* lfacUITestsLaunchTests.swift */; };
 		6F8B6C552BEBAE3600887CE7 /* GrammarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C542BEBAE3600887CE7 /* GrammarController.swift */; };
 		6F8B6C572BEBAE5200887CE7 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C562BEBAE5200887CE7 /* Token.swift */; };
+		6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */; };
+		6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		6F8B6C442BEBADE000887CE7 /* lfacUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lfacUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6F8B6C542BEBAE3600887CE7 /* GrammarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarController.swift; sourceTree = "<group>"; };
 		6F8B6C562BEBAE5200887CE7 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "diagram-token-recko.pdf"; sourceTree = "<group>"; };
+		6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lex-token-recognizer.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,9 +174,27 @@
 		6F8B6C592BEBAE8300887CE7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F8B6C5D2BEBC3C700887CE7 /* Documents */,
+				6F8B6C5B2BEBB55100887CE7 /* Diagrams */,
 				6F8B6C2A2BEBADE000887CE7 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F8B6C5B2BEBB55100887CE7 /* Diagrams */ = {
+			isa = PBXGroup;
+			children = (
+				6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */,
+			);
+			path = Diagrams;
+			sourceTree = "<group>";
+		};
+		6F8B6C5D2BEBC3C700887CE7 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */,
+			);
+			path = Documents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,8 +301,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */,
 				6F8B6C2F2BEBADE000887CE7 /* Preview Assets.xcassets in Resources */,
 				6F8B6C2B2BEBADE000887CE7 /* Assets.xcassets in Resources */,
+				6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
