@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>720.0</x>
+			<y>736.0</y>
+			<initial/>
+		</state>
+		<state id="1" name="q1">
+			<x>474.0</x>
+			<y>860.0</y>
+			<label>ID</label>
+			<final/>
+		</state>
+		<state id="2" name="q7">
+			<x>930.0</x>
+			<y>727.0</y>
+			<label>=</label>
+			<final/>
+		</state>
+		<state id="3" name="q8">
+			<x>918.0</x>
+			<y>790.0</y>
+			<label>&gt;</label>
+			<final/>
+		</state>
+		<state id="4" name="q4">
+			<x>564.0</x>
+			<y>234.0</y>
+			<label>ERRO</label>
+		</state>
+		<state id="5" name="q9">
+			<x>902.0</x>
+			<y>855.0</y>
+			<label>&lt;</label>
+			<final/>
+		</state>
+		<state id="6" name="q5">
+			<x>432.0</x>
+			<y>750.0</y>
+			<label>Fim</label>
+			<final/>
+		</state>
+		<state id="7" name="q10">
+			<x>989.0</x>
+			<y>905.0</y>
+			<label>&lt;=</label>
+			<final/>
+		</state>
+		<state id="8" name="q11">
+			<x>781.0</x>
+			<y>919.0</y>
+			<label>Operação Básicas</label>
+			<final/>
+		</state>
+		<state id="9" name="q1">
+			<x>486.0</x>
+			<y>537.0</y>
+			<label>NUMINT</label>
+			<final/>
+		</state>
+		<state id="10" name="q2">
+			<x>277.0</x>
+			<y>621.0</y>
+			<label>NUMDEC</label>
+			<final/>
+		</state>
+		<state id="11" name="q3">
+			<x>441.0</x>
+			<y>304.0</y>
+		</state>
+		<state id="12" name="q4">
+			<x>217.0</x>
+			<y>258.0</y>
+			<label>EXP</label>
+			<final/>
+		</state>
+		<state id="13" name="q14">
+			<x>535.0</x>
+			<y>910.0</y>
+			<label>;</label>
+			<final/>
+		</state>
+		<state id="14" name="q13">
+			<x>612.0</x>
+			<y>913.0</y>
+			<label>(</label>
+			<final/>
+		</state>
+		<state id="15" name="q15">
+			<x>129.0</x>
+			<y>423.0</y>
+			<label>Erro</label>
+			<final/>
+		</state>
+		<state id="16" name="q17">
+			<x>481.0</x>
+			<y>653.0</y>
+			<label>Erro</label>
+			<final/>
+		</state>
+		<state id="17" name="q12">
+			<x>691.0</x>
+			<y>915.0</y>
+			<label>)</label>
+			<final/>
+		</state>
+		<state id="18" name="q18">
+			<x>1024.0</x>
+			<y>817.0</y>
+			<label>&gt;=</label>
+			<final/>
+		</state>
+		<state id="20" name="q20">
+			<x>1030.0</x>
+			<y>722.0</y>
+			<label>==</label>
+			<final/>
+		</state>
+		<state id="22" name="q22">
+			<x>558.0</x>
+			<y>359.0</y>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>9</from>
+			<to>15</to>
+			<read>C</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>\n, \t, space</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>15</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>14</to>
+			<read>(</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>17</to>
+			<read>)</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>11</to>
+			<read>e</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>15</to>
+			<read>X</read>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>20</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>-</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>/</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>+</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>*</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>5</to>
+			<read>&lt;</read>
+		</transition>
+		<transition>
+			<from>5</from>
+			<to>7</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>11</to>
+			<read>E</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>16</to>
+			<read>X</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>9</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>12</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>10</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>12</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>15</to>
+			<read>w</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>4</to>
+			<read>X</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>15</to>
+			<read>X</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>e</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>13</to>
+			<read>;</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>15</to>
+			<read>C</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>18</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>15</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>6</to>
+			<read>EOF</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>4</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>3</to>
+			<read>&gt;</read>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>15</to>
+			<read>X</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>9</to>
+			<read>D</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>15</to>
+			<read>W</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>E</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>15</to>
+			<read>O</read>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>15</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>9</from>
+			<to>10</to>
+			<read>.</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>2</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>15</to>
+			<read>C</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>15</to>
+			<read>C</read>
+		</transition>
+		<note>
+			<text>                 LEGENDA
+
+   L : letra maiúscula, pertence ao alfabeto      
+   D : dígito / número, pertence ao alfabeto                                                     
+   O : qualquer outra entrada
+   C :  +, -, *, /, =, &lt;, &gt;, :, (, )
+   X : entrada que não pertence ao alfabeto
+
+</text>
+			<x>631.0</x>
+			<y>181.0</y>
+		</note>
+		<note>
+			<text>                 ALFABETO
+
+   Σ = { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z,    
+            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z,
+            0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+            +, -, *, /,
+            =, &lt;, &gt;, :, ., ;, (, )
+         }
+</text>
+			<x>627.0</x>
+			<y>6.0</y>
+		</note>
+		<note>
+			<text>   INTEGRANTES 
+
+   - Luiz Araujo        UC20201641   
+   - Gabriel Eduardo UC22101937
+   -Victor Inácio       UC22200065 
+</text>
+			<x>1167.0</x>
+			<y>10.0</y>
+		</note>
+	</automaton>
+</structure>
