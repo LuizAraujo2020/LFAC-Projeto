@@ -16,6 +16,7 @@ struct LexicalAnalysisView: View {
                 ForEach(scannerLA.tokens.keys.sorted(), id: \.self) { item in
                     TokenListItem(
                         token: scannerLA.tokens[item] ?? .mock,
+                        id: item,
                         styling: BasicStyling()
                     )
                 }
