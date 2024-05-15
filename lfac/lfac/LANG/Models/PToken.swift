@@ -41,3 +41,14 @@ struct PToken {
 
 
 }
+
+extension PToken {
+    static var mock: Self {
+        PToken(
+            type: .keyword,
+            value: "var",
+            line: 1,
+            column: 1
+        )
+    }
+}

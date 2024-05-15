@@ -28,6 +28,10 @@
 		6F3431722BF2FE9E00455FE9 /* AlphabetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431712BF2FE9E00455FE9 /* AlphabetTests.swift */; };
 		6F3431742BF2FEA700455FE9 /* NSRegularExpression+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431732BF2FEA700455FE9 /* NSRegularExpression+ExtensionTests.swift */; };
 		6F3431792BF310A000455FE9 /* dfacdfsfc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431782BF310A000455FE9 /* dfacdfsfc.swift */; };
+		6F685B0B2BF4173600F358FE /* TokenListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B0A2BF4173600F358FE /* TokenListItem.swift */; };
+		6F685B0D2BF4344300F358FE /* LexicalAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B0C2BF4344300F358FE /* LexicalAnalysisView.swift */; };
+		6F685B102BF4355600F358FE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B0F2BF4355600F358FE /* ContentViewModel.swift */; };
+		6F685B132BF4359400F358FE /* LexicalAnalysisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B122BF4359400F358FE /* LexicalAnalysisViewModel.swift */; };
 		6F8B6C272BEBADDE00887CE7 /* lfacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C262BEBADDE00887CE7 /* lfacApp.swift */; };
 		6F8B6C292BEBADDE00887CE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C282BEBADDE00887CE7 /* ContentView.swift */; };
 		6F8B6C2B2BEBADE000887CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C2A2BEBADE000887CE7 /* Assets.xcassets */; };
@@ -35,7 +39,6 @@
 		6F8B6C392BEBADE000887CE7 /* lfacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C382BEBADE000887CE7 /* lfacTests.swift */; };
 		6F8B6C432BEBADE000887CE7 /* lfacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C422BEBADE000887CE7 /* lfacUITests.swift */; };
 		6F8B6C452BEBADE000887CE7 /* lfacUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C442BEBADE000887CE7 /* lfacUITestsLaunchTests.swift */; };
-		6F8B6C552BEBAE3600887CE7 /* GrammarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C542BEBAE3600887CE7 /* GrammarController.swift */; };
 		6F8B6C572BEBAE5200887CE7 /* PToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C562BEBAE5200887CE7 /* PToken.swift */; };
 		6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */; };
 		6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */; };
@@ -80,6 +83,10 @@
 		6F3431712BF2FE9E00455FE9 /* AlphabetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabetTests.swift; sourceTree = "<group>"; };
 		6F3431732BF2FEA700455FE9 /* NSRegularExpression+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+ExtensionTests.swift"; sourceTree = "<group>"; };
 		6F3431782BF310A000455FE9 /* dfacdfsfc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dfacdfsfc.swift; sourceTree = "<group>"; };
+		6F685B0A2BF4173600F358FE /* TokenListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenListItem.swift; sourceTree = "<group>"; };
+		6F685B0C2BF4344300F358FE /* LexicalAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexicalAnalysisView.swift; sourceTree = "<group>"; };
+		6F685B0F2BF4355600F358FE /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		6F685B122BF4359400F358FE /* LexicalAnalysisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexicalAnalysisViewModel.swift; sourceTree = "<group>"; };
 		6F8B6C232BEBADDE00887CE7 /* lfac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lfac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8B6C262BEBADDE00887CE7 /* lfacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lfacApp.swift; sourceTree = "<group>"; };
 		6F8B6C282BEBADDE00887CE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,7 +98,6 @@
 		6F8B6C3E2BEBADE000887CE7 /* lfacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lfacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8B6C422BEBADE000887CE7 /* lfacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lfacUITests.swift; sourceTree = "<group>"; };
 		6F8B6C442BEBADE000887CE7 /* lfacUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lfacUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		6F8B6C542BEBAE3600887CE7 /* GrammarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrammarController.swift; sourceTree = "<group>"; };
 		6F8B6C562BEBAE5200887CE7 /* PToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PToken.swift; sourceTree = "<group>"; };
 		6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "diagram-token-recko.pdf"; sourceTree = "<group>"; };
 		6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lex-token-recognizer.png"; sourceTree = "<group>"; };
@@ -125,9 +131,8 @@
 		6F20B4502BF16D7100EC1B0B /* IDE */ = {
 			isa = PBXGroup;
 			children = (
-				6F8B6C532BEBAE0900887CE7 /* Controllers */,
 				6F8B6C512BEBADF300887CE7 /* Models */,
-				6F8B6C522BEBADF900887CE7 /* Views */,
+				6F8B6C522BEBADF900887CE7 /* Scenes */,
 			);
 			path = IDE;
 			sourceTree = "<group>";
@@ -178,8 +183,6 @@
 		6F34315C2BF2FDBC00455FE9 /* IDE */ = {
 			isa = PBXGroup;
 			children = (
-				6F3431602BF2FDEE00455FE9 /* Controllers */,
-				6F34315E2BF2FDE300455FE9 /* Models */,
 			);
 			path = IDE;
 			sourceTree = "<group>";
@@ -195,20 +198,6 @@
 				6F3431702BF2FE8A00455FE9 /* Utils */,
 			);
 			path = LANG;
-			sourceTree = "<group>";
-		};
-		6F34315E2BF2FDE300455FE9 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		6F3431602BF2FDEE00455FE9 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		6F3431692BF2FE5600455FE9 /* Models */ = {
@@ -236,6 +225,32 @@
 				6F3431732BF2FEA700455FE9 /* NSRegularExpression+ExtensionTests.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6F685B092BF4171100F358FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6F685B0A2BF4173600F358FE /* TokenListItem.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6F685B0E2BF4353400F358FE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6F8B6C282BEBADDE00887CE7 /* ContentView.swift */,
+				6F685B0F2BF4355600F358FE /* ContentViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6F685B112BF4357D00F358FE /* LexicalAnalysis */ = {
+			isa = PBXGroup;
+			children = (
+				6F685B0C2BF4344300F358FE /* LexicalAnalysisView.swift */,
+				6F685B122BF4359400F358FE /* LexicalAnalysisViewModel.swift */,
+			);
+			path = LexicalAnalysis;
 			sourceTree = "<group>";
 		};
 		6F8B6C1A2BEBADDE00887CE7 = {
@@ -306,20 +321,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6F8B6C522BEBADF900887CE7 /* Views */ = {
+		6F8B6C522BEBADF900887CE7 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				6F8B6C282BEBADDE00887CE7 /* ContentView.swift */,
+				6F685B092BF4171100F358FE /* Components */,
+				6F685B0E2BF4353400F358FE /* Home */,
+				6F685B112BF4357D00F358FE /* LexicalAnalysis */,
 			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6F8B6C532BEBAE0900887CE7 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				6F8B6C542BEBAE3600887CE7 /* GrammarController.swift */,
-			);
-			path = Controllers;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		6F8B6C582BEBAE7200887CE7 /* App */ = {
@@ -491,18 +500,21 @@
 				6F20B4652BF1ADA700EC1B0B /* PState.swift in Sources */,
 				6F8B6C292BEBADDE00887CE7 /* ContentView.swift in Sources */,
 				6F20B45A2BF1A4D400EC1B0B /* NSRegularExpression+Extension.swift in Sources */,
-				6F8B6C552BEBAE3600887CE7 /* GrammarController.swift in Sources */,
 				6F8B6C272BEBADDE00887CE7 /* lfacApp.swift in Sources */,
+				6F685B0D2BF4344300F358FE /* LexicalAnalysisView.swift in Sources */,
 				6F8B6C572BEBAE5200887CE7 /* PToken.swift in Sources */,
 				6F20B4622BF1AAE900EC1B0B /* RegexSource.swift in Sources */,
 				6F20B4562BF1A2CF00EC1B0B /* Terminators.swift in Sources */,
+				6F685B0B2BF4173600F358FE /* TokenListItem.swift in Sources */,
 				6F20B45E2BF1A67200EC1B0B /* Alphabet.swift in Sources */,
 				6F20B45C2BF1A54D00EC1B0B /* TransitionTable.swift in Sources */,
 				6F34315B2BF27A2700455FE9 /* TokenVerifier.swift in Sources */,
 				6F3431592BF277E800455FE9 /* ScannerLA.swift in Sources */,
 				6F20B4542BF1A23B00EC1B0B /* Errors.swift in Sources */,
+				6F685B102BF4355600F358FE /* ContentViewModel.swift in Sources */,
 				6F3431572BF26F9C00455FE9 /* TokenClass.swift in Sources */,
 				6F3431792BF310A000455FE9 /* dfacdfsfc.swift in Sources */,
+				6F685B132BF4359400F358FE /* LexicalAnalysisViewModel.swift in Sources */,
 				6F20B44F2BF16D6100EC1B0B /* LexicalAnalyzer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

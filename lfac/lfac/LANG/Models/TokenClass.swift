@@ -11,7 +11,7 @@ import Foundation
 //    case keyword = "Keyword"
 //    case symbol = "Symbol"
 //    case identifier = "Identifier"
-//    case number = "Number"
+//    case integer = "Number"
 //    case terminator = "Terminator"
 //
 //    var id: String { self.rawValue }
@@ -19,7 +19,7 @@ import Foundation
 
 enum PTokenType: String, Identifiable, CaseIterable {
     case space
-    case endLine
+//    case endLine
     case terminators
     case commentary
 
@@ -28,17 +28,18 @@ enum PTokenType: String, Identifiable, CaseIterable {
     case operatorAttribution
 
     case keyword
-    case number
+    case integer
+    case real
     case symbol
     case identifier
 
     case invalidToken
 
     static var allCases: [PTokenType] = [
-        .space, .endLine, .terminators, .commentary,
+        .space, .terminators, .commentary,
         .operatorMath, .operatorCompare, .operatorAttribution,
-        .number, .keyword, .symbol, .identifier,
-        .invalidToken
+        .integer, .real, .keyword, .symbol, .identifier,
+        .invalidToken//.endLine, 
     ]
 
     var id: String { self.rawValue }
@@ -61,10 +62,12 @@ enum PTokenType: String, Identifiable, CaseIterable {
             return "ESPACO"
         case .commentary:
             return "COMENTARIO"
-        case .number:
-            return "NUMEROS"
-        case .endLine:
-            return "FINAL_LINHA"
+        case .integer:
+            return "INTEIRO"
+        case .real:
+            return "REAL"
+//        case .endLine:
+//            return "FINAL_LINHA"
         case .terminators:
             return "TERMINADORES"
         case .invalidToken:
@@ -77,11 +80,13 @@ enum PTokenType: String, Identifiable, CaseIterable {
         case .identifier:
             return "^[a-z]+[a-zA-Z0-9]*$"
         case .keyword:
-            return "^[program|var|integer|real|boolean|procedure|begin|end|if|then|else|while|do|or|true|false|div|and|not|READ|WRITE]$"
+            return "^(program|var|integer|real|boolean|procedure|begin|end|if|then|else|while|do|or|true|false|div|and|not|READ|WRITE)$"
         case .operatorMath:
-            return "[+|-|*|/]$"
-        case .number:
-            return "^(e.*([+|-]?[0-9]+)(([.]?[0-9]+){0,1}([e]{1}[+|-]?[0-9]+)?)*/1)$"//"^(([+|-])?[0-9]+)([.](([0-9]+)?))?(([e|E])(([+|-])?)[0-9]+)?$"//
+            return "^[+|*|/|-]{1}$"
+        case .integer:
+            return "^([+|-])?[0-9]+$"//"^(([+|-])?[0-9]+)([.](([0-9]+)?))?(([e|E])(([+|-])?)[0-9]+)?$"//
+        case .real:
+            return "^([+|-])?[0-9]+[.]{1}[0-9]+$"//"^(e.*([+|-]?[0-9]+)(([.]?[0-9]+){0,1}([e]{1}[+|-]?[0-9]+)?)*/1)$"//"^(([+|-])?[0-9]+)([.](([0-9]+)?))?(([e|E])(([+|-])?)[0-9]+)?$"//
         case .operatorCompare:
             return "[<|>|=|>=|<=|<>]"
         case .operatorAttribution:
@@ -89,13 +94,13 @@ enum PTokenType: String, Identifiable, CaseIterable {
         case .symbol:
             return "^[<|>|=|>=|<=|<>|.|,|;|:=|:|(|)|+|-|*|/]$"
         case .space:
-            return "[\\s]"
+            return "^[\\s]+$"
         case .commentary:
-            return "[/]{2}"
-        case .endLine:
-            return "[\n|\0]"
+            return "[/]{2,}"
+//        case .endLine:
+//            return "[\n|\0]"
         case .terminators:
-            return "[\\s|\\r|\\n|\\t|\\0]"
+            return "[\\r|\\n|\\t|\\0]"
         case .invalidToken:
             return ""
         }
