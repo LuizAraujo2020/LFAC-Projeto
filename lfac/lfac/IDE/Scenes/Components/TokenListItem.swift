@@ -9,9 +9,23 @@ import SwiftUI
 
 struct TokenListItem: View {
     let token: PToken
+    let styling: CodeStyler
 
     var body: some View {
-        GroupBox {
+        ZStack {
+
+            Rectangle()
+                .foregroundStyle(Color(uiColor: .opaqueSeparator))
+                .clipShape(RoundedRectangle(cornerRadius: 12), style: FillStyle())
+
+            HStack {
+                Rectangle()
+                    .foregroundStyle(styling.getColorBy(type: token.type))
+                    .frame(width: 10)
+                    .clipShape(RoundedRectangle(cornerRadius: 12), style: FillStyle())
+
+                Spacer()
+            }
             VStack(alignment: .leading) {
                 Text("**TIPO :**\t\t\(token.type.id)")
                 Text("**NOME :**\t\(token.name)")
@@ -27,8 +41,10 @@ struct TokenListItem: View {
                 .font(.subheadline)
             }
             .frame(maxWidth: .infinity)
-            .padding(.top)
+            .padding([.top, .horizontal])
         }
+        .padding(.vertical, 8)
+        .shadow(radius: 10)
     }
 }
 
@@ -39,6 +55,7 @@ struct TokenListItem: View {
             value: "var",
             line: 1,
             column: 1
-        )
+        ),
+        styling: BasicStyling()
     )
 }

@@ -14,7 +14,10 @@ struct LexicalAnalysisView: View {
         VStack {
             List {
                 ForEach(scannerLA.tokens.keys.sorted(), id: \.self) { item in
-                    TokenListItem(token: scannerLA.tokens[item] ?? .mock)
+                    TokenListItem(
+                        token: scannerLA.tokens[item] ?? .mock,
+                        styling: BasicStyling()
+                    )
                 }
             }
         }

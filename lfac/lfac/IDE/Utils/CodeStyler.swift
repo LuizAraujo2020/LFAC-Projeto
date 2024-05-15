@@ -9,6 +9,7 @@ import SwiftUI
 
 protocol CodeStyler {
     func style(_ text: String) -> AttributedString
+    func getColorBy(type: PTokenType) -> Color 
 }
 
 struct BasicStyling: CodeStyler {
@@ -44,7 +45,7 @@ struct BasicStyling: CodeStyler {
         return styled
     }
 
-    private func getColorBy(type: PTokenType) -> Color {
+    func getColorBy(type: PTokenType) -> Color {
         switch type {
         case .space: .clear
         case .terminators: .blue
