@@ -55,9 +55,6 @@ struct ContentView: View {
                 }
             }
             .padding()
-//            .onChange(of: vm.code) { _, newValue in
-//                vm.enableRunButton()
-//            }
         }
     }
 }

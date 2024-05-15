@@ -32,6 +32,7 @@
 		6F685B0D2BF4344300F358FE /* LexicalAnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B0C2BF4344300F358FE /* LexicalAnalysisView.swift */; };
 		6F685B102BF4355600F358FE /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B0F2BF4355600F358FE /* ContentViewModel.swift */; };
 		6F685B132BF4359400F358FE /* LexicalAnalysisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B122BF4359400F358FE /* LexicalAnalysisViewModel.swift */; };
+		6F685B162BF4631600F358FE /* CodeStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F685B152BF4631600F358FE /* CodeStyler.swift */; };
 		6F8B6C272BEBADDE00887CE7 /* lfacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C262BEBADDE00887CE7 /* lfacApp.swift */; };
 		6F8B6C292BEBADDE00887CE7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C282BEBADDE00887CE7 /* ContentView.swift */; };
 		6F8B6C2B2BEBADE000887CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C2A2BEBADE000887CE7 /* Assets.xcassets */; };
@@ -87,6 +88,7 @@
 		6F685B0C2BF4344300F358FE /* LexicalAnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexicalAnalysisView.swift; sourceTree = "<group>"; };
 		6F685B0F2BF4355600F358FE /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		6F685B122BF4359400F358FE /* LexicalAnalysisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexicalAnalysisViewModel.swift; sourceTree = "<group>"; };
+		6F685B152BF4631600F358FE /* CodeStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeStyler.swift; sourceTree = "<group>"; };
 		6F8B6C232BEBADDE00887CE7 /* lfac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lfac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8B6C262BEBADDE00887CE7 /* lfacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lfacApp.swift; sourceTree = "<group>"; };
 		6F8B6C282BEBADDE00887CE7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		6F20B4502BF16D7100EC1B0B /* IDE */ = {
 			isa = PBXGroup;
 			children = (
+				6F685B142BF4630E00F358FE /* Utils */,
 				6F8B6C512BEBADF300887CE7 /* Models */,
 				6F8B6C522BEBADF900887CE7 /* Scenes */,
 			);
@@ -251,6 +254,14 @@
 				6F685B122BF4359400F358FE /* LexicalAnalysisViewModel.swift */,
 			);
 			path = LexicalAnalysis;
+			sourceTree = "<group>";
+		};
+		6F685B142BF4630E00F358FE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6F685B152BF4631600F358FE /* CodeStyler.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		6F8B6C1A2BEBADDE00887CE7 = {
@@ -498,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F20B4652BF1ADA700EC1B0B /* PState.swift in Sources */,
+				6F685B162BF4631600F358FE /* CodeStyler.swift in Sources */,
 				6F8B6C292BEBADDE00887CE7 /* ContentView.swift in Sources */,
 				6F20B45A2BF1A4D400EC1B0B /* NSRegularExpression+Extension.swift in Sources */,
 				6F8B6C272BEBADDE00887CE7 /* lfacApp.swift in Sources */,
