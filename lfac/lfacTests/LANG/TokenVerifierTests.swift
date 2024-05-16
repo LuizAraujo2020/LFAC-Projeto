@@ -156,55 +156,55 @@ final class TokenVerifierTests: XCTestCase {
 
 
     // MARK: - Testing commentary
-        func test_getLexemeType_shouldReturnComment() throws {
-            let correctType = PTokenType.commentary
-            let valids = [
-                "//", "////", "////"
-            ]
-    
-            for word in valids {
-                let type = sut.getLexemeType(word)
-                XCTAssertEqual(correctType, type, "\(word) != commentary")
-            }
-        }
+    func test_getLexemeType_shouldReturnComment() throws {
+        let correctType = PTokenType.commentary
+        let valids = [
+            "//", "////", "////"
+        ]
 
-        func test_getLexemeType_shouldntReturnComment() throws {
-            let incorrectType = PTokenType.commentary
-            let invalids = [
-                "hkjo/", "/n/", "123", "adasd", "123wqa", "asd12", " ", "<", "="
-            ]
-    
-            for word in invalids {
-                let type = sut.getLexemeType(word)
-                XCTAssertNotEqual(incorrectType, type, "\(word) == commentary")
-            }
+        for word in valids {
+            let type = sut.getLexemeType(word)
+            XCTAssertEqual(correctType, type, "\(word) != commentary")
         }
+    }
+
+    func test_getLexemeType_shouldntReturnComment() throws {
+        let incorrectType = PTokenType.commentary
+        let invalids = [
+            "hkjo/", "/n/", "123", "adasd", "123wqa", "asd12", " ", "<", "="
+        ]
+
+        for word in invalids {
+            let type = sut.getLexemeType(word)
+            XCTAssertNotEqual(incorrectType, type, "\(word) == commentary")
+        }
+    }
 
 
     // MARK: - Testing operatorMath
-        func test_getLexemeType_shouldReturnOperatorMath() throws {
-            let correctType = PTokenType.operatorMath
-            let valids = [
-                "+", "*", "/", "-"
-            ]
-    
-            for word in valids {
-                let type = sut.getLexemeType(word)
-                XCTAssertEqual(correctType, type, "\(word) != operatorMath")
-            }
-        }
+    func test_getLexemeType_shouldReturnOperatorMath() throws {
+        let correctType = PTokenType.operatorMath
+        let valids = [
+            "+", "*", "/", "-"
+        ]
 
-        func test_getLexemeType_shouldntReturnOperatorMath() throws {
-            let incorrectType = PTokenType.operatorMath
-            let invalids = [
-                "as", "<", ">", ":=", "asd", "123", "asd1"
-            ]
-    
-            for word in invalids {
-                let type = sut.getLexemeType(word)
-                XCTAssertNotEqual(incorrectType, type, "\(word) == operatorMath")
-            }
+        for word in valids {
+            let type = sut.getLexemeType(word)
+            XCTAssertEqual(correctType, type, "\(word) != operatorMath")
         }
+    }
+
+    func test_getLexemeType_shouldntReturnOperatorMath() throws {
+        let incorrectType = PTokenType.operatorMath
+        let invalids = [
+            "as", "<", ">", ":=", "asd", "123", "asd1"
+        ]
+
+        for word in invalids {
+            let type = sut.getLexemeType(word)
+            XCTAssertNotEqual(incorrectType, type, "\(word) == operatorMath")
+        }
+    }
 
 
     // MARK: - Testing operatorCompare
