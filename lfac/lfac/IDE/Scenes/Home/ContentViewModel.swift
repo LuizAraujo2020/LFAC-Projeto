@@ -11,37 +11,44 @@ import UIKit
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    @Published var code: String = ""
+    @Published var code: String = "program testeA\nvar qtd = 12\nvar numero = 3245\n"
+//    @Published var analyzer = LexicalAnalyzer(
+//        code: "",
+//        states: TransitionState.allCases,
+//        initialState: TransitionState.q0,
+//        finalStates: TransitionState.finals
+//    )
     @Published var styled: AttributedString = ""
 
     ///  View Elements States
     @Published var isRunEnabled = false
 
     private var cancellables = Set<AnyCancellable>()
-    private let styling: CodeStyler?
+//    private let styling: CodeStyler?
 
     internal init(
         code: String = "",
         isRunEnabled: Bool = false,
-        cancellables: Set<AnyCancellable> = Set<AnyCancellable>(),
-        styling: CodeStyler = BasicStyling()
+        cancellables: Set<AnyCancellable> = Set<AnyCancellable>()//,
+//        styling: CodeStyler = BasicStyling()
     ) {
         self.code = code
         self.isRunEnabled = isRunEnabled
         self.cancellables = cancellables
-        self.styling = styling
+//        self.styling = styling
 
         enableRunButton()
     }
 
     func enableRunButton() {
+        
         self.$code.sink { [unowned self] value in
 
             /// Validate input to enable Run Button
             self.isRunEnabled = self.validateInput(self.code)
-            if let styling {
-                self.styled = styling.style(code.description)
-            }
+//            if let styling {
+//                self.styled = styling.style(code.description)
+//            }
         }
         .store(in: &cancellables)
     }

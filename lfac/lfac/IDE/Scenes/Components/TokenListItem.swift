@@ -10,7 +10,7 @@ import SwiftUI
 struct TokenListItem: View {
     let token: PToken
     let id: Int
-    let styling: CodeStyler
+//    let styling: CodeStyler
     
     var body: some View {
         ZStack {
@@ -24,7 +24,7 @@ struct TokenListItem: View {
             HStack {
                 ZStack {
                     Rectangle()
-                        .foregroundStyle(styling.getColorBy(type: token.type))
+//                        .foregroundStyle(styling.getColorBy(type: token.type))
                         .clipShape(RoundedRectangle(cornerRadius: 12), style: FillStyle())
                     
                     Text("\(id)")
@@ -59,11 +59,12 @@ struct TokenListItem: View {
 #Preview {
     TokenListItem(
         token: PToken(
+            id: 0,
             type: .keyword,
             value: "var",
             line: 1,
             column: 1
-        ), id: 0,
-        styling: BasicStyling()
+        ), id: 0//,
+//        styling: BasicStyling()
     )
 }

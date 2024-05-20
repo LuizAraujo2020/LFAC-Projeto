@@ -22,9 +22,16 @@ struct ContentView: View {
 
                         Spacer()
 
-                        NavigationLink {
-                            LexicalAnalysisView(scannerLA: ScannerLA(code: vm.code, tokenVerifier: TokenVerifier()))
-                        } label: {
+                        NavigationLink(value: vm.code) {
+//                            <#code#>
+//                        }
+//
+//                        NavigationLink {
+////                            LexicalAnalysisView(scannerLA: ScannerLA(code: vm.code, tokenVerifier: TokenVerifier()))
+//                            LexicalAnalysisView(
+//                                analyzer: vm.analyzer
+//                            )
+//                        } label: {
                             Label("Analyze", systemImage: "play.circle.fill")
                         }
                         .disabled(!vm.isRunEnabled)
@@ -55,6 +62,16 @@ struct ContentView: View {
                 }
             }
             .padding()
+            .navigationDestination(for: String.self) { code in
+                LexicalAnalysisView(
+                    analyzer: LexicalAnalyzer(
+                        code: code,
+                        states: TransitionState.allCases,
+                        initialState: TransitionState.q0,
+                        finalStates: TransitionState.finals
+                    )
+                )
+            }
         }
     }
 }

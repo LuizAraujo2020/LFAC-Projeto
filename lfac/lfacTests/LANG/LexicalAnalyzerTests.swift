@@ -9,17 +9,53 @@ import XCTest
 @testable import lfac
 
 final class LexicalAnalyzerTests: XCTestCase {
+    var sut: LexicalAnalyzer!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = LexicalAnalyzer(
+            code: """
+                program testeA
+                var qtd = 12
+                var numero = 3245
+                """,
+            states: TransitionState.allCases,
+            initialState: TransitionState.q0,
+            finalStates: TransitionState.finals
+        )
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
-    func testExample() throws {
+    func test_getCharType() throws {
+        var type = CharType.letters
+        var result = sut.getCharType("v")
+        XCTAssertEqual(result, type)
         
-    }
+        type = CharType.space
+        result = sut.getCharType(" ")
+        XCTAssertEqual(result, type)
 
+        type = CharType.terminators
+        var string = "\n"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.digits
+        result = sut.getCharType("0")
+        XCTAssertEqual(result, type)
+
+        type = CharType.decimalSign
+        result = sut.getCharType(".")
+        XCTAssertEqual(result, type)
+
+        type = CharType.symbols
+        result = sut.getCharType("{")
+        XCTAssertEqual(result, type)
+
+        type = CharType.operators
+        result = sut.getCharType("+")
+        XCTAssertEqual(result, type)
+    }
 }
