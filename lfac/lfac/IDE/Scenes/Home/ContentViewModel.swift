@@ -12,12 +12,6 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject {
     @Published var code: String = "program testeA\nvar qtd = 12\nvar numero = 3245\n"
-//    @Published var analyzer = LexicalAnalyzer(
-//        code: "",
-//        states: TransitionState.allCases,
-//        initialState: TransitionState.q0,
-//        finalStates: TransitionState.finals
-//    )
     @Published var styled: AttributedString = ""
 
     ///  View Elements States

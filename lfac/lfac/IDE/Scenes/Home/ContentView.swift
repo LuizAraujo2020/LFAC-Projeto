@@ -23,15 +23,6 @@ struct ContentView: View {
                         Spacer()
 
                         NavigationLink(value: vm.code) {
-//                            <#code#>
-//                        }
-//
-//                        NavigationLink {
-////                            LexicalAnalysisView(scannerLA: ScannerLA(code: vm.code, tokenVerifier: TokenVerifier()))
-//                            LexicalAnalysisView(
-//                                analyzer: vm.analyzer
-//                            )
-//                        } label: {
                             Label("Analyze", systemImage: "play.circle.fill")
                         }
                         .disabled(!vm.isRunEnabled)

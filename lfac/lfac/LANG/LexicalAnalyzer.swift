@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol LexicalAnalyzeable {
-
-}
-
 // Autômato Finito Determinístico
 // Um autômato finito determinístico (AFD) é um modelo para definição de linguagens regulares composto de cinco elementos ⟨Σ, S, s0 , δ, F ⟩, onde:
 // Σ é o alfabeto sobre o qual a linguagem é definida; 
@@ -45,7 +41,7 @@ class LexicalAnalyzer {
         alphabet: Dictionary = Dictionary(),
         regexSource: RegexSource = RegexSource()
     ) {
-        self.code = code.map { String($0) }//Array("program testeA\nvar qtd = 12\nvar numero = 3245\n")
+        self.code = code.map { String($0) }
         self.alphabet = alphabet
         self.states = states
         self.initialState = initialState
@@ -68,13 +64,6 @@ class LexicalAnalyzer {
             let currentCharacter = code[currentRow]
             let characterType = getCharType(currentCharacter)
 
-            //            if checkIsTerminator(code[currentRow]) {
-            //                print("#")
-            //            } else {
-            //                print(currentCharacter)
-            //            }
-
-
             guard characterType != .invalid else {
                 print(ErrorState.e1.localizedDescription)
                 return
@@ -86,10 +75,6 @@ class LexicalAnalyzer {
             } catch {
                 print(error.localizedDescription)
             }
-
-            print("LEXEME: \(currentLexeme)")
-            print("STATE: \(currentState)")
-            print("CHAR: \(currentCharacter)\n")
 
             /// Não existe caracter?
             if checkIsTerminator(currentCharacter) {
@@ -127,100 +112,6 @@ class LexicalAnalyzer {
                 }
             }
 
-
-
-
-
-
-
-//            do {
-//                currentState = try transition(S: currentState, C: currentCharacter)
-//
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//
-//            if checkIsTerminator(code[currentRow]) || currentRow > code.count {
-//                if code[currentRow] == "\n" { currentColumn += 1 }
-//
-//                do {
-//                    currentState = try transition(S: currentState, C: currentCharacter)
-//
-//                } catch {
-//                    print(error.localizedDescription)
-//                }
-//
-//                guard currentState.isFinal else {
-//                    fatalError("Código invalido")
-//                }
-//
-//                if let token = createToken(
-//                    S: currentState,
-//                    id: tokens.count,
-//                    lexeme: currentLexeme,
-//                    row: currentRow,
-//                    column: currentColumn
-//                ) {
-//                    tokens.append(token)
-//                } else {
-//                    print("Falha ao criar o token")
-//                    print("LEXEME: \(currentLexeme)")
-//                }
-//
-////                tokens.append(token)
-//                currentLexeme = ""
-//                currentState = .q0
-//            } else {
-//                print("STATE: \(currentState.id) CHARACTER: \(currentCharacter)")
-//                currentLexeme += code[currentRow]
-//            }
-
-
-
-
-
-//
-//
-//            while !checkIsTerminator(code[currentRow]) && currentRow < code.count - 1 {
-//                do {
-//                    currentState = try transition(S: currentState, C: currentCharacter)
-//
-//                } catch {
-//                    print(error.localizedDescription)
-//                }
-//
-//                currentLexeme += currentCharacter
-//
-//                currentRow = nextCharacter(row: currentRow)
-//            }
-////
-////
-//            if checkIsTerminator(currentCharacter) {
-//                if let token = createToken(
-//                    S: currentState,
-//                    lexeme: currentLexeme,
-//                    row: currentRow,
-//                    column: currentColumn
-//                ) {
-//                    tokens.append(token)
-//                } else {
-//                    print("Cadeia não aceita, falhou!")
-//                }
-//////            } else {
-//////
-//////                do {
-//////                    currentState = try transition(S: currentState, C: currentCharacter)
-//////
-//////                } catch {
-//////                    print(error.localizedDescription)
-//////                }
-//            }
-////            
-//            currentState = .q0
-//            currentLexeme = ""
-////            /// Separar linhas
-////            if currentCharacter == "\n" || currentCharacter == "\0" { currentColumn += 1 }
-////
             currentRow = nextCharacter(row: currentRow)
         }
     }
@@ -298,7 +189,6 @@ class LexicalAnalyzer {
             }
 
         case .q3, .q4:
-
             switch char {
             case .terminators, .space: return .q0
             default: throw ErrorState.e1
@@ -323,7 +213,6 @@ class LexicalAnalyzer {
             }
 
         case .q7:
-            
             switch char {
             case .letters: throw ErrorState.e3
             case .digits: return .q8
@@ -360,7 +249,6 @@ class LexicalAnalyzer {
             }
 
         case .q11:
-            
             switch char {
             case .terminators, .space: return .q0
             default: throw ErrorState.e1
@@ -386,85 +274,6 @@ class LexicalAnalyzer {
             }
         }
 
-//        switch char {
-//        case .letters:
-//            if currentState == .q0 || currentState == .q1 { return .q1 }
-//
-//            if currentState == .q5 || currentState == .q7 || currentState == .q8 {
-//                throw ErrorState.e3
-//            }
-//
-//        case .digits:
-//            if currentState == .q0 || currentState == .q5 { return .q5 }
-//
-//            if currentState == .q7 || currentState == .q8 { return .q8 }
-//
-//        case .decimalSign:
-//            if currentState == .q5 { return .q7 }
-//
-//            if currentState == .q0 { throw ErrorState.e1 }
-//
-//            if currentState == .q1 { throw ErrorState.e2 }
-//
-//            if currentState == .q7 || currentState == .q8 { throw ErrorState.e5 }
-//
-//        case .terminators:
-//            if currentState == .q0 { return .q0 }
-//
-//            if currentState == .q1 { return .q2 }
-//
-//            if currentState == .q5 { return .q6 }
-//
-//            if currentState == .q8 { return .q9 }
-//
-//            if currentState == .q10 { return .q11 }
-//
-//            if currentState == .q12 { return .q13 }
-//
-//            if currentState == .q7 { throw ErrorState.e4 }
-//
-//        case .operators:
-//            if currentState == .q0 { return .q12 }
-//
-//            if currentState == .q1 { throw ErrorState.e3 }
-//
-//            if currentState == .q5 || currentState == .q7 || currentState == .q8 {
-//                throw ErrorState.e4
-//            }
-//
-//        case .symbols:
-//            if currentState == .q0 { return .q10 }
-//
-//            if currentState == .q1 { throw ErrorState.e3 }
-//
-//            if currentState == .q5 || currentState == .q7 || currentState == .q8 {
-//                throw ErrorState.e4
-//            }
-//
-//        case .keywords:
-//            return .q3
-//
-//        case .space:
-//            if currentState == .q1 {
-//
-//
-////                if currentState == .q2 {
-//                    if currentLexeme.contains(regexSource.keywords) {
-//                        return .q3
-//                    } else {
-//                        return .q4
-//                    }
-////                }
-////                return .q2
-//            }
-//
-//        case .commentary:
-//            currentRow += 1
-//
-//        case .invalid:
-//            throw ErrorState.e1
-//        }
-//
         throw ErrorState.e1
     }
 }
