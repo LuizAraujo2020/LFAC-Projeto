@@ -11,16 +11,13 @@
 		6F20B4542BF1A23B00EC1B0B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4532BF1A23B00EC1B0B /* Errors.swift */; };
 		6F20B4562BF1A2CF00EC1B0B /* Terminators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4552BF1A2CF00EC1B0B /* Terminators.swift */; };
 		6F20B45A2BF1A4D400EC1B0B /* NSRegularExpression+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4592BF1A4D400EC1B0B /* NSRegularExpression+Extension.swift */; };
-		6F20B45C2BF1A54D00EC1B0B /* TransitionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B45B2BF1A54D00EC1B0B /* TransitionTable.swift */; };
 		6F20B45E2BF1A67200EC1B0B /* Alphabet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B45D2BF1A67200EC1B0B /* Alphabet.swift */; };
 		6F20B4622BF1AAE900EC1B0B /* RegexSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4612BF1AAE900EC1B0B /* RegexSource.swift */; };
 		6F20B4652BF1ADA700EC1B0B /* TransitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4642BF1ADA700EC1B0B /* TransitionState.swift */; };
 		6F3431572BF26F9C00455FE9 /* PTokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431562BF26F9C00455FE9 /* PTokenType.swift */; };
 		6F3431592BF277E800455FE9 /* ScannerLA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431582BF277E800455FE9 /* ScannerLA.swift */; };
-		6F34315B2BF27A2700455FE9 /* TokenVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F34315A2BF27A2700455FE9 /* TokenVerifier.swift */; };
 		6F3431622BF2FE2B00455FE9 /* LexicalAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431612BF2FE2A00455FE9 /* LexicalAnalyzerTests.swift */; };
 		6F3431642BF2FE3700455FE9 /* ScannerLATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431632BF2FE3700455FE9 /* ScannerLATests.swift */; };
-		6F3431662BF2FE4300455FE9 /* TokenVerifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431652BF2FE4300455FE9 /* TokenVerifierTests.swift */; };
 		6F3431682BF2FE5100455FE9 /* TransitionTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3431672BF2FE5100455FE9 /* TransitionTableTests.swift */; };
 		6F34316B2BF2FE6400455FE9 /* PTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F34316A2BF2FE6400455FE9 /* PTokenTests.swift */; };
 		6F34316D2BF2FE6F00455FE9 /* TokenClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F34316C2BF2FE6F00455FE9 /* TokenClassTests.swift */; };
@@ -44,6 +41,7 @@
 		6F8B6C572BEBAE5200887CE7 /* PToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C562BEBAE5200887CE7 /* PToken.swift */; };
 		6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */; };
 		6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */; };
+		6FA365452BFAF19800558AFD /* code.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6FA365442BFAF19800558AFD /* code.pscs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,16 +66,13 @@
 		6F20B4532BF1A23B00EC1B0B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6F20B4552BF1A2CF00EC1B0B /* Terminators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminators.swift; sourceTree = "<group>"; };
 		6F20B4592BF1A4D400EC1B0B /* NSRegularExpression+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+Extension.swift"; sourceTree = "<group>"; };
-		6F20B45B2BF1A54D00EC1B0B /* TransitionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionTable.swift; sourceTree = "<group>"; };
 		6F20B45D2BF1A67200EC1B0B /* Alphabet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alphabet.swift; sourceTree = "<group>"; };
 		6F20B4612BF1AAE900EC1B0B /* RegexSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexSource.swift; sourceTree = "<group>"; };
 		6F20B4642BF1ADA700EC1B0B /* TransitionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionState.swift; sourceTree = "<group>"; };
 		6F3431562BF26F9C00455FE9 /* PTokenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTokenType.swift; sourceTree = "<group>"; };
 		6F3431582BF277E800455FE9 /* ScannerLA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerLA.swift; sourceTree = "<group>"; };
-		6F34315A2BF27A2700455FE9 /* TokenVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenVerifier.swift; sourceTree = "<group>"; };
 		6F3431612BF2FE2A00455FE9 /* LexicalAnalyzerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexicalAnalyzerTests.swift; sourceTree = "<group>"; };
 		6F3431632BF2FE3700455FE9 /* ScannerLATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerLATests.swift; sourceTree = "<group>"; };
-		6F3431652BF2FE4300455FE9 /* TokenVerifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenVerifierTests.swift; sourceTree = "<group>"; };
 		6F3431672BF2FE5100455FE9 /* TransitionTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionTableTests.swift; sourceTree = "<group>"; };
 		6F34316A2BF2FE6400455FE9 /* PTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTokenTests.swift; sourceTree = "<group>"; };
 		6F34316C2BF2FE6F00455FE9 /* TokenClassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenClassTests.swift; sourceTree = "<group>"; };
@@ -105,6 +100,7 @@
 		6F8B6C562BEBAE5200887CE7 /* PToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PToken.swift; sourceTree = "<group>"; };
 		6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "diagram-token-recko.pdf"; sourceTree = "<group>"; };
 		6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lex-token-recognizer.png"; sourceTree = "<group>"; };
+		6FA365442BFAF19800558AFD /* code.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code.pscs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +143,6 @@
 			children = (
 				6F20B44E2BF16D6100EC1B0B /* LexicalAnalyzer.swift */,
 				6F3431582BF277E800455FE9 /* ScannerLA.swift */,
-				6F34315A2BF27A2700455FE9 /* TokenVerifier.swift */,
-				6F20B45B2BF1A54D00EC1B0B /* TransitionTable.swift */,
 				6F20B4632BF1AD9A00EC1B0B /* Models */,
 				6F20B4522BF1A22400EC1B0B /* Utils */,
 			);
@@ -198,7 +192,6 @@
 			children = (
 				6F3431612BF2FE2A00455FE9 /* LexicalAnalyzerTests.swift */,
 				6F3431632BF2FE3700455FE9 /* ScannerLATests.swift */,
-				6F3431652BF2FE4300455FE9 /* TokenVerifierTests.swift */,
 				6F3431672BF2FE5100455FE9 /* TransitionTableTests.swift */,
 				6F3431692BF2FE5600455FE9 /* Models */,
 				6F3431702BF2FE8A00455FE9 /* Utils */,
@@ -292,6 +285,7 @@
 			children = (
 				6F8B6C2C2BEBADE000887CE7 /* lfac.entitlements */,
 				6F3431782BF310A000455FE9 /* dfacdfsfc.swift */,
+				6FA365442BFAF19800558AFD /* code.pscs */,
 				6F8B6C582BEBAE7200887CE7 /* App */,
 				6F20B4502BF16D7100EC1B0B /* IDE */,
 				6F20B4512BF1A20F00EC1B0B /* LANG */,
@@ -484,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */,
+				6FA365452BFAF19800558AFD /* code.pscs in Resources */,
 				6F8B6C2F2BEBADE000887CE7 /* Preview Assets.xcassets in Resources */,
 				6F8B6C2B2BEBADE000887CE7 /* Assets.xcassets in Resources */,
 				6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */,
@@ -523,8 +518,6 @@
 				6F685B0B2BF4173600F358FE /* TokenListItem.swift in Sources */,
 				6F20B45E2BF1A67200EC1B0B /* Alphabet.swift in Sources */,
 				6F4D05602BF989F000E3630D /* CharType.swift in Sources */,
-				6F20B45C2BF1A54D00EC1B0B /* TransitionTable.swift in Sources */,
-				6F34315B2BF27A2700455FE9 /* TokenVerifier.swift in Sources */,
 				6F3431592BF277E800455FE9 /* ScannerLA.swift in Sources */,
 				6F20B4542BF1A23B00EC1B0B /* Errors.swift in Sources */,
 				6F685B102BF4355600F358FE /* ContentViewModel.swift in Sources */,
@@ -544,7 +537,6 @@
 				6F3431622BF2FE2B00455FE9 /* LexicalAnalyzerTests.swift in Sources */,
 				6F3431642BF2FE3700455FE9 /* ScannerLATests.swift in Sources */,
 				6F8B6C392BEBADE000887CE7 /* lfacTests.swift in Sources */,
-				6F3431662BF2FE4300455FE9 /* TokenVerifierTests.swift in Sources */,
 				6F34316B2BF2FE6400455FE9 /* PTokenTests.swift in Sources */,
 				6F3431722BF2FE9E00455FE9 /* AlphabetTests.swift in Sources */,
 				6F3431682BF2FE5100455FE9 /* TransitionTableTests.swift in Sources */,

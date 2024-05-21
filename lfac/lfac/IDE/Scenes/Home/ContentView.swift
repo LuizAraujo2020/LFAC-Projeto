@@ -16,11 +16,27 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                    HStack {
+                HStack(spacing: 18) {
                         Text("Enter the code: ".uppercased())
                             .foregroundStyle(.primary)
 
                         Spacer()
+
+                        Button {
+                            vm.importCode()
+                        } label: {
+                            Label("Import", systemImage: "square.and.arrow.up")
+                        }
+
+                        Button {
+                            vm.exportCode()
+                        } label: {
+                            Label(
+                                "Export\(vm.savedCode != nil ? "ed" : "  ")",
+                                systemImage: "square.and.arrow.down.on.square\(vm.savedCode != nil ? ".fill" : "")"
+                            )
+                        }
+
 
                         NavigationLink(value: vm.code) {
                             Label("Analyze", systemImage: "play.circle.fill")
