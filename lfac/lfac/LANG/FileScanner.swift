@@ -1,5 +1,5 @@
 //
-//  ScannerLA.swift
+//  FileScanner.swift
 //  lfac
 //
 //  Created by Luiz Araujo on 13/05/24.
