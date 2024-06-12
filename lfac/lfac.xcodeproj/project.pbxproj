@@ -40,6 +40,7 @@
 		6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */; };
 		6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */; };
 		6FA365452BFAF19800558AFD /* code.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6FA365442BFAF19800558AFD /* code.pscs */; };
+		D30D1BF52C19D441008A9F42 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30D1BF42C19D441008A9F42 /* Parser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "diagram-token-recko.pdf"; sourceTree = "<group>"; };
 		6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lex-token-recognizer.png"; sourceTree = "<group>"; };
 		6FA365442BFAF19800558AFD /* code.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code.pscs; sourceTree = "<group>"; };
+		D30D1BF42C19D441008A9F42 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			children = (
 				6F20B44E2BF16D6100EC1B0B /* LexicalAnalyzer.swift */,
 				6F3431582BF277E800455FE9 /* FileScanner.swift */,
+				D30D1BF32C19D426008A9F42 /* Parser */,
 				6F20B4632BF1AD9A00EC1B0B /* Models */,
 				6F20B4522BF1A22400EC1B0B /* Utils */,
 			);
@@ -367,6 +370,14 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
+		D30D1BF32C19D426008A9F42 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				D30D1BF42C19D441008A9F42 /* Parser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -512,6 +523,7 @@
 				6F685B0B2BF4173600F358FE /* TokenListItem.swift in Sources */,
 				6F20B45E2BF1A67200EC1B0B /* Alphabet.swift in Sources */,
 				6F4D05602BF989F000E3630D /* CharType.swift in Sources */,
+				D30D1BF52C19D441008A9F42 /* Parser.swift in Sources */,
 				6F3431592BF277E800455FE9 /* FileScanner.swift in Sources */,
 				6F20B4542BF1A23B00EC1B0B /* Errors.swift in Sources */,
 				6F685B102BF4355600F358FE /* ContentViewModel.swift in Sources */,

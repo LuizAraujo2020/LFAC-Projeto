@@ -16,6 +16,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
     case operators
 
     case keyword
+    case booleans
     case integers
     case reals
     case symbols
@@ -26,7 +27,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
     static var allCases: [PTokenType] = [
         .space, .terminators, .commentary,
         .operators,
-        .integers, .reals, .keyword, .symbols, .identifiers,
+        .booleans, .integers, .reals, .keyword, .symbols, .identifiers,
         .invalidToken
     ]
 
@@ -46,6 +47,8 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
             return "ESPACO"
         case .commentary:
             return "COMENTARIO"
+        case .booleans:
+            return "BOOLEANO"
         case .integers:
             return "INTEIRO"
         case .reals:
@@ -72,6 +75,8 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
             return regexSource.operators
         case .keyword:
             return regexSource.keywords
+        case .booleans:
+            return regexSource
         case .integers:
             // TODO: Fazer depois
             return regexSource.digits
@@ -86,6 +91,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
             return regexSource.letters
         case .invalidToken:
             return /[^:<>=+*\/\-.,\\r\\n\\t\\0\\s]/ //[^a-zA-Z0-9]/
+        
         }
     }
 }

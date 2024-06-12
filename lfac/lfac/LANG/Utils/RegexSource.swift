@@ -17,6 +17,7 @@ struct RegexSource {
     var symbol = /^[.|,|;|:|\(|\)|{|}|\[|\]]/
     var space = /^[\s]+$/
     var commentary = /[\/]{2,}/
+    var booleans = /^[true|false]$/
     
     var keywordsArray = ["program", "var", "integer", "real", "boolean", "procedure", "begin", "end", "if", "then", "else", "while", "do", "or", "true", "false", "div", "and", "not", "READ", "WRITE"]
 }
