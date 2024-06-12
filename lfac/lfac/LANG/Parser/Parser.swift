@@ -22,7 +22,7 @@ class Parser {
 //            }
     
     // Verifica se um tipo é válido
-    private func isValidType() {
+    private func isValidType() -> Bool {
         // Se o token for integer, real ou boolean -> retorna true
         if () {
             return true

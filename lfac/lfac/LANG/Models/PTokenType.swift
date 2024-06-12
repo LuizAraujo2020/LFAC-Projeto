@@ -76,7 +76,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         case .keyword:
             return regexSource.keywords
         case .booleans:
-            return regexSource
+            return regexSource.booleans
         case .integers:
             // TODO: Fazer depois
             return regexSource.digits
