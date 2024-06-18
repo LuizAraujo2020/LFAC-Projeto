@@ -62,10 +62,10 @@ final class SyntacticalAnalyzer {
         do {
             switch keyword.value {
             case "program":
-                try program()
+                try programa()
 
             case "var":
-                try varDeclaration()
+                try parteDeDeclaracoesDeVariaveis()
 
             default:
                 break
@@ -81,7 +81,7 @@ final class SyntacticalAnalyzer {
 
     /// <programa> ::=
     ///      program <identificador> ; <bloco> .
-    func program() throws {
+    func programa() throws {
         guard getNextSymbol().type == .identifiers else {
             throw ErrorState.i1
         }
@@ -102,7 +102,7 @@ final class SyntacticalAnalyzer {
     ///      <parte de declarações de variáveis> 
     ///      <parte de declarações de procedimentos>
     ///      <comando composto>
-    func block() throws {
+    func bloco() throws {
 
     }
 
@@ -112,81 +112,81 @@ final class SyntacticalAnalyzer {
     ///     <vazio> |
     ///      var <declaração de variáveis>;
     ///      { <declaração de variáveis>; }
-    func declarationVarPart() throws {
+    func parteDeDeclaracoesDeVariaveis() throws {
 
     }
 
     /// <declaração de variáveis> ::=
     ///      <identificador>{,<identificador>} : <tipo>
-    func declarationVar() throws {
+    func declaracaoDeVariaveis() throws {
 
     }
 
     /// <lista de identificadores> ::= 
     ///      <identificador> { , <identificador> }
-    func declarationListIdentifier() throws {
+    func listaDeIdentificadores() throws {
 
     }
 
     /// <tipo> ::=
     ///     integer  | real | boolean
-    func declarationType() throws {
+    func tipo() throws {
 
     }
 
-    /// <declaração de procedimento> ::=
-    ///      { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
-    func declarationProcedure() throws {
-
-    }
-
-    /// <parâmetros formais> ::=
-    ///      ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
-    func declarationFormalParameter() throws {
-
-    }
-
-    /// <seção de parâmetros formais> ::=
-    ///      { var } <lista de identificadores> : <tipo>
-    func declarationFormalParameterSection() throws {
-
-    }
+//    /// <declaração de procedimento> ::=
+//    ///      { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
+//    func declarationProcedure() throws {
+//
+//    }
+//
+//    /// <parâmetros formais> ::=
+//    ///      ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
+//    func declarationFormalParameter() throws {
+//
+//    }
+//
+//    /// <seção de parâmetros formais> ::=
+//    ///      { var } <lista de identificadores> : <tipo>
+//    func declarationFormalParameterSection() throws {
+//
+//    }
 
 
     // MARK: - Comandos
     /// <comando composto> ::= 
     ///      begin <comando> { ; <comando> } end
-    func commandComposed() throws {
+    func comandoComposto() throws {
 
     }
 
     /// <comado> ::=
     ///      <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
-    func command() throws {
+    func comando() throws {
 
     }
 
     /// <atribuição> ::= 
     ///      <variável> := <expressão>
-    func commandAttribution() throws {
+    func atribuicao() throws {
 
     }
 
-    /// <chamada de procedimento> ::=
-    ///      <identificador> [ ( <lista de expressões> ) ]
-    func commandProcedureCall() throws {
-
-    }
+//    /// <chamada de procedimento> ::=
+//    ///      <identificador> [ ( <lista de expressões> ) ]
+//    func commandProcedureCall() throws {
+//
+//    }
 
     /// <comando condicional 1> ::=
     ///      if <expressão> then <comando> [ else <comando> ]
-    func commandConditional() throws {
+    func comandoCondicional() throws {
 
     }
 
     /// <comando repetitivo 1> ::=
     ///      while <expressão> do <comando>
-    func commandRepetition() throws {
+    func comandoRepetitivo() throws {
 
     }
 
@@ -195,43 +195,43 @@ final class SyntacticalAnalyzer {
 
     /// <expressão> ::=
     ///      <expressão simples> [ <relação> <expressão simples> ]
-    func expression() throws {
+    func expressao() throws {
 
     }
 
     /// <relação> ::=
     ///      = | <> | < | <= | >= | >
-    func expressionRelation() throws {
+    func relacao() throws {
 
     }
 
     /// <expressão simples> ::=
     ///      [ + | - ] <termo> { ( + | - | or ) <termo> }
-    func expressionSimple() throws {
+    func expressaoSimples() throws {
 
     }
 
     /// <termo> ::=
     ///      <fator> { ( * | / | div | and ) <fator> }
-    func expressionTerm() throws {
+    func termo() throws {
 
     }
 
     /// <fator> ::=
     ///      <variável> | <número> | ( <expressão> ) | not <fator>
-    func expressionFactor() throws {
+    func fator() throws {
 
     }
 
     /// <variável> ::=
     ///      <identificador>
-    func expressionVar() throws {
+    func variavel() throws {
 
     }
 
     /// <lista de expressões> ::=
     ///      <expressão> { , <expressão> }
-    func expressionList() throws {
+    func listaDeExpressoes() throws {
 
     }
 }
