@@ -24,33 +24,13 @@ final class SyntacticalAnalyzer {
 
 
     // MARK: - Methods
-    func analyze() {
-        var token = tokens[currentTokenIndex]
+    func analyze() throws {
+        try programa()
 
-//        switch token.type {
-//        case .space:
-//            <#code#>
-//        case .terminators:
-//            <#code#>
-//        case .commentary:
-//            <#code#>
-//        case .operators:
-//            <#code#>
-//        case .keyword:
-//            <#code#>
-//        case .booleans:
-//            <#code#>
-//        case .integers:
-//            <#code#>
-//        case .reals:
-//            <#code#>
-//        case .symbols:
-//            <#code#>
-//        case .identifiers:
-//            <#code#>
-//        case .invalidToken:
-//            <#code#>
-//        }
+        nextSymbol()
+        try bloco()
+
+
     }
 
     func getNextSymbol() -> PToken {
@@ -58,23 +38,27 @@ final class SyntacticalAnalyzer {
         return tokens[currentTokenIndex]
     }
 
-    func handleKeyword(keyword: PToken) {
-        do {
-            switch keyword.value {
-            case "program":
-                try programa()
-
-            case "var":
-                try parteDeDeclaracoesDeVariaveis()
-
-            default:
-                break
-            }
-
-        } catch {
-            self.printError(error)
-        }
+    func nextSymbol() {
+        currentTokenIndex += 1
     }
+
+//    func handleKeyword(keyword: PToken) {
+//        do {
+//            switch keyword.value {
+//            case "program":
+//                try programa()
+//
+//            case "var":
+//                try parteDeDeclaracoesDeVariaveis()
+//
+//            default:
+//                break
+//            }
+//
+//        } catch {
+//            self.printError(error)
+//        }
+//    }
 
 
     // MARK: - Programa e Bloco
@@ -94,8 +78,7 @@ final class SyntacticalAnalyzer {
             throw ErrorState.t2
         }
 
-        /// Deu certo
-//            print("program encontrado.")
+        print("program correto.")
     }
 
     /// <bloco> ::=
@@ -103,7 +86,22 @@ final class SyntacticalAnalyzer {
     ///      <parte de declarações de procedimentos>
     ///      <comando composto>
     func bloco() throws {
+        nextSymbol()
+        try parteDeDeclaracoesDeVariaveis()
 
+        nextSymbol()
+        try comandoComposto()
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == "." else {
+            throw ErrorState.t3
+        }
+
+        guard currentTokenIndex == tokens.count - 1 else {
+            throw ErrorState.f1
+        }
+
+        print("Bloco de código livre de erros")
     }
 
 
@@ -113,7 +111,7 @@ final class SyntacticalAnalyzer {
     ///      var <declaração de variáveis>;
     ///      { <declaração de variáveis>; }
     func parteDeDeclaracoesDeVariaveis() throws {
-
+        // Luiz
     }
 
     /// <declaração de variáveis> ::=

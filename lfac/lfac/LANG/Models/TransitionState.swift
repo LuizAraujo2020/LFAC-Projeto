@@ -45,8 +45,9 @@ enum TransitionState: String, Identifiable, CaseIterable {
 
 enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7
+    case f1
     case i1
-    case t1, t2
+    case t1, t2, t3
 
     var errorDescription: String? {
         switch self {
@@ -75,6 +76,12 @@ enum ErrorState: LocalizedError {
             return "Terminador necessário."
         case .t2:
             return "Terminador inválido."
+        case .t3:
+            return "Terminador de bloco inválido."
+
+        /// Final errors
+        case .f1:
+            return "Programa terminou inesperadamente."
         }
     }
 }
