@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0CE79E2C2134820057A6CE /* pascal.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CE79B2C2134820057A6CE /* pascal.pdf */; };
+		6F0CE79F2C2134820057A6CE /* Mini Pascal.docx in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CE79C2C2134820057A6CE /* Mini Pascal.docx */; };
+		6F0CE7A02C2134820057A6CE /* LFA&C 06 [C 03] - Compiladores - Análise Sintática.pptx in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CE79D2C2134820057A6CE /* LFA&C 06 [C 03] - Compiladores - Análise Sintática.pptx */; };
+		6F0CE7A22C2134F90057A6CE /* aula-10-anc3a1lise-sintc3a1tica-descendente.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CE7A12C2134F80057A6CE /* aula-10-anc3a1lise-sintc3a1tica-descendente.pdf */; };
+		6F0CE7A42C2135430057A6CE /* Syntax of Mini-Pascal.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F0CE7A32C2135430057A6CE /* Syntax of Mini-Pascal.pdf */; };
 		6F20B44F2BF16D6100EC1B0B /* LexicalAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B44E2BF16D6100EC1B0B /* LexicalAnalyzer.swift */; };
 		6F20B4542BF1A23B00EC1B0B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4532BF1A23B00EC1B0B /* Errors.swift */; };
 		6F20B4562BF1A2CF00EC1B0B /* Terminators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F20B4552BF1A2CF00EC1B0B /* Terminators.swift */; };
@@ -62,6 +67,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F0CE79B2C2134820057A6CE /* pascal.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pascal.pdf; sourceTree = "<group>"; };
+		6F0CE79C2C2134820057A6CE /* Mini Pascal.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mini Pascal.docx"; sourceTree = "<group>"; };
+		6F0CE79D2C2134820057A6CE /* LFA&C 06 [C 03] - Compiladores - Análise Sintática.pptx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LFA&C 06 [C 03] - Compiladores - Análise Sintática.pptx"; sourceTree = "<group>"; };
+		6F0CE7A12C2134F80057A6CE /* aula-10-anc3a1lise-sintc3a1tica-descendente.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "aula-10-anc3a1lise-sintc3a1tica-descendente.pdf"; sourceTree = "<group>"; };
+		6F0CE7A32C2135430057A6CE /* Syntax of Mini-Pascal.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Syntax of Mini-Pascal.pdf"; sourceTree = "<group>"; };
 		6F20B44E2BF16D6100EC1B0B /* LexicalAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexicalAnalyzer.swift; sourceTree = "<group>"; };
 		6F20B4532BF1A23B00EC1B0B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6F20B4552BF1A2CF00EC1B0B /* Terminators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminators.swift; sourceTree = "<group>"; };
@@ -360,7 +370,12 @@
 		6F8B6C5D2BEBC3C700887CE7 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
+				6F0CE7A12C2134F80057A6CE /* aula-10-anc3a1lise-sintc3a1tica-descendente.pdf */,
 				6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */,
+				6F0CE79D2C2134820057A6CE /* LFA&C 06 [C 03] - Compiladores - Análise Sintática.pptx */,
+				6F0CE79C2C2134820057A6CE /* Mini Pascal.docx */,
+				6F0CE79B2C2134820057A6CE /* pascal.pdf */,
+				6F0CE7A32C2135430057A6CE /* Syntax of Mini-Pascal.pdf */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -477,10 +492,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F0CE79E2C2134820057A6CE /* pascal.pdf in Resources */,
+				6F0CE7A42C2135430057A6CE /* Syntax of Mini-Pascal.pdf in Resources */,
+				6F0CE7A22C2134F90057A6CE /* aula-10-anc3a1lise-sintc3a1tica-descendente.pdf in Resources */,
 				6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */,
 				6FA365452BFAF19800558AFD /* code.pscs in Resources */,
 				6F8B6C2F2BEBADE000887CE7 /* Preview Assets.xcassets in Resources */,
+				6F0CE79F2C2134820057A6CE /* Mini Pascal.docx in Resources */,
 				6F8B6C2B2BEBADE000887CE7 /* Assets.xcassets in Resources */,
+				6F0CE7A02C2134820057A6CE /* LFA&C 06 [C 03] - Compiladores - Análise Sintática.pptx in Resources */,
 				6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
