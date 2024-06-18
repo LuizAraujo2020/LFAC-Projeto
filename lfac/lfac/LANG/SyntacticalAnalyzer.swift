@@ -164,7 +164,9 @@ final class SyntacticalAnalyzer {
     /// <tipo> ::=
     ///     integer  | real | boolean
     func tipo() throws {
-
+        guard tokens[currentTokenIndex].type == .integers || tokens[currentTokenIndex].type == .reals || tokens[currentTokenIndex].type == .booleans else {
+            throw ErrorState.e8
+        }
     }
 
 //    /// <declaração de procedimento> ::=

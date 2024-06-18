@@ -44,7 +44,7 @@ enum TransitionState: String, Identifiable, CaseIterable {
 }
 
 enum ErrorState: LocalizedError {
-    case e1, e2, e3, e4, e5, e6, e7
+    case e1, e2, e3, e4, e5, e6, e7, e8
     case c1
     case d1, d2, d3
     case f1
@@ -68,6 +68,8 @@ enum ErrorState: LocalizedError {
             return "Símbolo inválido."
         case .e7:
             return "Operador inválido."
+        case .e8:
+            return "Tipo inválido."
 
             /// Comandos
         case .c1:
