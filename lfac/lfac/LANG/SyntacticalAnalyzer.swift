@@ -261,7 +261,9 @@ final class SyntacticalAnalyzer {
     /// <variável> ::=
     ///      <identificador>
     func variavel() throws {
-
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.i1
+        }
     }
 
     /// <lista de expressões> ::=
