@@ -42,29 +42,10 @@ final class SyntacticalAnalyzer {
         currentTokenIndex += 1
     }
 
-//    func handleKeyword(keyword: PToken) {
-//        do {
-//            switch keyword.value {
-//            case "program":
-//                try programa()
-//
-//            case "var":
-//                try parteDeDeclaracoesDeVariaveis()
-//
-//            default:
-//                break
-//            }
-//
-//        } catch {
-//            self.printError(error)
-//        }
-//    }
-
-
     // MARK: - Programa e Bloco
 
     /// <programa> ::=
-    ///      program <identificador> ; <bloco> .
+    ///     program <identificador> ; <bloco> .
     func programa() throws {
         guard getNextSymbol().type == .identifiers else {
             throw ErrorState.i1
@@ -82,9 +63,9 @@ final class SyntacticalAnalyzer {
     }
 
     /// <bloco> ::=
-    ///      <parte de declarações de variáveis> 
-    ///      <parte de declarações de procedimentos>
-    ///      <comando composto>
+    ///     <parte de declarações de variáveis>
+    ///     <parte de declarações de procedimentos>
+    ///     <comando composto>
     func bloco() throws {
         nextSymbol()
         try parteDeDeclaracoesDeVariaveis()
@@ -108,8 +89,8 @@ final class SyntacticalAnalyzer {
     // MARK: - Declarações
     /// <parte de declarações de variáveis> ::=
     ///     <vazio> |
-    ///      var <declaração de variáveis>;
-    ///      { <declaração de variáveis>; }
+    ///     var <declaração de variáveis>;
+    ///     { <declaração de variáveis>; }
     func parteDeDeclaracoesDeVariaveis() throws {
         guard tokens[currentTokenIndex].value == "var" else {
             /// empty, vazio, não tem declarações no código
@@ -124,8 +105,8 @@ final class SyntacticalAnalyzer {
     }
 
     /// <declaração de variáveis> ::=
-    ///      <identificador>{,<identificador>} : <tipo>
-    ///      var sum: integer;
+    ///     <identificador>{,<identificador>} : <tipo>
+    ///     var sum: integer;
     func declaracaoDeVariaveis() throws {
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.d1
@@ -156,7 +137,7 @@ final class SyntacticalAnalyzer {
     }
 
     /// <lista de identificadores> ::= 
-    ///      <identificador> { , <identificador> }
+    ///     <identificador> { , <identificador> }
     func listaDeIdentificadores() throws {
 
     }
@@ -190,19 +171,19 @@ final class SyntacticalAnalyzer {
 
     // MARK: - Comandos
     /// <comando composto> ::= 
-    ///      begin <comando> { ; <comando> } end
+    ///     begin <comando> { ; <comando> } end
     func comandoComposto() throws {
 
     }
 
     /// <comado> ::=
-    ///      <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
+    ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
 
     }
 
     /// <atribuição> ::= 
-    ///      <variável> := <expressão>
+    ///     <variável> := <expressão>
     func atribuicao() throws {
 
     }
@@ -214,13 +195,13 @@ final class SyntacticalAnalyzer {
 //    }
 
     /// <comando condicional 1> ::=
-    ///      if <expressão> then <comando> [ else <comando> ]
+    ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
 
     }
 
     /// <comando repetitivo 1> ::=
-    ///      while <expressão> do <comando>
+    ///     while <expressão> do <comando>
     func comandoRepetitivo() throws {
 
     }
@@ -229,37 +210,37 @@ final class SyntacticalAnalyzer {
     // MARK: - Expressões
 
     /// <expressão> ::=
-    ///      <expressão simples> [ <relação> <expressão simples> ]
+    ///     <expressão simples> [ <relação> <expressão simples> ]
     func expressao() throws {
 
     }
 
     /// <relação> ::=
-    ///      = | <> | < | <= | >= | >
+    ///     = | <> | < | <= | >= | >
     func relacao() throws {
 
     }
 
     /// <expressão simples> ::=
-    ///      [ + | - ] <termo> { ( + | - | or ) <termo> }
+    ///     [ + | - ] <termo> { ( + | - | or ) <termo> }
     func expressaoSimples() throws {
 
     }
 
     /// <termo> ::=
-    ///      <fator> { ( * | / | div | and ) <fator> }
+    ///     <fator> { ( * | / | div | and ) <fator> }
     func termo() throws {
 
     }
 
     /// <fator> ::=
-    ///      <variável> | <número> | ( <expressão> ) | not <fator>
+    ///     <variável> | <número> | ( <expressão> ) | not <fator>
     func fator() throws {
 
     }
 
     /// <variável> ::=
-    ///      <identificador>
+    ///     <identificador>
     func variavel() throws {
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.i1
@@ -267,7 +248,7 @@ final class SyntacticalAnalyzer {
     }
 
     /// <lista de expressões> ::=
-    ///      <expressão> { , <expressão> }
+    ///     <expressão> { , <expressão> }
     func listaDeExpressoes() throws {
 
     }
