@@ -47,15 +47,17 @@ final class SyntacticalAnalyzer {
     /// <programa> ::=
     ///     program <identificador> ; <bloco> .
     func programa() throws {
-        guard tokens[0].value == "program" else {
+        guard tokens[currentTokenIndex].value == "program" else {
             throw ErrorState.p1
         }
         
-        guard getNextSymbol().type == .identifiers else {
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.i1
         }
 
-        guard getNextSymbol().value == ";" else {
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t2
         }
 
@@ -177,7 +179,7 @@ final class SyntacticalAnalyzer {
     }
 
     /// <comado> ::=
-    ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
+    ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
 
     }
@@ -185,7 +187,14 @@ final class SyntacticalAnalyzer {
     /// <atribuição> ::= 
     ///     <variável> := <expressão>
     func atribuicao() throws {
-
+        nextSymbol()
+        try variavel()
+        
+        nextSymbol()
+        // TODO: Identificar o :=
+        
+        nextSymbol()
+        try
     }
 
 //    /// <chamada de procedimento> ::=
@@ -218,7 +227,6 @@ final class SyntacticalAnalyzer {
     /// <relação> ::=
     ///     = | <> | < | <= | >= | >
     func relacao() throws {
-
     }
 
     /// <expressão simples> ::=
