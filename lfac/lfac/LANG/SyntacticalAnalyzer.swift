@@ -117,7 +117,7 @@ final class SyntacticalAnalyzer {
     /// <declaração de variáveis> ::=
     ///      <identificador>{,<identificador>} : <tipo>
     func declaracaoDeVariaveis() throws {
-
+        // Luiz
     }
 
     /// <lista de identificadores> ::= 
