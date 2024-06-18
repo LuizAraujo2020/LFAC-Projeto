@@ -26,10 +26,9 @@ final class SyntacticalAnalyzer {
     // MARK: - Methods
     func analyze() throws {
         try programa()
-
+        
         nextSymbol()
         try bloco()
-
 
     }
 
@@ -69,7 +68,6 @@ final class SyntacticalAnalyzer {
     ///     <parte de declarações de procedimentos>
     ///     <comando composto>
     func bloco() throws {
-        nextSymbol()
         try parteDeDeclaracoesDeVariaveis()
 
         nextSymbol()
@@ -187,18 +185,17 @@ final class SyntacticalAnalyzer {
     /// <atribuição> ::= 
     ///     <variável> := <expressão>
     func atribuicao() throws {
-        nextSymbol()
         try variavel()
         
         nextSymbol()
         // TODO: Identificar o :=
         
         nextSymbol()
-        try
+        try expressao()
     }
 
 //    /// <chamada de procedimento> ::=
-//    ///      <identificador> [ ( <lista de expressões> ) ]
+//    ///     <identificador> [ ( <lista de expressões> ) ]
 //    func commandProcedureCall() throws {
 //
 //    }
