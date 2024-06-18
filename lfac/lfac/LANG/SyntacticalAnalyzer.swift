@@ -47,12 +47,12 @@ final class SyntacticalAnalyzer {
     /// <programa> ::=
     ///     program <identificador> ; <bloco> .
     func programa() throws {
+        guard tokens[0].value == "program" else {
+            throw ErrorState.p1
+        }
+        
         guard getNextSymbol().type == .identifiers else {
             throw ErrorState.i1
-        }
-
-        guard getNextSymbol().type == .terminators else {
-            throw ErrorState.t1
         }
 
         guard getNextSymbol().value == ";" else {

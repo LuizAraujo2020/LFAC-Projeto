@@ -45,6 +45,7 @@ enum TransitionState: String, Identifiable, CaseIterable {
 
 enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7, e8
+    case p1
     case c1
     case d1, d2, d3
     case f1
@@ -71,6 +72,10 @@ enum ErrorState: LocalizedError {
         case .e8:
             return "Tipo inválido."
 
+            /// Program errors.
+        case .p1:
+            return "O programa deve iniciar com `program`"
+            
             /// Comandos
         case .c1:
             return "A parte de Comandos deve começar com `BEGIN`"
