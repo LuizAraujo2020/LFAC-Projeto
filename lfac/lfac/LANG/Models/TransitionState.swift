@@ -45,9 +45,12 @@ enum TransitionState: String, Identifiable, CaseIterable {
 
 enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7
+    case i1
+    case t1, t2
 
     var errorDescription: String? {
         switch self {
+        /// Generic errors.
         case .e1:
             return "Caracter inválido."
         case .e2:
@@ -62,6 +65,16 @@ enum ErrorState: LocalizedError {
             return "Símbolo inválido."
         case .e7:
             return "Operador inválido."
+
+        /// Identifier errors.
+        case .i1:
+            return "Um Identificador é esperado."
+
+        /// Terminator errors.
+        case .t1:
+            return "Terminador necessário."
+        case .t2:
+            return "Terminador inválido."
         }
     }
 }
