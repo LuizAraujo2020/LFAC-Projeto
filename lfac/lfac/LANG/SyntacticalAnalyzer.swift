@@ -117,7 +117,32 @@ final class SyntacticalAnalyzer {
     /// <declaração de variáveis> ::=
     ///      <identificador>{,<identificador>} : <tipo>
     func declaracaoDeVariaveis() throws {
-        // Luiz
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.d1
+        }
+
+        nextSymbol()
+        while tokens[currentTokenIndex].value == "," {
+            nextSymbol()
+
+            guard tokens[currentTokenIndex].type == .identifiers else {
+                throw ErrorState.d2
+            }
+
+            nextSymbol()
+        }
+
+        guard tokens[currentTokenIndex].value == ":" else {
+            throw ErrorState.d3
+        }
+
+        nextSymbol()
+        try tipo()
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState.t4
+        }
     }
 
     /// <lista de identificadores> ::= 
