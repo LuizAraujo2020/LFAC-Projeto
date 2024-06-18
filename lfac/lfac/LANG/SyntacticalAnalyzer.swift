@@ -111,13 +111,48 @@ final class SyntacticalAnalyzer {
     ///      var <declaração de variáveis>;
     ///      { <declaração de variáveis>; }
     func parteDeDeclaracoesDeVariaveis() throws {
-        // Luiz
+        guard tokens[currentTokenIndex].value == "var" else {
+            /// empty, vazio, não tem declarações no código
+            return
+        }
+
+        nextSymbol()
+        while tokens[currentTokenIndex].type == .identifiers {
+            try declaracaoDeVariaveis()
+            nextSymbol()
+        }
     }
 
     /// <declaração de variáveis> ::=
     ///      <identificador>{,<identificador>} : <tipo>
+    ///      var sum: integer;
     func declaracaoDeVariaveis() throws {
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.d1
+        }
 
+        nextSymbol()
+        while tokens[currentTokenIndex].value == "," {
+            nextSymbol()
+
+            guard tokens[currentTokenIndex].type == .identifiers else {
+                throw ErrorState.d2
+            }
+
+            nextSymbol()
+        }
+
+        guard tokens[currentTokenIndex].value == ":" else {
+            throw ErrorState.d3
+        }
+
+        nextSymbol()
+        try tipo()
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState.t4
+        }
     }
 
     /// <lista de identificadores> ::= 
@@ -161,6 +196,7 @@ final class SyntacticalAnalyzer {
     /// <comado> ::=
     ///      <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
+
 
     }
 

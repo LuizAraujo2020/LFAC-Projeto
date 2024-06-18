@@ -45,9 +45,11 @@ enum TransitionState: String, Identifiable, CaseIterable {
 
 enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7
+    case c1
+    case d1, d2, d3
     case f1
     case i1
-    case t1, t2, t3
+    case t1, t2, t3, t4
 
     var errorDescription: String? {
         switch self {
@@ -61,11 +63,23 @@ enum ErrorState: LocalizedError {
         case .e4:
             return "Números não podem conter caracteres especiais, separe-os com espaço."
         case .e5:
-            return "Números não podem conter mais que um ponto '.'."
+            return "Números não podem conter mais que um ponto `.`."
         case .e6:
             return "Símbolo inválido."
         case .e7:
             return "Operador inválido."
+
+        /// Comandos
+        case .c1:
+            return "A parte de Comandos deve começar com `BEGIN`"
+
+        /// Declaration errors.
+        case .d1:
+            return "Declaração de variáveis deve começar com um Identificador."
+        case .d2:
+            return "Declaração de múltiplas variáveis devem ter uma sequencia de Identificadores separados por vírgula."
+        case .d3:
+            return "Declaração de variáveis deve ter um `:` entre os Identificadores e o Tipo de variável."
 
         /// Identifier errors.
         case .i1:
@@ -78,6 +92,8 @@ enum ErrorState: LocalizedError {
             return "Terminador inválido."
         case .t3:
             return "Terminador de bloco inválido."
+        case .t4:
+            return "Terminador de instruções inválido."
 
         /// Final errors
         case .f1:
