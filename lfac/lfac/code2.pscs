@@ -1,0 +1,5 @@
+program prog2;
+var soma: integer;
+begin
+    soma := 25 + 33 + 75;
+end.

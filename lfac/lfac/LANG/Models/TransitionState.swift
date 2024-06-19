@@ -44,7 +44,7 @@ enum TransitionState: String, Identifiable, CaseIterable {
 }
 
 enum ErrorState: LocalizedError {
-    case e1, e2, e3, e4, e5, e6, e7, e8
+    case e1, e2, e3, e4, e5, e6, e7, e8, e9
     case p1
     case c1, c2, c3
     case d1, d2, d3
@@ -71,6 +71,8 @@ enum ErrorState: LocalizedError {
             return "Operador inválido."
         case .e8:
             return "Tipo inválido."
+        case .e9:
+            return "Fator inválido. Espera-se um número, variável, expressão ou outro fator."
 
 
             /// Program errors.
@@ -80,9 +82,9 @@ enum ErrorState: LocalizedError {
 
             /// Comandos
         case .c1:
-            return "A parte de Comandos deve começar com `BEGIN`"
+            return "A parte de Comandos deve começar com `begin`"
         case .c2:
-            return "A parte de Comandos deve fechar com com `END`"
+            return "A parte de Comandos deve fechar com com `end`"
         case .c3:
             return "A parte de Comandos deve terminar com `.`"
 
@@ -109,10 +111,10 @@ enum ErrorState: LocalizedError {
         case .t3:
             return "Terminador de bloco inválido."
         case .t4:
-            return "Terminador de instruções inválido."
+            return "Terminador de instruções inválido, deve ser `;`."
 
 
-            /// Final errors
+        /// Final errors
         case .f1:
             return "Programa terminou inesperadamente."
         case .f2:

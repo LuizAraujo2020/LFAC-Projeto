@@ -1,0 +1,16 @@
+program "micro04"
+
+var
+	x,y,num,intervalo: integer;
+
+begin
+	intervalo:=0;	
+	while intervalo < 5 do
+	begin
+		readln(num);
+		if(num >= 10) then
+			if(num<=150)then
+				x := x + 1;
+	end;
+	writeln(x);
+end.
