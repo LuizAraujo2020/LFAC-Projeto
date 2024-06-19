@@ -30,12 +30,11 @@ final class SyntacticalAnalyzer {
     func analyze() throws {
         try programa()
 
-        try nextSymbol()
+        nextSymbol()
         try fimCodigo()
-
         try bloco()
-        try nextSymbol()
 
+        nextSymbol()
         try fimCodigo()
     }
 
@@ -44,11 +43,14 @@ final class SyntacticalAnalyzer {
         return tokens[currentTokenIndex]
     }
 
-    func nextSymbol() throws {
+    func nextSymbol() {
         if currentTokenIndex < tokens.count - 1 {
             currentTokenIndex += 1
-            
         }
+    }
+    
+    func previousSymbol() {
+        currentTokenIndex -= 1
     }
 
     // MARK: - Programa e Bloco
@@ -70,12 +72,12 @@ final class SyntacticalAnalyzer {
             throw ErrorState.p1
         }
         
-        try nextSymbol()
+        nextSymbol()
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.i1
         }
 
-        try nextSymbol()
+        nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t2
         }
@@ -90,7 +92,7 @@ final class SyntacticalAnalyzer {
 
         try comandoComposto()
 
-        try nextSymbol()
+        nextSymbol()
         guard tokens[currentTokenIndex].value == "." else {
             throw ErrorState.t3
         }
@@ -117,7 +119,7 @@ final class SyntacticalAnalyzer {
         var newIteration = tokens[currentTokenIndex + 1].type == .identifiers || tokens[currentTokenIndex + 1].value == "var"
 
         while newIteration {
-            try nextSymbol()
+            nextSymbol()
             try declaracaoDeVariaveis()
 
             newIteration = tokens[currentTokenIndex + 1].type == .identifiers || tokens[currentTokenIndex + 1].value == "var"
@@ -135,10 +137,10 @@ final class SyntacticalAnalyzer {
             throw ErrorState.d3
         }
 
-        try nextSymbol()
+        nextSymbol()
         try tipo()
 
-        try nextSymbol()
+        nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t4
         }
@@ -151,15 +153,15 @@ final class SyntacticalAnalyzer {
             throw ErrorState.d1
         }
 
-        try nextSymbol()
+        nextSymbol()
         while tokens[currentTokenIndex].value == "," {
 
-            try nextSymbol()
+            nextSymbol()
             guard tokens[currentTokenIndex].type == .identifiers else {
                 throw ErrorState.d2
             }
 
-            try nextSymbol()
+            nextSymbol()
         }
     }
 
@@ -196,7 +198,7 @@ final class SyntacticalAnalyzer {
     func comandoComposto() throws {
 //        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
 //            // Ver se esse next é necessário
-////            try nextSymbol()
+////            nextSymbol()
 //
 //            /// Se não tem a parte de comandos mas não termina com `.`
 //            if tokens[currentTokenIndex].value == "." {
@@ -225,7 +227,7 @@ final class SyntacticalAnalyzer {
 //        print("✅0 - tokens[currentTokenIndex: \(tokens[currentTokenIndex].value)")
 //        while shouldLoop {
 ////            if tokens[currentTokenIndex + 1].value == "end" { break }
-//            try nextSymbol()
+//            nextSymbol()
 //
 ////            if tokens[currentTokenIndex].value == "begin" {
 ////                try comandoComposto()
@@ -241,14 +243,14 @@ final class SyntacticalAnalyzer {
 //            print("✅1 - tokens[currentTokenIndex: \(tokens[currentTokenIndex].value)")
 //        }
 //
-//        try nextSymbol()
+//        nextSymbol()
 //        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
 //            throw ErrorState.c2
 //        }
 //
 //
 //        // talvez tirar depois
-//        try nextSymbol()
+//        nextSymbol()
 //        guard tokens[currentTokenIndex].type == .terminators, tokens[currentTokenIndex].value == "." else {
 //            throw ErrorState.c3
 //        }
@@ -279,16 +281,16 @@ final class SyntacticalAnalyzer {
     ///     <variável> := <expressão>
     func atribuicao() throws {
         try variavel()
-        
-        try nextSymbol()
-        guard tokens[currentTokenIndex].value == ":=" else {
-            throw ErrorState.a1
-        }
 
-        try nextSymbol()
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ":=" else {
+            throw ErrorState.e7
+        }
+        
+        nextSymbol()
         try expressao()
 
-        try nextSymbol()
+        nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t4
         }
@@ -321,21 +323,56 @@ final class SyntacticalAnalyzer {
     /// <expressão> ::=
     ///     <expressão simples> [ <relação> <expressão simples> ]
     func expressao() throws {
+        try expressaoSimples()
 
+        var shouldLoop = tokens[currentTokenIndex + 1].type == .relationals
+        while shouldLoop {
+            nextSymbol()
+            try expressaoSimples()
+
+            shouldLoop = tokens[currentTokenIndex + 1].type == .relationals
+        }
     }
 
     /// <relação> ::=
     ///     = | <> | < | <= | >= | >
     func relacao() throws {
-        guard tokens[currentTokenIndex].type == .relationals else {
-            throw ErrorState.o1
+        guard tokens[currentTokenIndex].value == "=" || tokens[currentTokenIndex].value == "<>" || tokens[currentTokenIndex].value == "<" || tokens[currentTokenIndex].value == "<=" || tokens[currentTokenIndex].value == ">=" || tokens[currentTokenIndex].value == ">" else {
+            throw ErrorState.e7
         }
     }
 
     /// <expressão simples> ::=
     ///     [ + | - ] <termo> { ( + | - | or ) <termo> }
     func expressaoSimples() throws {
+        var continuarTermo = false
+        
+        if tokens[currentTokenIndex].value == "+" || tokens[currentTokenIndex].value == "-" {
+            nextSymbol()
+        }
+        
+        try termo()
 
+        try fimCodigo()
+
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == "+" || nextSymbolValue == "-" || nextSymbolValue == "or" {
+            continuarTermo = true
+            nextSymbol()
+        }
+        
+        while continuarTermo {
+            continuarTermo = false
+
+            nextSymbol()
+            try termo()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == "+" || nextSymbolValue == "-" || nextSymbolValue == "or" {
+                continuarTermo = true
+                nextSymbol()
+            }
+        }
     }
 
     /// <termo> ::=
@@ -347,7 +384,26 @@ final class SyntacticalAnalyzer {
     /// <fator> ::=
     ///     <variável> | <número> | ( <expressão> ) | not <fator>
     func fator() throws {
+        guard tokens[currentTokenIndex].type != .identifiers &&
+              tokens[currentTokenIndex].type != .integers &&
+              tokens[currentTokenIndex].type != .reals else {
+             return
+        }
 
+        /// not <fator>
+        guard tokens[currentTokenIndex].value != "not" else {
+            nextSymbol()
+            try fator()
+            return
+        }
+
+        /// <expressão>
+        do {
+            try expressao()
+            return
+        } catch { }
+
+        throw ErrorState.e9
     }
 
     /// <variável> ::=

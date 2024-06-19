@@ -45,13 +45,11 @@ enum TransitionState: String, Identifiable, CaseIterable {
 
 enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7, e8, e9
-    case a1
     case p1
     case c1, c2, c3
     case d1, d2, d3
     case f1, f2
     case i1
-    case o1
     case t1, t2, t3, t4
 
     var errorDescription: String? {
@@ -74,7 +72,7 @@ enum ErrorState: LocalizedError {
         case .e8:
             return "Tipo inválido."
         case .e9:
-            return "Out of Range."
+            return "Fator inválido. Espera-se um número, variável, expressão ou outro fator."
 
 
             /// Program errors.
@@ -121,15 +119,6 @@ enum ErrorState: LocalizedError {
             return "Programa terminou inesperadamente."
         case .f2:
             return "Programa deve terminar com `.`."
-
-
-        case .a1:
-            return "Atribuição deve ser feita com `:=`."
-
-
-        /// Operator errors
-        case .o1:
-            return "Operador relacional esperado."
         }
     }
 }

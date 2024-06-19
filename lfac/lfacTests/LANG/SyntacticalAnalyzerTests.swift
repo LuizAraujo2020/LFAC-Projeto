@@ -24,7 +24,7 @@ final class SyntacticalAnalyzerTests: XCTestCase {
             XCTFail("Deveria lançar uma exception.")
 
         } catch let error as ErrorState {
-            
+
             XCTAssertTrue(error == .f2, "ERRO ESPERADO => ErrorState.f2: \(ErrorState.f2.localizedDescription)")
 
         } catch {
@@ -65,7 +65,7 @@ final class SyntacticalAnalyzerTests: XCTestCase {
     // MARK: - ATRIBUICAO
 
     func test_atribuicao_successful() throws {
-        var sut = SyntacticalAnalyzer(tokens: MockCodes().atribuicaoSuccessful)
+        sut = SyntacticalAnalyzer(tokens: MockCodes().atribuicaoSuccessful)
 
         XCTAssertNoThrow(try sut.atribuicao())
     }
@@ -75,16 +75,69 @@ final class SyntacticalAnalyzerTests: XCTestCase {
     }
 
 
+    // MARK: - EXPRESSOES
     func test_expressaoSimples_successful() throws {
+        sut = SyntacticalAnalyzer(tokens: MockCodes().expressaoSimplesSuccessful)
+
+        XCTAssertNoThrow(try sut.expressaoSimples())
+
+    }
+
+    func test_expressaoSimples_fail() throws {
 
     }
 
 
+    func test_expressao_successful() throws {
+        sut = SyntacticalAnalyzer(tokens: MockCodes().expressaoSimplesSuccessful)
+
+        XCTAssertNoThrow(try sut.expressao())
+
+    }
+
+    func test_expressao_fail() throws {
+        sut = SyntacticalAnalyzer(tokens: MockCodes().expressaoSimplesSuccessful)
+
+        XCTAssertNoThrow(try sut.expressaoSimples())
+
+    }
+
+
+    // MARK: - RELACAO
     func test_relacao_successful() throws {
-        var sut = SyntacticalAnalyzer(tokens: MockCodes().relacaoSuccessful)
+        sut = SyntacticalAnalyzer(tokens: MockCodes().relacaoSuccessful)
 
         XCTAssertNoThrow(try sut.relacao())
     }
+
+
+    func test_relacao_fail() throws {
+    }
+
+
+    // MARK: - FATOR
+    func test_fator_successful() throws {
+        sut = SyntacticalAnalyzer(tokens: MockCodes().fatorSuccessfulVariavel)
+        XCTAssertNoThrow(try sut.fator())
+
+        sut = SyntacticalAnalyzer(tokens: MockCodes().fatorSuccessfulNumero)
+        XCTAssertNoThrow(try sut.fator())
+
+        sut = SyntacticalAnalyzer(tokens: MockCodes().fatorSuccessfulNot)
+        XCTAssertNoThrow(try sut.fator())
+
+        sut = SyntacticalAnalyzer(tokens: MockCodes().expressaoSimplesSuccessful)
+        XCTAssertNoThrow(try sut.fator())
+
+        sut = SyntacticalAnalyzer(tokens: MockCodes().expressaoSuccessful)
+        XCTAssertNoThrow(try sut.fator())
+    }
+
+
+    func test_fator_fail() throws {
+    }
+
+
 }
 
 struct MockCodes {
@@ -132,28 +185,58 @@ struct MockCodes {
     var relacaoSuccessful: [PToken] {[
         .init(id: 0, type: .relationals, value: "<>", line: 1, column: 1)
     ]}
-}
 
-//"""
-//program micro03;
-//
-//var
-//    numero : integer;
-//
-//begin
-//    readln(numero);
-//    if(numero >= 100) then
-//        begin
-//        if(numero <= 200) then begin
-//        writeln(1);
-//    end;
-//    else begin
-//        writeln(0);
-//        end;
-//        end;
-//        else begin
-//        writeln(0);
-//    end;
-//
-//end.
-//"""
+    var expressaoSimplesSuccessful: [PToken] {[
+        .init(id: 0, type: .operators, value: "+", line: 1, column: 1),
+        .init(id: 1, type: .integers, value: "10", line: 1, column: 2),
+        .init(id: 2, type: .keyword, value: "and", line: 1, column: 14),
+        .init(id: 3, type: .identifiers, value: "valid", line: 1, column: 1),
+        .init(id: 4, type: .keyword, value: "or", line: 1, column: 1),
+
+        .init(id: 0, type: .operators, value: "-", line: 1, column: 1),
+        .init(id: 1, type: .integers, value: "10", line: 1, column: 2),
+        .init(id: 2, type: .keyword, value: "*", line: 1, column: 14),
+        .init(id: 3, type: .identifiers, value: "qtd", line: 1, column: 1),
+
+        .init(id: 4, type: .terminators, value: ";", line: 1, column: 1),
+    ]}
+
+    var expressaoSuccessful: [PToken] {[
+        .init(id: 0, type: .operators, value: "+", line: 1, column: 1),
+        .init(id: 1, type: .integers, value: "10", line: 1, column: 2),
+        .init(id: 2, type: .keyword, value: "and", line: 1, column: 14),
+        .init(id: 3, type: .identifiers, value: "valid", line: 1, column: 1),
+        .init(id: 4, type: .keyword, value: "or", line: 1, column: 1),
+
+        .init(id: 0, type: .operators, value: "-", line: 1, column: 1),
+        .init(id: 1, type: .integers, value: "10", line: 1, column: 2),
+        .init(id: 2, type: .keyword, value: "*", line: 1, column: 14),
+        .init(id: 3, type: .identifiers, value: "qtd", line: 1, column: 1),
+
+        .init(id: 4, type: .relationals, value: "<>", line: 1, column: 22),
+
+        .init(id: 0, type: .operators, value: "+", line: 1, column: 1),
+        .init(id: 1, type: .integers, value: "10", line: 1, column: 2),
+        .init(id: 2, type: .keyword, value: "and", line: 1, column: 14),
+        .init(id: 3, type: .identifiers, value: "valid", line: 1, column: 1),
+        .init(id: 4, type: .keyword, value: "or", line: 1, column: 1),
+
+        .init(id: 0, type: .operators, value: "-", line: 1, column: 1),
+        .init(id: 1, type: .integers, value: "10", line: 1, column: 2),
+        .init(id: 2, type: .keyword, value: "*", line: 1, column: 14),
+        .init(id: 3, type: .identifiers, value: "qtd", line: 1, column: 1)
+    ]}
+
+    var fatorSuccessfulVariavel: [PToken] {[
+        .init(id: 0, type: .identifiers, value: "soma", line: 1, column: 1)
+    ]}
+
+    var fatorSuccessfulNumero: [PToken] {[
+        .init(id: 0, type: .integers, value: "21", line: 1, column: 1)
+    ]}
+
+    var fatorSuccessfulNot: [PToken] {[
+        .init(id: 0, type: .keyword, value: "not", line: 1, column: 1),
+        .init(id: 1, type: .identifiers, value: "varivael", line: 5, column: 1),
+    ]}
+}
