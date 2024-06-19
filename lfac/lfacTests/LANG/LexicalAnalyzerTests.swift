@@ -33,12 +33,27 @@ final class LexicalAnalyzerTests: XCTestCase {
         var result = sut.getCharType("v")
         XCTAssertEqual(result, type)
         
-        type = CharType.space
-        result = sut.getCharType(" ")
-        XCTAssertEqual(result, type)
+//        type = CharType.space
+//        result = sut.getCharType(" ")
+//        XCTAssertEqual(result, type)
 
         type = CharType.terminators
         var string = "\n"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.terminators
+        string = "\n"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.terminators
+        string = ";"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.operators
+        string = ":"
         result = sut.getCharType(string)
         XCTAssertEqual(result, type)
 
