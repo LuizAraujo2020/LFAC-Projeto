@@ -15,6 +15,9 @@ final class SyntacticalAnalyzer {
     
     /// States
     private var currentTokenIndex: Int
+    
+    /// Errors
+    private var errors = [ErrorState]()
 
 
     internal init(tokens: [PToken], currentTokenIndex: Int = 0) {
@@ -26,7 +29,7 @@ final class SyntacticalAnalyzer {
     // MARK: - Methods
     func analyze() throws {
         try programa()
-
+        
         nextSymbol()
         try bloco()
 
@@ -254,7 +257,9 @@ final class SyntacticalAnalyzer {
         try variavel()
         
         nextSymbol()
-        // TODO: Identificar o :=
+        guard tokens[currentTokenIndex].value == ":=" else {
+            throw ErrorState.e7
+        }
         
         nextSymbol()
         try expressao()
