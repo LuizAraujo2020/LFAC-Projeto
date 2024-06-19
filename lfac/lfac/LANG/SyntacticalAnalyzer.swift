@@ -201,11 +201,8 @@ final class SyntacticalAnalyzer {
 //            nextSymbol()
 
             try fimCodigo()
-
-            /// Se tem código mas não tá dentro de `begin`
-            throw ErrorState.c1
+            return
         }
-
 
         /// Comandos
 
@@ -288,19 +285,17 @@ final class SyntacticalAnalyzer {
         }
     }
 
-//    /// <chamada de procedimento> ::=
-//    ///     <identificador> [ ( <lista de expressões> ) ]
-//    func commandProcedureCall() throws {
-//
-//    }
+    /// <chamada de procedimento> ::=
+    ///     <identificador> [ ( <lista de expressões> ) ]
+    func commandProcedureCall() throws {
+
+    }
 
     /// <comando condicional 1> ::=
     ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
         
     }
-
-
 
 
     /// <comando repetitivo 1> ::=
