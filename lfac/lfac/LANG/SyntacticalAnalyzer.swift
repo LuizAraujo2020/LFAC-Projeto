@@ -365,6 +365,30 @@ final class SyntacticalAnalyzer {
     /// <termo> ::=
     ///     <fator> { ( * | / | div | and ) <fator> }
     func termo() throws {
+        var continuarFator = false
+        
+        try fator()
+
+        try fimCodigo()
+
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == "*" || nextSymbolValue == "/" || nextSymbolValue == "div" || nextSymbolValue == "and" {
+            continuarFator = true
+            nextSymbol()
+        }
+        
+        while continuarFator {
+            continuarFator = false
+
+            nextSymbol()
+            try termo()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == "*" || nextSymbolValue == "/" || nextSymbolValue == "div" || nextSymbolValue == "and" {
+                continuarFator = true
+                nextSymbol()
+            }
+        }
     }
 
     /// <fator> ::=
