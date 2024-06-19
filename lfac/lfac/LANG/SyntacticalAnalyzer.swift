@@ -196,85 +196,81 @@ final class SyntacticalAnalyzer {
     /// <comando composto> ::= 
     ///     begin <comando> { ; <comando> } end
     func comandoComposto() throws {
-//        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
-//            // Ver se esse next é necessário
-////            nextSymbol()
-//
-//            /// Se não tem a parte de comandos mas não termina com `.`
-//            if tokens[currentTokenIndex].value == "." {
-//                throw ErrorState.f2
-//            }
-//            /// Se tem código mas não tá dentro de `begin`
-//            throw ErrorState.c1
-//        }
-//
-//
-//        /// Comandos
-//
-//        /// Verifica se o próximo token inicia um dos seguintes comandos:
-//        ///     - atribuição;
-//        ///     - comando composto;
-//        ///     - comando condicional 1;
-//        ///     - comando repetitivo 1.
-////        var shouldLoop: Bool {
-//        var shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
-//            tokens[currentTokenIndex + 1].value == "begin" ||
-//            tokens[currentTokenIndex + 1].value == "if" ||
-//            tokens[currentTokenIndex + 1].value == "while"
-//
-////        }
-//
-//        print("✅0 - tokens[currentTokenIndex: \(tokens[currentTokenIndex].value)")
-//        while shouldLoop {
-////            if tokens[currentTokenIndex + 1].value == "end" { break }
+        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
+            // Ver se esse next é necessário
 //            nextSymbol()
-//
-////            if tokens[currentTokenIndex].value == "begin" {
-////                try comandoComposto()
-////
-////            } else {
-//                try comando()
-////            }
-//            shouldLoop = //tokens[currentTokenIndex + 1].type == .identifiers ||
-//            tokens[currentTokenIndex + 1].value == "begin" ||
-//            tokens[currentTokenIndex + 1].value == "if" ||
-//            tokens[currentTokenIndex + 1].value == "while" &&
-//            tokens[currentTokenIndex + 1].value != "end"
-//            print("✅1 - tokens[currentTokenIndex: \(tokens[currentTokenIndex].value)")
-//        }
-//
-//        nextSymbol()
-//        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
-//            throw ErrorState.c2
-//        }
-//
-//
-//        // talvez tirar depois
-//        nextSymbol()
-//        guard tokens[currentTokenIndex].type == .terminators, tokens[currentTokenIndex].value == "." else {
-//            throw ErrorState.c3
-//        }
+
+            try fimCodigo()
+
+            /// Se tem código mas não tá dentro de `begin`
+            throw ErrorState.c1
+        }
+
+
+        /// Comandos
+
+        /// Verifica se o próximo token inicia um dos seguintes comandos:
+        ///     - atribuição;
+        ///     - comando composto;
+        ///     - comando condicional 1;
+        ///     - comando repetitivo 1.
+        var shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
+                        tokens[currentTokenIndex + 1].value == "begin" ||
+                        tokens[currentTokenIndex + 1].value == "if" ||
+                        tokens[currentTokenIndex + 1].value == "while"
+
+        while shouldLoop {
+            nextSymbol()
+
+            if tokens[currentTokenIndex].type == .identifiers {
+                try atribuicao()
+
+            } else if tokens[currentTokenIndex].value == "begin" {
+                /// comando dentro do comando.
+                try comando()
+
+            } else if tokens[currentTokenIndex].value == "if" {
+                try comandoCondicional()
+
+            } else if tokens[currentTokenIndex].value == "while" {
+                try comandoRepetitivo()
+            }
+
+            shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
+                        tokens[currentTokenIndex + 1].value == "begin" ||
+                        tokens[currentTokenIndex + 1].value == "if" ||
+                        tokens[currentTokenIndex + 1].value == "while"
+        }
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
+            throw ErrorState.c2
+        }
+
+        try fimCodigo()
     }
 
     /// <comado> ::=
     ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
-//        /// atribuição
-//        if tokens[currentTokenIndex].type == .identifiers {
-//            try atribuicao()
-//
-//        /// comando composto.
-//        } else if tokens[currentTokenIndex].value == "begin" {
-//            try comandoComposto()
-//
-//        /// comando condicional 1.
-//        } else if tokens[currentTokenIndex].value == "if" {
-//            try comandoCondicional()
-//
-//        /// comando repetitivo 1.
-//        } else if tokens[currentTokenIndex].value == "while" {
-//            try comandoRepetitivo()
-//        }
+        /// atribuição
+        if tokens[currentTokenIndex].type == .identifiers {
+            try atribuicao()
+
+        /// comando composto.
+        } else if tokens[currentTokenIndex].value == "begin" {
+            try comandoComposto()
+
+        /// comando condicional 1.
+        } else if tokens[currentTokenIndex].value == "if" {
+            try comandoCondicional()
+
+        /// comando repetitivo 1.
+        } else if tokens[currentTokenIndex].value == "while" {
+            try comandoRepetitivo()
+        }
+
+        try fimCodigo()
     }
 
     /// <atribuição> ::= 
@@ -294,6 +290,8 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t4
         }
+
+        try fimCodigo()
     }
 
 //    /// <chamada de procedimento> ::=
@@ -332,6 +330,8 @@ final class SyntacticalAnalyzer {
 
             shouldLoop = tokens[currentTokenIndex + 1].type == .relationals
         }
+
+        try fimCodigo()
     }
 
     /// <relação> ::=
@@ -340,6 +340,8 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].value == "=" || tokens[currentTokenIndex].value == "<>" || tokens[currentTokenIndex].value == "<" || tokens[currentTokenIndex].value == "<=" || tokens[currentTokenIndex].value == ">=" || tokens[currentTokenIndex].value == ">" else {
             throw ErrorState.e7
         }
+
+        try fimCodigo()
     }
 
     /// <expressão simples> ::=
@@ -373,6 +375,8 @@ final class SyntacticalAnalyzer {
                 nextSymbol()
             }
         }
+
+        try fimCodigo()
     }
 
     /// <termo> ::=
@@ -403,6 +407,8 @@ final class SyntacticalAnalyzer {
             return
         } catch { }
 
+        try fimCodigo()
+
         throw ErrorState.e9
     }
 
@@ -412,6 +418,8 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.i1
         }
+
+        try fimCodigo()
     }
 
     /// <lista de expressões> ::=

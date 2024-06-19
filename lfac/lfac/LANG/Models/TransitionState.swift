@@ -82,9 +82,9 @@ enum ErrorState: LocalizedError {
 
             /// Comandos
         case .c1:
-            return "A parte de Comandos deve começar com `BEGIN`"
+            return "A parte de Comandos deve começar com `begin`"
         case .c2:
-            return "A parte de Comandos deve fechar com com `END`"
+            return "A parte de Comandos deve fechar com com `end`"
         case .c3:
             return "A parte de Comandos deve terminar com `.`"
 
