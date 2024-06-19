@@ -174,19 +174,19 @@ final class SyntacticalAnalyzer {
     }
 
     /// <declaração de procedimento> ::=
-    ///      { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
+    ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
     func declarationProcedure() throws {
 
     }
 
     /// <parâmetros formais> ::=
-    ///      ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
+    ///     ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
     func declarationFormalParameter() throws {
 
     }
 
     /// <seção de parâmetros formais> ::=
-    ///      { var } <lista de identificadores> : <tipo>
+    ///     { var } <lista de identificadores> : <tipo>
     func declarationFormalParameterSection() throws {
 
     }
@@ -365,7 +365,6 @@ final class SyntacticalAnalyzer {
     /// <termo> ::=
     ///     <fator> { ( * | / | div | and ) <fator> }
     func termo() throws {
-
     }
 
     /// <fator> ::=
@@ -404,7 +403,30 @@ final class SyntacticalAnalyzer {
     /// <lista de expressões> ::=
     ///     <expressão> { , <expressão> }
     func listaDeExpressoes() throws {
+        var continuarExpressao = false
+        
+        try expressao()
 
+        try fimCodigo()
+
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == "," {
+            continuarExpressao = true
+            nextSymbol()
+        }
+        
+        while continuarExpressao {
+            continuarExpressao = false
+
+            nextSymbol()
+            try expressao()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == "," {
+                continuarExpressao = true
+                nextSymbol()
+            }
+        }
     }
 }
 
