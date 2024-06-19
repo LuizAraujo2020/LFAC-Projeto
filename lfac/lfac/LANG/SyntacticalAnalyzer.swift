@@ -17,7 +17,10 @@ final class SyntacticalAnalyzer {
     private var currentTokenIndex: Int
 
 
-    internal init(tokens: [PToken], currentTokenIndex: Int = 0) {
+    internal init(
+        tokens: [PToken],
+        currentTokenIndex: Int = 0
+    ) {
         self.tokens = tokens
         self.currentTokenIndex = currentTokenIndex
     }
@@ -27,9 +30,15 @@ final class SyntacticalAnalyzer {
     func analyze() throws {
         try programa()
 
-        nextSymbol()
-        try bloco()
+        try nextSymbol()
+        if tokens[currentTokenIndex].value != "." {
+            try bloco()
+            try nextSymbol()
+        }
 
+        if currentTokenIndex == tokens.count - 1 && tokens[currentTokenIndex].value != "." {
+            throw ErrorState.f2
+        }
     }
 
     func getNextSymbol() -> PToken {
@@ -37,8 +46,11 @@ final class SyntacticalAnalyzer {
         return tokens[currentTokenIndex]
     }
 
-    func nextSymbol() {
-        currentTokenIndex += 1
+    func nextSymbol() throws {
+        if currentTokenIndex < tokens.count - 1 {
+            currentTokenIndex += 1
+            
+        }
     }
 
     // MARK: - Programa e Bloco
@@ -50,12 +62,12 @@ final class SyntacticalAnalyzer {
             throw ErrorState.p1
         }
         
-        nextSymbol()
+        try nextSymbol()
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.i1
         }
 
-        nextSymbol()
+        try nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t2
         }
@@ -70,10 +82,9 @@ final class SyntacticalAnalyzer {
     func bloco() throws {
         try parteDeDeclaracoesDeVariaveis()
 
-        nextSymbol()
         try comandoComposto()
 
-        nextSymbol()
+        try nextSymbol()
         guard tokens[currentTokenIndex].value == "." else {
             throw ErrorState.t3
         }
@@ -97,10 +108,13 @@ final class SyntacticalAnalyzer {
             return
         }
 
-        nextSymbol()
-        while tokens[currentTokenIndex].type == .identifiers {
+        var newIteration = tokens[currentTokenIndex + 1].type == .identifiers || tokens[currentTokenIndex + 1].value == "var"
+
+        while newIteration {
+            try nextSymbol()
             try declaracaoDeVariaveis()
-            nextSymbol()
+
+            newIteration = tokens[currentTokenIndex + 1].type == .identifiers || tokens[currentTokenIndex + 1].value == "var"
         }
     }
 
@@ -115,10 +129,10 @@ final class SyntacticalAnalyzer {
             throw ErrorState.d3
         }
 
-        nextSymbol()
+        try nextSymbol()
         try tipo()
 
-        nextSymbol()
+        try nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t4
         }
@@ -131,15 +145,15 @@ final class SyntacticalAnalyzer {
             throw ErrorState.d1
         }
 
-        nextSymbol()
+        try nextSymbol()
         while tokens[currentTokenIndex].value == "," {
 
-            nextSymbol()
+            try nextSymbol()
             guard tokens[currentTokenIndex].type == .identifiers else {
                 throw ErrorState.d2
             }
 
-            nextSymbol()
+            try nextSymbol()
         }
     }
 
@@ -151,101 +165,108 @@ final class SyntacticalAnalyzer {
         }
     }
 
-//    /// <declaração de procedimento> ::=
-//    ///      { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
-//    func declarationProcedure() throws {
-//
-//    }
-//
-//    /// <parâmetros formais> ::=
-//    ///      ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
-//    func declarationFormalParameter() throws {
-//
-//    }
-//
-//    /// <seção de parâmetros formais> ::=
-//    ///      { var } <lista de identificadores> : <tipo>
-//    func declarationFormalParameterSection() throws {
-//
-//    }
+    /// <declaração de procedimento> ::=
+    ///      { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
+    func declarationProcedure() throws {
+
+    }
+
+    /// <parâmetros formais> ::=
+    ///      ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
+    func declarationFormalParameter() throws {
+
+    }
+
+    /// <seção de parâmetros formais> ::=
+    ///      { var } <lista de identificadores> : <tipo>
+    func declarationFormalParameterSection() throws {
+
+    }
 
 
     // MARK: - Comandos
     /// <comando composto> ::= 
     ///     begin <comando> { ; <comando> } end
     func comandoComposto() throws {
-        var rodandoComandos = true
-
-        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
-            // Ver se esse next é necessário
-//            nextSymbol()
-
-            /// Se não tem a parte de comandos mas não termina com `.`
-            if tokens[currentTokenIndex].value == "." {
-                throw ErrorState.f2
-            }
-            /// Se tem código mas não tá dentro de `begin`
-            throw ErrorState.c1
-        }
-
-
-        /// Comandos
-        nextSymbol()
-        while rodandoComandos {
-            rodandoComandos = false
-
-            /// atribuição.
-            if tokens[currentTokenIndex].type == .identifiers {
-                try atribuicao()
-            }
-
-            /// comando composto.
-            if tokens[currentTokenIndex].value == "begin" {
-                try comandoComposto()
-            }
-
-            /// comando condicional 1.
-            if tokens[currentTokenIndex].value == "if" {
-                try comandoCondicional()
-            }
-
-            /// comando repetitivo 1.
-            if tokens[currentTokenIndex].value == "while" {
-                try comandoRepetitivo()
-            }
-
-            /// Verifica se o próximo token inicia um dos seguintes comandos:
-            ///     - atribuição;
-            ///     - comando composto;
-            ///     - comando condicional 1;
-            ///     - comando repetitivo 1.
-            nextSymbol()
-            if tokens[currentTokenIndex].type == .identifiers ||
-                tokens[currentTokenIndex].value == "begin" ||
-                tokens[currentTokenIndex].value == "if" ||
-                tokens[currentTokenIndex].value == "while" {
-                rodandoComandos = true
-            }
-        }
-
-
-        nextSymbol()
-        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
-            throw ErrorState.c2
-        }
-
-
-        // talvez tirar depois
-        nextSymbol()
-        guard tokens[currentTokenIndex].type == .terminators, tokens[currentTokenIndex].value == "." else {
-            throw ErrorState.c3
-        }
+//        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
+//            // Ver se esse next é necessário
+////            try nextSymbol()
+//
+//            /// Se não tem a parte de comandos mas não termina com `.`
+//            if tokens[currentTokenIndex].value == "." {
+//                throw ErrorState.f2
+//            }
+//            /// Se tem código mas não tá dentro de `begin`
+//            throw ErrorState.c1
+//        }
+//
+//
+//        /// Comandos
+//
+//        /// Verifica se o próximo token inicia um dos seguintes comandos:
+//        ///     - atribuição;
+//        ///     - comando composto;
+//        ///     - comando condicional 1;
+//        ///     - comando repetitivo 1.
+////        var shouldLoop: Bool {
+//        var shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
+//            tokens[currentTokenIndex + 1].value == "begin" ||
+//            tokens[currentTokenIndex + 1].value == "if" ||
+//            tokens[currentTokenIndex + 1].value == "while"
+//
+////        }
+//
+//        print("✅0 - tokens[currentTokenIndex: \(tokens[currentTokenIndex].value)")
+//        while shouldLoop {
+////            if tokens[currentTokenIndex + 1].value == "end" { break }
+//            try nextSymbol()
+//
+////            if tokens[currentTokenIndex].value == "begin" {
+////                try comandoComposto()
+////
+////            } else {
+//                try comando()
+////            }
+//            shouldLoop = //tokens[currentTokenIndex + 1].type == .identifiers ||
+//            tokens[currentTokenIndex + 1].value == "begin" ||
+//            tokens[currentTokenIndex + 1].value == "if" ||
+//            tokens[currentTokenIndex + 1].value == "while" &&
+//            tokens[currentTokenIndex + 1].value != "end"
+//            print("✅1 - tokens[currentTokenIndex: \(tokens[currentTokenIndex].value)")
+//        }
+//
+//        try nextSymbol()
+//        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
+//            throw ErrorState.c2
+//        }
+//
+//
+//        // talvez tirar depois
+//        try nextSymbol()
+//        guard tokens[currentTokenIndex].type == .terminators, tokens[currentTokenIndex].value == "." else {
+//            throw ErrorState.c3
+//        }
     }
 
     /// <comado> ::=
     ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
-
+//        /// atribuição
+//        if tokens[currentTokenIndex].type == .identifiers {
+//            try atribuicao()
+//
+//        /// comando composto.
+//        } else if tokens[currentTokenIndex].value == "begin" {
+//            try comandoComposto()
+//
+//        /// comando condicional 1.
+//        } else if tokens[currentTokenIndex].value == "if" {
+//            try comandoCondicional()
+//
+//        /// comando repetitivo 1.
+//        } else if tokens[currentTokenIndex].value == "while" {
+//            try comandoRepetitivo()
+//        }
     }
 
     /// <atribuição> ::= 
@@ -253,11 +274,18 @@ final class SyntacticalAnalyzer {
     func atribuicao() throws {
         try variavel()
         
-        nextSymbol()
-        // TODO: Identificar o :=
-        
-        nextSymbol()
+        try nextSymbol()
+        guard tokens[currentTokenIndex].value == ":=" else {
+            throw ErrorState.a1
+        }
+
+        try nextSymbol()
         try expressao()
+
+        try nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState.t4
+        }
     }
 
 //    /// <chamada de procedimento> ::=
@@ -269,8 +297,11 @@ final class SyntacticalAnalyzer {
     /// <comando condicional 1> ::=
     ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
-
+        
     }
+
+
+
 
     /// <comando repetitivo 1> ::=
     ///     while <expressão> do <comando>
@@ -290,6 +321,9 @@ final class SyntacticalAnalyzer {
     /// <relação> ::=
     ///     = | <> | < | <= | >= | >
     func relacao() throws {
+        guard tokens[currentTokenIndex].type == .relationals else {
+            throw ErrorState.o1
+        }
     }
 
     /// <expressão simples> ::=

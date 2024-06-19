@@ -1,0 +1,21 @@
+program micro03;
+
+var
+    numero : integer;
+
+begin
+    readln(numero);
+    if(numero >= 100) then
+        begin
+        if(numero <= 200) then begin
+        writeln(1);
+    end;
+    else begin
+        writeln(0);
+        end;
+        end;
+        else begin
+        writeln(0);
+    end;
+
+end.

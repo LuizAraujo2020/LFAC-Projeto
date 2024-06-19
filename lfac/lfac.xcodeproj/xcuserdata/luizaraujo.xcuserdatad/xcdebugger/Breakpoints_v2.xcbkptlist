@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AAE91654-5249-4275-8218-C23ECFF4201D"
+            uuid = "9277722A-B721-40A6-ABB3-1D04A4227648"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "lfac/IDE/Scenes/LexicalAnalysis/LexicalAnalysisView.swift"
+            filePath = "lfac/LANG/SyntacticalAnalyzer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EC7BBF40-BE20-4D00-BF34-4DF595D6A97F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "lfac/LANG/LexicalAnalyzer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "analyze()"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "comandoComposto()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
