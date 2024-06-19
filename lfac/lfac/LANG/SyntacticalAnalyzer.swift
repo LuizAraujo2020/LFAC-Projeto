@@ -194,25 +194,8 @@ final class SyntacticalAnalyzer {
         while rodandoComandos {
             rodandoComandos = false
 
-            /// atribuição.
-            if tokens[currentTokenIndex].type == .identifiers {
-                try atribuicao()
-            }
-
-            /// comando composto.
-            if tokens[currentTokenIndex].value == "begin" {
-                try comandoComposto()
-            }
-
-            /// comando condicional 1.
-            if tokens[currentTokenIndex].value == "if" {
-                try comandoCondicional()
-            }
-
-            /// comando repetitivo 1.
-            if tokens[currentTokenIndex].value == "while" {
-                try comandoRepetitivo()
-            }
+            nextSymbol()
+            try comando()
 
             /// Verifica se o próximo token inicia um dos seguintes comandos:
             ///     - atribuição;
@@ -245,7 +228,22 @@ final class SyntacticalAnalyzer {
     /// <comado> ::=
     ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
+        /// atribuição.
+        if tokens[currentTokenIndex].type == .identifiers {
+            try atribuicao()
 
+        } else if tokens[currentTokenIndex].value == "begin" {
+            /// comando composto.
+            try comandoComposto()
+
+        } else if tokens[currentTokenIndex].value == "if" {
+            /// comando condicional 1.
+            try comandoCondicional()
+            
+        } else if tokens[currentTokenIndex].value == "while" {
+            /// comando repetitivo 1.
+            try comandoRepetitivo()
+        }
     }
 
     /// <atribuição> ::= 
