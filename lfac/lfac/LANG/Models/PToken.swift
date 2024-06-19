@@ -54,7 +54,7 @@ struct PToken: Identifiable, Hashable {
 }
 
 extension PToken {
-    static var mock: Self {
+    static var mockToken: Self {
         PToken(
             id: 0,
             type: .keyword,
@@ -62,5 +62,29 @@ extension PToken {
             line: 1,
             column: 1
         )
+    }
+
+    ///program prog1;
+    ///var soma: integer;
+    ///begin
+    ///soma := 25;
+    ///end.
+    static var mockTokens: [Self] {
+        [
+            .init(id: 0, type: .keyword, value: "program", line: 1, column: 1),
+            .init(id: 1, type: .identifiers, value: "prog1", line: 1, column: 9),
+            .init(id: 2, type: .terminators, value: ";", line: 1, column: 14),
+            .init(id: 3, type: .keyword, value: "var", line: 2, column: 1),
+            .init(id: 4, type: .identifiers, value: "soma", line: 2, column: 5),
+            .init(id: 5, type: .relationals, value: ":", line: 2, column: 9),
+            .init(id: 6, type: .keyword, value: "integer", line: 2, column: 11),
+            .init(id: 7, type: .terminators, value: ";", line: 2, column: 18),
+            .init(id: 8, type: .keyword, value: "begin", line: 3, column: 1),
+            .init(id: 9, type: .identifiers, value: "soma", line: 4, column: 1),
+            .init(id: 10, type: .relationals, value: ":=", line: 4, column: 6),
+            .init(id: 11, type: .integers, value: "25", line: 4, column: 9),
+            .init(id: 12, type: .keyword, value: "end", line: 4, column: 1),
+            .init(id: 13, type: .terminators, value: ".", line: 5, column: 4)
+        ]
     }
 }
