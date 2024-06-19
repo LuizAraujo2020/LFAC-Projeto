@@ -14,9 +14,9 @@ final class LexicalAnalyzerTests: XCTestCase {
     override func setUpWithError() throws {
         sut = LexicalAnalyzer(
             code: """
-                program testeA
-                var qtd = 12
-                var numero = 3245
+                program testeA;
+                    var qtd = 12;
+                        numero = 3245;
                 """,
             states: TransitionState.allCases,
             initialState: TransitionState.q0,

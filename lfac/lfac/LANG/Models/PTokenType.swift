@@ -63,7 +63,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         }
     }
 
-    var regex: Regex<Substring> {
+    var regex: Regex<(Substring, Substring)> {
         let regexSource = RegexSource()
 
         switch self {
@@ -91,10 +91,9 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
             // TODO: Fazer depois
             return regexSource.symbol
         case .identifiers:
-            // TODO: Fazer depois
             return regexSource.letters
         case .invalidToken:
-            return /[^:<>=+*\/\-.,\\r\\n\\t\\0\\s]/ //[^a-zA-Z0-9]/
+            return /([\^])/ //[^a-zA-Z0-9]/
         }
     }
 }

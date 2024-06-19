@@ -45,6 +45,7 @@
 		6F8B6C572BEBAE5200887CE7 /* PToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B6C562BEBAE5200887CE7 /* PToken.swift */; };
 		6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */; };
 		6F8B6C5F2BEBC40F00887CE7 /* lex-token-recognizer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */; };
+		6F9535472C22597600ECE3EA /* code1.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6F9535462C22597600ECE3EA /* code1.pscs */; };
 		6FA365452BFAF19800558AFD /* code.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6FA365442BFAF19800558AFD /* code.pscs */; };
 		D30D1BF52C19D441008A9F42 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30D1BF42C19D441008A9F42 /* Parser.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,7 @@
 		6F8B6C562BEBAE5200887CE7 /* PToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PToken.swift; sourceTree = "<group>"; };
 		6F8B6C5A2BEBB55100887CE7 /* diagram-token-recko.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "diagram-token-recko.pdf"; sourceTree = "<group>"; };
 		6F8B6C5E2BEBC40F00887CE7 /* lex-token-recognizer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lex-token-recognizer.png"; sourceTree = "<group>"; };
+		6F9535462C22597600ECE3EA /* code1.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code1.pscs; sourceTree = "<group>"; };
 		6FA365442BFAF19800558AFD /* code.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code.pscs; sourceTree = "<group>"; };
 		D30D1BF42C19D441008A9F42 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,6 +291,7 @@
 				6F8B6C2C2BEBADE000887CE7 /* lfac.entitlements */,
 				6F3431782BF310A000455FE9 /* dfacdfsfc.swift */,
 				6FA365442BFAF19800558AFD /* code.pscs */,
+				6F9535462C22597600ECE3EA /* code1.pscs */,
 				6F8B6C582BEBAE7200887CE7 /* App */,
 				6F20B4502BF16D7100EC1B0B /* IDE */,
 				6F20B4512BF1A20F00EC1B0B /* LANG */,
@@ -495,6 +498,7 @@
 				6F0CE79E2C2134820057A6CE /* pascal.pdf in Resources */,
 				6F0CE7A42C2135430057A6CE /* Syntax of Mini-Pascal.pdf in Resources */,
 				6F0CE7A22C2134F90057A6CE /* aula-10-anc3a1lise-sintc3a1tica-descendente.pdf in Resources */,
+				6F9535472C22597600ECE3EA /* code1.pscs in Resources */,
 				6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */,
 				6FA365452BFAF19800558AFD /* code.pscs in Resources */,
 				6F8B6C2F2BEBADE000887CE7 /* Preview Assets.xcassets in Resources */,
