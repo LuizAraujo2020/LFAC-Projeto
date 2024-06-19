@@ -246,8 +246,6 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
             throw ErrorState.c2
         }
-
-        try fimCodigo()
     }
 
     /// <comado> ::=
@@ -269,8 +267,6 @@ final class SyntacticalAnalyzer {
         } else if tokens[currentTokenIndex].value == "while" {
             try comandoRepetitivo()
         }
-
-        try fimCodigo()
     }
 
     /// <atribuição> ::= 
@@ -290,8 +286,6 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t4
         }
-
-        try fimCodigo()
     }
 
 //    /// <chamada de procedimento> ::=
@@ -330,8 +324,6 @@ final class SyntacticalAnalyzer {
 
             shouldLoop = tokens[currentTokenIndex + 1].type == .relationals
         }
-
-        try fimCodigo()
     }
 
     /// <relação> ::=
@@ -340,8 +332,6 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].value == "=" || tokens[currentTokenIndex].value == "<>" || tokens[currentTokenIndex].value == "<" || tokens[currentTokenIndex].value == "<=" || tokens[currentTokenIndex].value == ">=" || tokens[currentTokenIndex].value == ">" else {
             throw ErrorState.e7
         }
-
-        try fimCodigo()
     }
 
     /// <expressão simples> ::=
@@ -375,8 +365,6 @@ final class SyntacticalAnalyzer {
                 nextSymbol()
             }
         }
-
-        try fimCodigo()
     }
 
     /// <termo> ::=
@@ -407,8 +395,6 @@ final class SyntacticalAnalyzer {
             return
         } catch { }
 
-        try fimCodigo()
-
         throw ErrorState.e9
     }
 
@@ -418,8 +404,6 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState.i1
         }
-
-        try fimCodigo()
     }
 
     /// <lista de expressões> ::=
