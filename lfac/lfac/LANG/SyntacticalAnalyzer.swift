@@ -43,6 +43,10 @@ final class SyntacticalAnalyzer {
     func nextSymbol() {
         currentTokenIndex += 1
     }
+    
+    func previousSymbol() {
+        currentTokenIndex -= 1
+    }
 
     // MARK: - Programa e Bloco
 
@@ -303,7 +307,42 @@ final class SyntacticalAnalyzer {
     /// <expressão simples> ::=
     ///     [ + | - ] <termo> { ( + | - | or ) <termo> }
     func expressaoSimples() throws {
-
+        var continuarTermo = false
+        
+        if tokens[currentTokenIndex].value == "+" || tokens[currentTokenIndex].value == "-" {
+            nextSymbol()
+        }
+        
+        try termo()
+        
+        
+        
+        /// tudo opcional
+        ///  { ( + | - | or ) <termo> }
+        // checar se é + - ou or
+        guard tokens.count >= currentTokenIndex + 1 else {
+            if tokens[currentTokenIndex].value != "." {
+                throw ErrorState.f2
+            } 
+            throw ErrorState.f1
+        }
+        
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == "+" || nextSymbolValue == "-" || nextSymbolValue == "or" {
+            var continuarTermo = true
+            nextSymbol()
+        }
+        
+        while continuarTermo {
+            nextSymbol()
+            try termo()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == "+" || nextSymbolValue == "-" || nextSymbolValue == "or" {
+                var continuarTermo = true
+                nextSymbol()
+            }
+        } ///fim do while
     }
 
     /// <termo> ::=
