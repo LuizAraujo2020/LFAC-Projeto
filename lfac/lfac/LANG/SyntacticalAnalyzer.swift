@@ -295,6 +295,29 @@ final class SyntacticalAnalyzer {
     /// <relação> ::=
     ///     = | <> | < | <= | >= | >
     func relacao() throws {
+        guard tokens[currentTokenIndex].value == "=" else {
+            throw ErrorState.e7
+        }
+        
+        guard tokens[currentTokenIndex].value == "<>" else {
+            throw ErrorState.e7
+        }
+        
+        guard tokens[currentTokenIndex].value == "<" else {
+            throw ErrorState.e7
+        }
+        
+        guard tokens[currentTokenIndex].value == "<=" else {
+            throw ErrorState.e7
+        }
+        
+        guard tokens[currentTokenIndex].value == ">=" else {
+            throw ErrorState.e7
+        }
+        
+        guard tokens[currentTokenIndex].value == ">" else {
+            throw ErrorState.e7
+        }
     }
 
     /// <expressão simples> ::=
