@@ -26,7 +26,7 @@ final class SyntacticalAnalyzer {
     // MARK: - Methods
     func analyze() throws {
         try programa()
-        
+
         nextSymbol()
         try bloco()
 
@@ -108,20 +108,8 @@ final class SyntacticalAnalyzer {
     ///     <identificador>{,<identificador>} : <tipo>
     ///     var sum: integer;
     func declaracaoDeVariaveis() throws {
-        guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.d1
-        }
 
-        nextSymbol()
-        while tokens[currentTokenIndex].value == "," {
-            nextSymbol()
-
-            guard tokens[currentTokenIndex].type == .identifiers else {
-                throw ErrorState.d2
-            }
-
-            nextSymbol()
-        }
+        try listaDeIdentificadores()
 
         guard tokens[currentTokenIndex].value == ":" else {
             throw ErrorState.d3
@@ -139,7 +127,20 @@ final class SyntacticalAnalyzer {
     /// <lista de identificadores> ::= 
     ///     <identificador> { , <identificador> }
     func listaDeIdentificadores() throws {
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.d1
+        }
 
+        nextSymbol()
+        while tokens[currentTokenIndex].value == "," {
+
+            nextSymbol()
+            guard tokens[currentTokenIndex].type == .identifiers else {
+                throw ErrorState.d2
+            }
+
+            nextSymbol()
+        }
     }
 
     /// <tipo> ::=
@@ -173,7 +174,72 @@ final class SyntacticalAnalyzer {
     /// <comando composto> ::= 
     ///     begin <comando> { ; <comando> } end
     func comandoComposto() throws {
+        var rodandoComandos = true
 
+        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
+            // Ver se esse next é necessário
+//            nextSymbol()
+
+            /// Se não tem a parte de comandos mas não termina com `.`
+            if tokens[currentTokenIndex].value == "." {
+                throw ErrorState.f2
+            }
+            /// Se tem código mas não tá dentro de `begin`
+            throw ErrorState.c1
+        }
+
+
+        /// Comandos
+        nextSymbol()
+        while rodandoComandos {
+            rodandoComandos = false
+
+            /// atribuição.
+            if tokens[currentTokenIndex].type == .identifiers {
+                try atribuicao()
+            }
+
+            /// comando composto.
+            if tokens[currentTokenIndex].value == "begin" {
+                try comandoComposto()
+            }
+
+            /// comando condicional 1.
+            if tokens[currentTokenIndex].value == "if" {
+                try comandoCondicional()
+            }
+
+            /// comando repetitivo 1.
+            if tokens[currentTokenIndex].value == "while" {
+                try comandoRepetitivo()
+            }
+
+            /// Verifica se o próximo token inicia um dos seguintes comandos:
+            ///     - atribuição;
+            ///     - comando composto;
+            ///     - comando condicional 1;
+            ///     - comando repetitivo 1.
+            nextSymbol()
+            if tokens[currentTokenIndex].type == .identifiers ||
+                tokens[currentTokenIndex].value == "begin" ||
+                tokens[currentTokenIndex].value == "if" ||
+                tokens[currentTokenIndex].value == "while" {
+                rodandoComandos = true
+            }
+        }
+
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
+            throw ErrorState.c2
+        }
+
+
+        // talvez tirar depois
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .terminators, tokens[currentTokenIndex].value == "." else {
+            throw ErrorState.c3
+        }
     }
 
     /// <comado> ::=

@@ -46,9 +46,9 @@ enum TransitionState: String, Identifiable, CaseIterable {
 enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7, e8
     case p1
-    case c1
+    case c1, c2, c3
     case d1, d2, d3
-    case f1
+    case f1, f2
     case i1
     case t1, t2, t3, t4
 
@@ -72,13 +72,20 @@ enum ErrorState: LocalizedError {
         case .e8:
             return "Tipo inválido."
 
+
             /// Program errors.
         case .p1:
             return "O programa deve iniciar com `program`"
             
+
             /// Comandos
         case .c1:
             return "A parte de Comandos deve começar com `BEGIN`"
+        case .c2:
+            return "A parte de Comandos deve fechar com com `END`"
+        case .c3:
+            return "A parte de Comandos deve terminar com `.`"
+
 
             /// Declaration errors.
         case .d1:
@@ -88,9 +95,11 @@ enum ErrorState: LocalizedError {
         case .d3:
             return "Declaração de variáveis deve ter um `:` entre os Identificadores e o Tipo de variável."
 
+
             /// Identifier errors.
         case .i1:
             return "Um Identificador é esperado."
+
 
             /// Terminator errors.
         case .t1:
@@ -102,9 +111,12 @@ enum ErrorState: LocalizedError {
         case .t4:
             return "Terminador de instruções inválido."
 
+
             /// Final errors
         case .f1:
             return "Programa terminou inesperadamente."
+        case .f2:
+            return "Programa deve terminar com `.`."
         }
     }
 }

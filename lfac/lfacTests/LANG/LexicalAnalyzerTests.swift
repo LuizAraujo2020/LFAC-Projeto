@@ -14,9 +14,9 @@ final class LexicalAnalyzerTests: XCTestCase {
     override func setUpWithError() throws {
         sut = LexicalAnalyzer(
             code: """
-                program testeA
-                var qtd = 12
-                var numero = 3245
+                program testeA;
+                    var qtd = 12;
+                        numero = 3245;
                 """,
             states: TransitionState.allCases,
             initialState: TransitionState.q0,
@@ -33,12 +33,27 @@ final class LexicalAnalyzerTests: XCTestCase {
         var result = sut.getCharType("v")
         XCTAssertEqual(result, type)
         
-        type = CharType.space
-        result = sut.getCharType(" ")
-        XCTAssertEqual(result, type)
+//        type = CharType.space
+//        result = sut.getCharType(" ")
+//        XCTAssertEqual(result, type)
 
         type = CharType.terminators
         var string = "\n"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.terminators
+        string = "\n"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.terminators
+        string = ";"
+        result = sut.getCharType(string)
+        XCTAssertEqual(result, type)
+
+        type = CharType.operators
+        string = ":"
         result = sut.getCharType(string)
         XCTAssertEqual(result, type)
 

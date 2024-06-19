@@ -23,16 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "17B0EBCE-31DB-43EB-918D-779292D79393"
-            shouldBeEnabled = "Yes"
+            uuid = "EC7BBF40-BE20-4D00-BF34-4DF595D6A97F"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "lfac/IDE/Scenes/Home/ContentViewModel.swift"
+            filePath = "lfac/LANG/LexicalAnalyzer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "importCode()"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "analyze()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
