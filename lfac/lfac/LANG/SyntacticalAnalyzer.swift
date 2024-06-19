@@ -186,9 +186,21 @@ final class SyntacticalAnalyzer {
     }
 
     /// <seção de parâmetros formais> ::=
-    ///     { var } <lista de identificadores> : <tipo>
+    ///     [ var ]  <lista de identificadores> : <tipo>
     func declarationFormalParameterSection() throws {
-
+        if tokens[currentTokenIndex].value == "var" {
+            nextSymbol()
+        }
+        
+        try listaDeIdentificadores()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ":" else {
+            throw ErrorState.d3
+        }
+        
+        nextSymbol()
+        try tipo()
     }
 
 
@@ -301,7 +313,7 @@ final class SyntacticalAnalyzer {
     /// <comando repetitivo 1> ::=
     ///     while <expressão> do <comando>
     func comandoRepetitivo() throws {
-
+        
     }
 
 
