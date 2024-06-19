@@ -31,14 +31,12 @@ final class SyntacticalAnalyzer {
         try programa()
 
         try nextSymbol()
-        if tokens[currentTokenIndex].value != "." {
-            try bloco()
-            try nextSymbol()
-        }
+        try fimCodigo()
 
-        if currentTokenIndex == tokens.count - 1 && tokens[currentTokenIndex].value != "." {
-            throw ErrorState.f2
-        }
+        try bloco()
+        try nextSymbol()
+
+        try fimCodigo()
     }
 
     func getNextSymbol() -> PToken {
@@ -54,6 +52,16 @@ final class SyntacticalAnalyzer {
     }
 
     // MARK: - Programa e Bloco
+
+    func fimCodigo() throws {
+        if currentTokenIndex < tokens.count - 1 && tokens[currentTokenIndex].value == "." {
+            throw ErrorState.f1
+        }
+
+        if currentTokenIndex == tokens.count - 1 && tokens[currentTokenIndex].value != "." {
+            throw ErrorState.f2
+        }
+    }
 
     /// <programa> ::=
     ///     program <identificador> ; <bloco> .
@@ -71,8 +79,6 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState.t2
         }
-
-        print("program correto.")
     }
 
     /// <bloco> ::=
@@ -361,7 +367,7 @@ final class SyntacticalAnalyzer {
 
 // MARK: - HELPERS
 extension SyntacticalAnalyzer {
-    func printError(_ error: Error) {
+    func printError(_ error: LocalizedError) {
         let token = tokens[currentTokenIndex]
 
         print("🚨 ERRO ENCONTRADO 🚨")

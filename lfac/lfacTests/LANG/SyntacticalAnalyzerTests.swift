@@ -24,6 +24,7 @@ final class SyntacticalAnalyzerTests: XCTestCase {
             XCTFail("Deveria lançar uma exception.")
 
         } catch let error as ErrorState {
+            
             XCTAssertTrue(error == .f2, "ERRO ESPERADO => ErrorState.f2: \(ErrorState.f2.localizedDescription)")
 
         } catch {
