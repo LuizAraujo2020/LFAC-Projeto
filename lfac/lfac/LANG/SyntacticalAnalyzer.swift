@@ -175,8 +175,26 @@ final class SyntacticalAnalyzer {
 
     /// <declaração de procedimento> ::=
     ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
-    func declarationProcedure() throws {
+    func declarationProcedure() throws {        
+        guard tokens[currentTokenIndex].value == "procedure" else {
+            throw ErrorState.d6
+        }
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.i1
+        }
 
+        nextSymbol()
+        try declarationFormalParameter()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState.t4
+        }
+        
+        nextSymbol()
+        try bloco()
     }
 
     /// <parâmetros formais> ::=
