@@ -175,7 +175,7 @@ final class SyntacticalAnalyzer {
 
     /// <declaração de procedimento> ::=
     ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
-    func declarationProcedure() throws {        
+    func declarationProcedure() throws {
         guard tokens[currentTokenIndex].value == "procedure" else {
             throw ErrorState.d6
         }
@@ -347,7 +347,11 @@ final class SyntacticalAnalyzer {
     /// <chamada de procedimento> ::=
     ///     <identificador> [ ( <lista de expressões> ) ]
     func commandProcedureCall() throws {
-
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.e7
+        }
+        
+        try listaDeExpressoes()
     }
 
     /// <comando condicional 1> ::=
