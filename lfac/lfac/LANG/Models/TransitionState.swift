@@ -47,7 +47,7 @@ enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7, e8, e9
     case p1
     case c1, c2, c3
-    case d1, d2, d3
+    case d1, d2, d3, d4, d5
     case f1, f2
     case i1
     case t1, t2, t3, t4
@@ -96,6 +96,10 @@ enum ErrorState: LocalizedError {
             return "Declaração de múltiplas variáveis devem ter uma sequencia de Identificadores separados por vírgula."
         case .d3:
             return "Declaração de variáveis deve ter um `:` entre os Identificadores e o Tipo de variável."
+        case .d4:
+            return "Declaração de parâmetros formais deve iniciar com `(`"
+        case .d5:
+            return "O fim da declaração de parâmetros formais deve finalizar com `)`"
 
 
             /// Identifier errors.

@@ -182,7 +182,36 @@ final class SyntacticalAnalyzer {
     /// <parâmetros formais> ::=
     ///     ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
     func declarationFormalParameter() throws {
+        var continuarSecao = false
+        guard tokens[currentTokenIndex].value == "(" else {
+            throw ErrorState.d4
+        }
+        
+        try declarationFormalParameterSection()
 
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == ";" {
+            continuarSecao = true
+            nextSymbol()
+        }
+        
+        while continuarSecao {
+            continuarSecao = false
+
+            nextSymbol()
+            try declarationFormalParameterSection()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == ";" {
+                continuarSecao = true
+                nextSymbol()
+            }
+        }
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ")" else {
+            throw ErrorState.d5
+        }
     }
 
     /// <seção de parâmetros formais> ::=
