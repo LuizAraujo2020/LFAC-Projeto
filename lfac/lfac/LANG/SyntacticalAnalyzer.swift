@@ -348,7 +348,7 @@ final class SyntacticalAnalyzer {
     ///     <identificador> [ ( <lista de expressões> ) ]
     func commandProcedureCall() throws {
         guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.e7
+            throw ErrorState.i1
         }
         
         try listaDeExpressoes()
