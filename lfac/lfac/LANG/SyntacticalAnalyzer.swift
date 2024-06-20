@@ -384,7 +384,20 @@ final class SyntacticalAnalyzer {
     /// <comando repetitivo 1> ::=
     ///     while <expressão> do <comando>
     func comandoRepetitivo() throws {
+        guard tokens[currentTokenIndex].value == "while" else {
+            throw ErrorState.d9
+        }
         
+        nextSymbol()
+        try expressao()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == "do" else {
+            throw ErrorState.d9
+        }
+        
+        nextSymbol()
+        try comando()
     }
 
 
