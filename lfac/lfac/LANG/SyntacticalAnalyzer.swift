@@ -357,7 +357,27 @@ final class SyntacticalAnalyzer {
     /// <comando condicional 1> ::=
     ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
+        guard tokens[currentTokenIndex].value == "if" else {
+            throw ErrorState.d7
+        }
         
+        nextSymbol()
+        try expressao()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == "then" else {
+            throw ErrorState.d8
+        }
+        
+        nextSymbol()
+        try comando()
+        
+        if tokens[currentTokenIndex + 1].value == "else" {
+            nextSymbol()
+            
+            nextSymbol()
+            try comando()
+        }
     }
 
 
