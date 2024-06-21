@@ -47,7 +47,7 @@ enum ErrorState: LocalizedError {
     case e1, e2, e3, e4, e5, e6, e7, e8, e9
     case p1
     case c1, c2, c3
-    case d1, d2, d3, d4, d5, d6, d7, d8, d9
+    case d1, d2, d3, d4, d5, d6, d7, d8, d9, d10
     case f1, f2
     case i1
     case t1, t2, t3, t4
