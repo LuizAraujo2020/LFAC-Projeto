@@ -87,4 +87,8 @@ extension PToken {
             .init(id: 13, type: .terminators, value: ".", line: 5, column: 4)
         ]
     }
+
+//    static var mockTokens: [Self] {
+//
+//    }
 }

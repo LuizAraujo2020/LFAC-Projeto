@@ -44,10 +44,10 @@ enum TransitionState: String, Identifiable, CaseIterable {
 }
 
 enum ErrorState: LocalizedError {
-    case e1, e2, e3, e4, e5, e6, e7, e8
+    case e1, e2, e3, e4, e5, e6, e7, e8, e9
     case p1
     case c1, c2, c3
-    case d1, d2, d3
+    case d1, d2, d3, d4, d5, d6, d7, d8, d9, d10
     case f1, f2
     case i1
     case t1, t2, t3, t4
@@ -71,6 +71,8 @@ enum ErrorState: LocalizedError {
             return "Operador inválido."
         case .e8:
             return "Tipo inválido."
+        case .e9:
+            return "Fator inválido. Espera-se um número, variável, expressão ou outro fator."
 
 
             /// Program errors.
@@ -80,9 +82,9 @@ enum ErrorState: LocalizedError {
 
             /// Comandos
         case .c1:
-            return "A parte de Comandos deve começar com `BEGIN`"
+            return "A parte de Comandos deve começar com `begin`"
         case .c2:
-            return "A parte de Comandos deve fechar com com `END`"
+            return "A parte de Comandos deve fechar com com `end`"
         case .c3:
             return "A parte de Comandos deve terminar com `.`"
 
@@ -94,6 +96,20 @@ enum ErrorState: LocalizedError {
             return "Declaração de múltiplas variáveis devem ter uma sequencia de Identificadores separados por vírgula."
         case .d3:
             return "Declaração de variáveis deve ter um `:` entre os Identificadores e o Tipo de variável."
+        case .d4:
+            return "Declaração de parâmetros formais deve iniciar com `(`"
+        case .d5:
+            return "O fim da declaração de parâmetros formais deve finalizar com `)`"
+        case .d6:
+            return "Declaração de procedimentos deve começar com `procedure"
+        case .d7:
+            return "Comando condicional deve começar com `if`"
+        case .d8:
+            return "Comando condicional deve conter `then`"
+        case .d9:
+            return "Comando repetitivo deve começar com `while`"
+        case .d10:
+            return "Comando repetitivo deve conter `do`"
 
 
             /// Identifier errors.
@@ -109,10 +125,10 @@ enum ErrorState: LocalizedError {
         case .t3:
             return "Terminador de bloco inválido."
         case .t4:
-            return "Terminador de instruções inválido."
+            return "Terminador de instruções inválido, deve ser `;`."
 
 
-            /// Final errors
+        /// Final errors
         case .f1:
             return "Programa terminou inesperadamente."
         case .f2:

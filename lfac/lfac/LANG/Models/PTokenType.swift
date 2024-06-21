@@ -82,13 +82,10 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         case .booleans:
             return regexSource.booleans
         case .integers:
-            // TODO: Fazer depois
             return regexSource.digits
         case .reals:
-            // TODO: Fazer depois
             return regexSource.digits
         case .symbols:
-            // TODO: Fazer depois
             return regexSource.symbol
         case .identifiers:
             return regexSource.letters
