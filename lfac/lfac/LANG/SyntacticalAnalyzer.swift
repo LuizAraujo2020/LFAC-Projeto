@@ -174,21 +174,80 @@ final class SyntacticalAnalyzer {
     }
 
     /// <declaração de procedimento> ::=
-    ///      { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
+    ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
     func declarationProcedure() throws {
+        guard tokens[currentTokenIndex].value == "procedure" else {
+            throw ErrorState.d6
+        }
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.i1
+        }
 
+        nextSymbol()
+        try declarationFormalParameter()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState.t4
+        }
+        
+        nextSymbol()
+        try bloco()
     }
 
     /// <parâmetros formais> ::=
-    ///      ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
+    ///     ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
     func declarationFormalParameter() throws {
+        var continuarSecao = false
+        guard tokens[currentTokenIndex].value == "(" else {
+            throw ErrorState.d4
+        }
+        
+        try declarationFormalParameterSection()
 
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == ";" {
+            continuarSecao = true
+            nextSymbol()
+        }
+        
+        while continuarSecao {
+            continuarSecao = false
+
+            nextSymbol()
+            try declarationFormalParameterSection()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == ";" {
+                continuarSecao = true
+                nextSymbol()
+            }
+        }
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ")" else {
+            throw ErrorState.d5
+        }
     }
 
     /// <seção de parâmetros formais> ::=
-    ///      { var } <lista de identificadores> : <tipo>
+    ///     [ var ]  <lista de identificadores> : <tipo>
     func declarationFormalParameterSection() throws {
-
+        if tokens[currentTokenIndex].value == "var" {
+            nextSymbol()
+        }
+        
+        try listaDeIdentificadores()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ":" else {
+            throw ErrorState.d3
+        }
+        
+        nextSymbol()
+        try tipo()
     }
 
 
@@ -288,20 +347,57 @@ final class SyntacticalAnalyzer {
     /// <chamada de procedimento> ::=
     ///     <identificador> [ ( <lista de expressões> ) ]
     func commandProcedureCall() throws {
-
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState.i1
+        }
+        
+        try listaDeExpressoes()
     }
 
     /// <comando condicional 1> ::=
     ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
+        guard tokens[currentTokenIndex].value == "if" else {
+            throw ErrorState.d7
+        }
         
+        nextSymbol()
+        try expressao()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == "then" else {
+            throw ErrorState.d8
+        }
+        
+        nextSymbol()
+        try comando()
+        
+        if tokens[currentTokenIndex + 1].value == "else" {
+            nextSymbol()
+            
+            nextSymbol()
+            try comando()
+        }
     }
 
 
     /// <comando repetitivo 1> ::=
     ///     while <expressão> do <comando>
     func comandoRepetitivo() throws {
-
+        guard tokens[currentTokenIndex].value == "while" else {
+            throw ErrorState.d9
+        }
+        
+        nextSymbol()
+        try expressao()
+        
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == "do" else {
+            throw ErrorState.d9
+        }
+        
+        nextSymbol()
+        try comando()
     }
 
 
@@ -365,7 +461,30 @@ final class SyntacticalAnalyzer {
     /// <termo> ::=
     ///     <fator> { ( * | / | div | and ) <fator> }
     func termo() throws {
+        var continuarFator = false
+        
+        try fator()
 
+        try fimCodigo()
+
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == "*" || nextSymbolValue == "/" || nextSymbolValue == "div" || nextSymbolValue == "and" {
+            continuarFator = true
+            nextSymbol()
+        }
+        
+        while continuarFator {
+            continuarFator = false
+
+            nextSymbol()
+            try termo()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == "*" || nextSymbolValue == "/" || nextSymbolValue == "div" || nextSymbolValue == "and" {
+                continuarFator = true
+                nextSymbol()
+            }
+        }
     }
 
     /// <fator> ::=
@@ -404,7 +523,30 @@ final class SyntacticalAnalyzer {
     /// <lista de expressões> ::=
     ///     <expressão> { , <expressão> }
     func listaDeExpressoes() throws {
+        var continuarExpressao = false
+        
+        try expressao()
 
+        try fimCodigo()
+
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == "," {
+            continuarExpressao = true
+            nextSymbol()
+        }
+        
+        while continuarExpressao {
+            continuarExpressao = false
+
+            nextSymbol()
+            try expressao()
+            
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == "," {
+                continuarExpressao = true
+                nextSymbol()
+            }
+        }
     }
 }
 
