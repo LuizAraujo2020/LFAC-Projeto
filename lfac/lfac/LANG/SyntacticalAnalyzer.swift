@@ -12,7 +12,10 @@ final class SyntacticalAnalyzer {
     
     /// Tokens
     private var tokens: [PToken]
-    
+
+    /// Errors
+    var errors = [ErrorState]()
+
     /// States
     private var currentTokenIndex: Int
 
@@ -27,15 +30,40 @@ final class SyntacticalAnalyzer {
 
 
     // MARK: - Methods
-    func analyze() throws {
-        try programa()
+    func analyze() {
+        do {
+            try programa()
+        } catch let error as ErrorState {
+            errors.append(error)
+        } catch {
+            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+        }
 
-        nextSymbol()
-        try fimCodigo()
-        try bloco()
+        do {
+            nextSymbol()
+            try fimCodigo()
+        } catch let error as ErrorState {
+            errors.append(error)
+        } catch {
+            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+        }
 
-        nextSymbol()
-        try fimCodigo()
+        do {
+            try bloco()
+        } catch let error as ErrorState {
+            errors.append(error)
+        } catch {
+            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+        }
+
+        do {
+            nextSymbol()
+            try fimCodigo()
+        } catch let error as ErrorState {
+            errors.append(error)
+        } catch {
+            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+        }
     }
 
     func getNextSymbol() -> PToken {

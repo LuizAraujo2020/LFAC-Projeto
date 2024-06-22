@@ -28,17 +28,14 @@ struct ContentView: View {
                             vm.exportCode()
                         } label: {
                             Label(
-                                "Export\(vm.savedCode != nil ? "ed" : "  ")",
-                                systemImage: "square.and.arrow.down.on.square\(vm.savedCode != nil ? ".fill" : "")"
+                                "Analyze",
+                                systemImage: "play.circle.fill"
                             )
                         }
-
-                        NavigationLink(value: vm.code) {
-                            Label("Analyze", systemImage: "play.circle.fill")
-                        }
-//                        .disabled(!vm.isRunEnabled)
+                        .disabled(!vm.isRunEnabled)
                     }
 
+                // MARK: - ENTER THE CODE
                 HStack(alignment: .top) {
                     TextEditor(text: $vm.code)
                         .scrollContentBackground(.hidden)
@@ -58,68 +55,42 @@ struct ContentView: View {
                         .autocorrectionDisabled()
                         .textInputAutocapitalization(.never)
                         .frame(width: width / 2.5)
+                    
+                    // MARK: - RESULT
+                    // TODO: ⚠️ Fazer extrair depois
+                    VStack(alignment: .leading) {
+                        if vm.lexicalAnalyzer.errors.count > 0 || vm.syntacticalAnalyzer.errors.count > 0 {
+                            ErrorsView(errors: vm.lexicalAnalyzer.errors.count > 0 ? vm.lexicalAnalyzer.errors:  vm.syntacticalAnalyzer.errors)
 
-                    Text(vm.styled)
-                        .frame(width: width / 2.5)
+                        } else {
+                            List {
+                                Section(header: AnalysisTypePicker(type: $vm.selectedAnalysis)) {
+
+                                    switch vm.selectedAnalysis{
+                                    case .lexical:
+                                        LexicalAnalysisCompactView(
+                                            analyzer: LexicalAnalyzer(
+                                                code: vm.code
+                                            )
+                                        )
+                                    case .syntactical:
+                                        SyntacticalAnalysisCompactView(
+                                            analyzer: SyntacticalAnalyzer(
+                                                tokens: vm.lexicalAnalyzer.tokens
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .padding()
-            .navigationDestination(for: String.self) { code in
-                LexicalAnalysisView(
-                    analyzer: LexicalAnalyzer(
-                        code: code//,
-//                        states: TransitionState.allCases,
-//                        initialState: TransitionState.q0,
-//                        finalStates: TransitionState.finals
-                    )
-                )
-            }
         }
-//        LexicalAnalysisView(
-//            analyzer: LexicalAnalyzer(
-//                code: """
-//program micro03;
-//
-//var
-//    numero : integer;
-//
-//begin
-//    readln(numero);
-//    if(numero >= 100) then
-//        begin
-//            if(numero <= 200) then begin
-//            writeln(1);
-//            end;
-//    else begin
-//        writeln(0);
-//        end;
-//        end;
-//        else begin
-//        writeln(0);
-//    end;
-//
-//end.
-//""",
-//                states: [],
-//                initialState: .q0,
-//                finalStates: []
-//            )
-//        )
     }
 }
 
 #Preview {
     ContentView()
-//    LexicalAnalysisView(
-//        analyzer: LexicalAnalyzer(
-//            code: """
-//program prog1;
-//    var num = 123
-//    var qtd = 10
-//""",
-//            states: [],
-//            initialState: .q0,
-//            finalStates: []
-//        )
-//    )
 }

@@ -5,11 +5,11 @@
 //  Created by Luiz Araujo on 13/05/24.
 //
 
-import Foundation
+import SwiftUI
 
 enum PTokenType: String, Identifiable, CaseIterable, Hashable {
     case space
-//    case endLine
+    //    case endLine
     case terminators
     case separators
     case commentary
@@ -69,41 +69,27 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         }
     }
 
-//    var regex: Regex<(Substring, Substring)> {
-//        let regexSource = RegexSource()
-//
-//        switch self {
-//        case .space:
-//            return regexSource.space
-//        case .terminators:
-//            return regexSource.terminators
-//        case .separators:
-//            return /^([,])$/
-//        case .commentary:
-//            return regexSource.commentary
-//        case .operators:
-//            return regexSource.operators
-//        case .relationals:
-//            return regexSource.relationals
-//        case .attribution:
-//            return /^(:|:=)$/
-//        case .keyword:
-//            return regexSource.keywords
-//        case .booleans:
-//            return regexSource.booleans
-//        case .integers:
-//            return regexSource.digits
-//        case .reals:
-//            return regexSource.digits
-//        case .symbols:
-//            return regexSource.symbol
-//        case .identifiers:
-//            return regexSource.letters
-//        case .invalidToken:
-//            return /([\^|\"]+)/
-//        }
-//    }
+    var color: Color {
+        switch self {
+        case .space: return Color.gray
+        case .terminators: return Color.black
+        case .separators: return Color.gray
+        case .commentary: return Color.gray
+        case .operators: return Color.orange
+        case .relationals: return Color.orange
+        case .attribution: return Color.orange
+        case .keyword: return Color.blue
+        case .booleans: return Color.green
+        case .integers: return Color.green
+        case .reals: return Color.green
+        case .symbols: return Color.gray
+        case .identifiers: return Color.yellow
+        case .invalidToken: return Color.red
+        }
+    }
+}
 
+extension PTokenType {
     static func getType(lexeme: String, dict: Dictionaryable = Dictionary()) -> Self {
         guard !String(lexeme.prefix(2)).contains(dict.commentary) else { return .commentary}
 
@@ -122,7 +108,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         guard !dict.keywords.contains(lexeme) else { return .keyword }
         guard !lexeme.contains(dict.identifiers) else { return .identifiers }
 
-        // Falta: .reals
+        // TODO: ⚠️ Fazer depois: .reals
         return .invalidToken
     }
 }
