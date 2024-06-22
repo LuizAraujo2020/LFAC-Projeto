@@ -11,6 +11,8 @@ import UIKit
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
+    @Published var codeFile: FileScanner.FilesName = .code1
+    
     @Published var code: String = ""
     @Published var savedCode: String?
     @Published var styled: AttributedString = ""
@@ -37,6 +39,7 @@ class ContentViewModel: ObservableObject {
 //        self.styling = styling
 
         enableRunButton()
+        observeCodePicker()
     }
 
     func enableRunButton() {
@@ -53,13 +56,20 @@ class ContentViewModel: ObservableObject {
         .store(in: &cancellables)
     }
 
-    func exportCode() {
-        fileScanner.writeTo(fileName: .code, value: code)
+    func observeCodePicker() {
+        self.$codeFile.sink { [unowned self] value in
+            self.importCode(value)
+        }
+        .store(in: &cancellables)
+    }
+
+    func exportCode(_ file: FileScanner.FilesName = .code1) {
+        fileScanner.writeTo(fileName: file, value: code)
         savedCode = code
     }
 
-    func importCode() {
-        let data = fileScanner.readFrom()
+    func importCode(_ file: FileScanner.FilesName = .code1) {
+        let data = fileScanner.readFrom(fileName: file)
         code = data
         styled = AttributedString(data)
     }

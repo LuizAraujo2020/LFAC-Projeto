@@ -277,20 +277,7 @@ final class SyntacticalAnalyzer {
 
         while shouldLoop {
             nextSymbol()
-
-            if tokens[currentTokenIndex].type == .identifiers {
-                try atribuicao()
-
-            } else if tokens[currentTokenIndex].value == "begin" {
-                /// comando dentro do comando.
-                try comando()
-
-            } else if tokens[currentTokenIndex].value == "if" {
-                try comandoCondicional()
-
-            } else if tokens[currentTokenIndex].value == "while" {
-                try comandoRepetitivo()
-            }
+            try comando()
 
             shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
                         tokens[currentTokenIndex + 1].value == "begin" ||
@@ -420,7 +407,12 @@ final class SyntacticalAnalyzer {
     /// <relação> ::=
     ///     = | <> | < | <= | >= | >
     func relacao() throws {
-        guard tokens[currentTokenIndex].value == "=" || tokens[currentTokenIndex].value == "<>" || tokens[currentTokenIndex].value == "<" || tokens[currentTokenIndex].value == "<=" || tokens[currentTokenIndex].value == ">=" || tokens[currentTokenIndex].value == ">" else {
+        guard tokens[currentTokenIndex].value == "=" ||
+                tokens[currentTokenIndex].value == "<>" ||
+                tokens[currentTokenIndex].value == "<" ||
+                tokens[currentTokenIndex].value == "<=" ||
+                tokens[currentTokenIndex].value == ">=" ||
+                tokens[currentTokenIndex].value == ">" else {
             throw ErrorState.e7
         }
     }
