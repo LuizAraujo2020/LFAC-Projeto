@@ -24,21 +24,31 @@ struct ContentView: View {
 
                         CodePickerView(code: $vm.codeFile)
 
+//                        Button {
+//                            vm.exportCode()
+//                        } label: {
+//                            Label(
+//                                "Export\(vm.savedCode != nil ? "ed" : "  ")",
+//                                systemImage: "square.and.arrow.down.on.square\(vm.savedCode != nil ? ".fill" : "")"
+//                            )
+//                        }
+
+//                        NavigationLink(value: vm.code) {
+//                            Label("Analyze", systemImage: "play.circle.fill")
+//                        }
+
                         Button {
                             vm.exportCode()
                         } label: {
                             Label(
-                                "Export\(vm.savedCode != nil ? "ed" : "  ")",
-                                systemImage: "square.and.arrow.down.on.square\(vm.savedCode != nil ? ".fill" : "")"
+                                "Analyze",
+                                systemImage: "play.circle.fill"
                             )
                         }
-
-                        NavigationLink(value: vm.code) {
-                            Label("Analyze", systemImage: "play.circle.fill")
-                        }
-//                        .disabled(!vm.isRunEnabled)
+                        .disabled(!vm.isRunEnabled)
                     }
 
+                // MARK: - ENTER THE CODE
                 HStack(alignment: .top) {
                     TextEditor(text: $vm.code)
                         .scrollContentBackground(.hidden)
@@ -59,21 +69,27 @@ struct ContentView: View {
                         .textInputAutocapitalization(.never)
                         .frame(width: width / 2.5)
 
-                    Text(vm.styled)
-                        .frame(width: width / 2.5)
+                    // MARK: - RESULT
+//                    Text(vm.styled)
+//                        .frame(width: width / 2.5)
+                    LexicalAnalysisCompactView(
+                        analyzer: LexicalAnalyzer(
+                            code: vm.code
+                        )
+                    )
                 }
             }
             .padding()
-            .navigationDestination(for: String.self) { code in
-                LexicalAnalysisView(
-                    analyzer: LexicalAnalyzer(
-                        code: code//,
-//                        states: TransitionState.allCases,
-//                        initialState: TransitionState.q0,
-//                        finalStates: TransitionState.finals
-                    )
-                )
-            }
+//            .navigationDestination(for: String.self) { code in
+//                LexicalAnalysisView(
+//                    analyzer: LexicalAnalyzer(
+//                        code: code//,
+////                        states: TransitionState.allCases,
+////                        initialState: TransitionState.q0,
+////                        finalStates: TransitionState.finals
+//                    )
+//                )
+//            }
         }
 //        LexicalAnalysisView(
 //            analyzer: LexicalAnalyzer(

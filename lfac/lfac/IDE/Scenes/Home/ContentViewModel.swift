@@ -12,13 +12,16 @@ import SwiftUI
 
 class ContentViewModel: ObservableObject {
     @Published var codeFile: FileScanner.FilesName = .code1
-    
+    @Published var lexicalAnalyzer: LexicalAnalyzer
+    @Published var syntacticalAnalyzer: SyntacticalAnalyzer
+
     @Published var code: String = ""
     @Published var savedCode: String?
     @Published var styled: AttributedString = ""
 
     ///  View Elements States
     @Published var isRunEnabled = false
+    @Published var selectedAnalysis = AnalysisTypes.lexical
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -29,13 +32,28 @@ class ContentViewModel: ObservableObject {
         code: String = "",
         isRunEnabled: Bool = false,
         cancellables: Set<AnyCancellable> = Set<AnyCancellable>(),
-        fileScanner: FileScanner = FileScanner()//,
+        fileScanner: FileScanner = FileScanner(),
+        lexicalAnalyzer: LexicalAnalyzer? = nil,
+        syntacticalAnalyzer: SyntacticalAnalyzer? = nil
 //        styling: CodeStyler = BasicStyling()
     ) {
         self.code = code
         self.isRunEnabled = isRunEnabled
         self.cancellables = cancellables
         self.fileScanner = fileScanner
+
+        if let lexicalAnalyzer {
+            self.lexicalAnalyzer = lexicalAnalyzer
+        } else {
+            self.lexicalAnalyzer = LexicalAnalyzer(code: code)
+
+        }
+
+        if let syntacticalAnalyzer {
+            self.syntacticalAnalyzer = syntacticalAnalyzer
+        } else {
+            self.syntacticalAnalyzer = SyntacticalAnalyzer(tokens: [])
+        }
 //        self.styling = styling
 
         enableRunButton()
@@ -71,6 +89,10 @@ class ContentViewModel: ObservableObject {
     func importCode(_ file: FileScanner.FilesName = .code1) {
         let data = fileScanner.readFrom(fileName: file)
         code = data
+
+        self.lexicalAnalyzer = LexicalAnalyzer(code: code)
+        self.syntacticalAnalyzer = SyntacticalAnalyzer(tokens: self.lexicalAnalyzer.tokens)
+
         styled = AttributedString(data)
     }
 

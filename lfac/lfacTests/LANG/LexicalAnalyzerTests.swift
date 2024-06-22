@@ -17,10 +17,10 @@ final class LexicalAnalyzerTests: XCTestCase {
                 program testeA;
                     var qtd = 12;
                         numero = 3245;
-                """,
-            states: TransitionState.allCases,
-            initialState: TransitionState.q0,
-            finalStates: TransitionState.finals
+                """//,
+//            states: TransitionState.allCases,
+//            initialState: TransitionState.q0,
+//            finalStates: TransitionState.finals
         )
     }
 
