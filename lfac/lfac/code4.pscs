@@ -14,3 +14,6 @@ begin
 	end;
 	writeln(x);
 end.
+
+
+

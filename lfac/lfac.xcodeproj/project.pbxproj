@@ -151,7 +151,6 @@
 		6F20B4502BF16D7100EC1B0B /* IDE */ = {
 			isa = PBXGroup;
 			children = (
-				6F8B6C512BEBADF300887CE7 /* Models */,
 				6F8B6C522BEBADF900887CE7 /* Scenes */,
 				6F685B142BF4630E00F358FE /* Utils */,
 			);
@@ -337,13 +336,6 @@
 				6F8B6C442BEBADE000887CE7 /* lfacUITestsLaunchTests.swift */,
 			);
 			path = lfacUITests;
-			sourceTree = "<group>";
-		};
-		6F8B6C512BEBADF300887CE7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		6F8B6C522BEBADF900887CE7 /* Scenes */ = {

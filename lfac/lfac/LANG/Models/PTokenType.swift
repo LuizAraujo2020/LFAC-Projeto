@@ -11,10 +11,12 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
     case space
 //    case endLine
     case terminators
+    case separators
     case commentary
 
     case operators
     case relationals
+    case attribution
 
     case keyword
     case booleans
@@ -41,9 +43,11 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         case .identifiers:
             return "IDENTIFICADOR"
         case .operators:
-            return "OPERADOR"
+            return "OPERADOR_MATEMATICO"
         case .relationals:
             return "OPERADOR_RELACIONAL"
+        case .attribution:
+            return "OPERADOR_ATRIBUICAO"
         case .symbols:
             return "SIMBOLO"
         case .space:
@@ -58,92 +62,67 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
             return "REAL"
         case .terminators:
             return "TERMINADORES"
+        case .separators:
+            return "SEPARADORES"
         case .invalidToken:
             return "INVALID_TOKEN"
         }
     }
 
-    var regex: Regex<(Substring, Substring)> {
-        let regexSource = RegexSource()
-
-        switch self {
-        case .space:
-            return regexSource.space
-        case .terminators:
-            return regexSource.terminators
-        case .commentary:
-            return regexSource.commentary
-        case .operators:
-            return regexSource.operators
-        case .relationals:
-            return regexSource.relationals
-        case .keyword:
-            return regexSource.keywords
-        case .booleans:
-            return regexSource.booleans
-        case .integers:
-            return regexSource.digits
-        case .reals:
-            return regexSource.digits
-        case .symbols:
-            return regexSource.symbol
-        case .identifiers:
-            return regexSource.letters
-        case .invalidToken:
-            return /([\^])/ //[^a-zA-Z0-9]/
-        }
-    }
-
-//    static func examples(type typeAux: Self) -> [String] {
+//    var regex: Regex<(Substring, Substring)> {
+//        let regexSource = RegexSource()
+//
 //        switch self {
-//        case .space: [" "]
-//        case .terminators: [""] .|;|\r|\n|\t|\0|\s
-//        case .commentary: [""]
-//        case .operators: [""]
-//        case .relationals: [""]
-//        case .keyword: [""]
-//        case .booleans: [""]
-//        case .integers: [""]
-//        case .reals: [""]
-//        case .symbols: [""]
-//        case .identifiers: [""]
-//        case .invalidToken: [""]
+//        case .space:
+//            return regexSource.space
+//        case .terminators:
+//            return regexSource.terminators
+//        case .separators:
+//            return /^([,])$/
+//        case .commentary:
+//            return regexSource.commentary
+//        case .operators:
+//            return regexSource.operators
+//        case .relationals:
+//            return regexSource.relationals
+//        case .attribution:
+//            return /^(:|:=)$/
+//        case .keyword:
+//            return regexSource.keywords
+//        case .booleans:
+//            return regexSource.booleans
+//        case .integers:
+//            return regexSource.digits
+//        case .reals:
+//            return regexSource.digits
+//        case .symbols:
+//            return regexSource.symbol
+//        case .identifiers:
+//            return regexSource.letters
+//        case .invalidToken:
+//            return /([\^|\"]+)/
 //        }
 //    }
 
+    static func getType(lexeme: String, dict: Dictionaryable = Dictionary()) -> Self {
+        guard !String(lexeme.prefix(2)).contains(dict.commentary) else { return .commentary}
 
+        guard !dict.space.contains(lexeme) else { return .space }
 
+        guard !dict.relationals.contains(lexeme) else { return .relationals }
+        guard !dict.operators.contains(lexeme) else { return .operators }
+        guard !dict.attribution.contains(lexeme) else { return .attribution }
+        guard !dict.terminators.contains(lexeme) else { return .terminators }
+        guard !dict.separators.contains(lexeme) else { return .separators }
+        guard !dict.symbols.contains(lexeme) else { return .symbols }
 
+        guard !lexeme.contains(dict.integers) else { return .integers }
 
-//    var letters = /^([a-z]|[A-Z])$/
-//    var digits = /^([0-9])$/
-//    var booleans = /^(true|false)$/
-//    var decimalSign = /^[.|,]{1}$/
-//
-//    var terminators = /^([\.|;|\r|\n|\t|\0|\s]+)$/
-//    var operators = /^([:|<|>|=|\+|\*|\/|\-])$/
-//
-//    var relationals = /^(=|<>|<|<=|>=|>)$/
-//
-//    var keywords = /^\b(program|var|integer|real|boolean|procedure|begin|end|if|then|else|while|do|or|true|false|div|and|not|READ|WRITE)\b$/
-//    var symbol = /^(\.|\:|;|,|\(|\)|\[|\]|{|})$/
-//    var commentary = /^([\/]{2,})$/
-//
-//    var space = /^([\s]+)$/
-//
-//    var keywordsArray = ["program", "var", "integer", "real", "boolean", "procedure", "begin", "end", "if", "then", "else", "while", "do", "or", "div", "and", "not", "READ", "WRITE"]
+        guard !dict.booleans.contains(lexeme) else { return .booleans }
+        guard !dict.keywords.contains(lexeme) else { return .keyword }
+        guard !lexeme.contains(dict.identifiers) else { return .identifiers }
 
-    static func getType(lexeme: String) -> Self {
-        // TODO: ⚠️ Fazer depois
-        .identifiers
+        // Falta: .reals
+        return .invalidToken
     }
 }
-
-
-
-
-
-
-
-
-
