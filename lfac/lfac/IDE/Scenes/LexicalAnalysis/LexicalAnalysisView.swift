@@ -31,10 +31,7 @@ struct LexicalAnalysisView: View {
         .navigationDestination(for: String.self) { code in
             LexicalAnalysisView(
                 analyzer: LexicalAnalyzer(
-                    code: code//,
-                    //                        states: TransitionState.allCases,
-                    //                        initialState: TransitionState.q0,
-                    //                        finalStates: TransitionState.finals
+                    code: code
                 )
             )
         }
@@ -48,10 +45,7 @@ struct LexicalAnalysisView: View {
                     program testeA
                     var qtd = 12
                     var numero = 3245
-                    """//,
-            //            states: TransitionState.allCases,
-            //            initialState: TransitionState.q0,
-            //            finalStates: TransitionState.finals
+                    """
         )
     )
 }

@@ -12,34 +12,29 @@ struct LexicalAnalysisCompactView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            if analyzer.errors.count > 0 {
-                ErrorsView(errors: analyzer.errors)
+            ForEach(
+                analyzer.tokens//.filter({ $0.type == .keyword || $0.type == .identifiers })
+            ) { token in
+                HStack {
+                    Rectangle()
+                        .frame(width: 5, alignment: .leading)
+                        .foregroundStyle(token.type.color)
 
-            } else {
-                List {
-                    ForEach(
-                        analyzer.tokens.filter({ $0.type == .keyword || $0.type == .identifiers })
-                    ) { token in
+                    VStack(alignment: .leading) {
                         HStack {
-                            Rectangle()
-                                .frame(width: 5, alignment: .leading)
-                                .foregroundStyle(token.type.color)
+                            Text("TIPO:\t\t").bold()
+                            Text(token.type.name)
+                        }
 
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text("TIPO:\t\t").bold()
-                                    Text(token.type.name)
-                                }
-                                
-                                HStack {
-                                    Text("VALOR:\t").bold()
-                                    Text(token.value)
-                                }
-                            }
+                        HStack {
+                            Text("VALOR:\t").bold()
+                            Text(token.value)
                         }
                     }
                 }
             }
+            
+            Spacer()
         }
     }
 }

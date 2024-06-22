@@ -24,11 +24,7 @@ class LexicalAnalyzer {
 
     internal init(
         code: String,
-//        states: [TransitionState],
-//        initialState: TransitionState,
-//        finalStates: [TransitionState],
-        alphabet: Dictionary = Dictionary()//,
-//        regexSource: RegexSource = RegexSource()
+        alphabet: Dictionary = Dictionary()
     ) {
         self.code = code.map { String($0) }
         self.alphabet = alphabet

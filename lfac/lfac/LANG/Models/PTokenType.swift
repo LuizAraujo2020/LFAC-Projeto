@@ -69,41 +69,6 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         }
     }
 
-    //    var regex: Regex<(Substring, Substring)> {
-    //        let regexSource = RegexSource()
-    //
-    //        switch self {
-    //        case .space:
-    //            return regexSource.space
-    //        case .terminators:
-    //            return regexSource.terminators
-    //        case .separators:
-    //            return /^([,])$/
-    //        case .commentary:
-    //            return regexSource.commentary
-    //        case .operators:
-    //            return regexSource.operators
-    //        case .relationals:
-    //            return regexSource.relationals
-    //        case .attribution:
-    //            return /^(:|:=)$/
-    //        case .keyword:
-    //            return regexSource.keywords
-    //        case .booleans:
-    //            return regexSource.booleans
-    //        case .integers:
-    //            return regexSource.digits
-    //        case .reals:
-    //            return regexSource.digits
-    //        case .symbols:
-    //            return regexSource.symbol
-    //        case .identifiers:
-    //            return regexSource.letters
-    //        case .invalidToken:
-    //            return /([\^|\"]+)/
-    //        }
-    //    }
-
     var color: Color {
         switch self {
         case .space: return Color.gray
@@ -143,7 +108,7 @@ extension PTokenType {
         guard !dict.keywords.contains(lexeme) else { return .keyword }
         guard !lexeme.contains(dict.identifiers) else { return .identifiers }
 
-        // Falta: .reals
+        // TODO: ⚠️ Fazer depois: .reals
         return .invalidToken
     }
 }

@@ -26,7 +26,6 @@ class ContentViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
 
     private var fileScanner: FileScanner
-//    private let styling: CodeStyler?
 
     internal init(
         code: String = "",
@@ -35,7 +34,6 @@ class ContentViewModel: ObservableObject {
         fileScanner: FileScanner = FileScanner(),
         lexicalAnalyzer: LexicalAnalyzer? = nil,
         syntacticalAnalyzer: SyntacticalAnalyzer? = nil
-//        styling: CodeStyler = BasicStyling()
     ) {
         self.code = code
         self.isRunEnabled = isRunEnabled
@@ -54,7 +52,6 @@ class ContentViewModel: ObservableObject {
         } else {
             self.syntacticalAnalyzer = SyntacticalAnalyzer(tokens: [])
         }
-//        self.styling = styling
 
         enableRunButton()
         observeCodePicker()
@@ -66,9 +63,6 @@ class ContentViewModel: ObservableObject {
 
             /// Validate input to enable Run Button
             self.isRunEnabled = self.validateInput(self.code)
-//            if let styling {
-//                self.styled = styling.style(code.description)
-//            }
             self.savedCode = self.savedCode != self.code ? nil : self.code
         }
         .store(in: &cancellables)
@@ -98,12 +92,7 @@ class ContentViewModel: ObservableObject {
 
     private func validateInput(_ input: String) -> Bool {
         // TODO: Fazer validações
-
         guard input.description.count >= 3 else { return false }
-//        guard !input.description.contains(PTokenType.invalidToken.regex) else { return false }
-//        if let regex = try? Regex(PTokenType.invalidToken.regex), !input.description.matches(of: regex).isEmpty {
-//            return false
-//        }
         return true
     }
 
