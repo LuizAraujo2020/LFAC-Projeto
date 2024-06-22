@@ -44,7 +44,7 @@ enum TransitionState: String, Identifiable, CaseIterable {
 }
 
 enum ErrorState: LocalizedError {
-    case e1, e2, e3, e4, e5, e6, e7, e8, e9
+    case e1(String), e2, e3, e4, e5, e6, e7, e8, e9
     case p1
     case c1, c2, c3
     case d1, d2, d3, d4, d5, d6, d7, d8, d9, d10
@@ -55,8 +55,8 @@ enum ErrorState: LocalizedError {
     var errorDescription: String? {
         switch self {
             /// Generic errors.
-        case .e1:
-            return "Caracter inválido."
+        case .e1(let char):
+            return "Caracter inválido: \(char)"
         case .e2:
             return "Identificadores não podem conter caracteres especiais."
         case .e3:

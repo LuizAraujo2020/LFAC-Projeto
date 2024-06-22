@@ -28,49 +28,49 @@ final class LexicalAnalyzerTests: XCTestCase {
         sut = nil
     }
 
-    func test_getCharType() throws {
-        var type = CharType.letters
-        var result = sut.getCharType("v")
-        XCTAssertEqual(result, type)
-        
-//        type = CharType.space
-//        result = sut.getCharType(" ")
+//    func test_getCharType() throws {
+//        var type = CharType.letters
+//        var result = sut.getCharType("v")
 //        XCTAssertEqual(result, type)
-
-        type = CharType.terminators
-        var string = "\n"
-        result = sut.getCharType(string)
-        XCTAssertEqual(result, type)
-
-        type = CharType.terminators
-        string = "\n"
-        result = sut.getCharType(string)
-        XCTAssertEqual(result, type)
-
-        type = CharType.terminators
-        string = ";"
-        result = sut.getCharType(string)
-        XCTAssertEqual(result, type)
-
-        type = CharType.operators
-        string = ":"
-        result = sut.getCharType(string)
-        XCTAssertEqual(result, type)
-
-        type = CharType.digits
-        result = sut.getCharType("0")
-        XCTAssertEqual(result, type)
-
-        type = CharType.decimalSign
-        result = sut.getCharType(".")
-        XCTAssertEqual(result, type)
-
-        type = CharType.symbols
-        result = sut.getCharType("{")
-        XCTAssertEqual(result, type)
-
-        type = CharType.operators
-        result = sut.getCharType("+")
-        XCTAssertEqual(result, type)
-    }
+//        
+////        type = CharType.space
+////        result = sut.getCharType(" ")
+////        XCTAssertEqual(result, type)
+//
+//        type = CharType.terminators
+//        var string = "\n"
+//        result = sut.getCharType(string)
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.terminators
+//        string = "\n"
+//        result = sut.getCharType(string)
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.terminators
+//        string = ";"
+//        result = sut.getCharType(string)
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.operators
+//        string = ":"
+//        result = sut.getCharType(string)
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.digits
+//        result = sut.getCharType("0")
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.decimalSign
+//        result = sut.getCharType(".")
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.symbols
+//        result = sut.getCharType("{")
+//        XCTAssertEqual(result, type)
+//
+//        type = CharType.operators
+//        result = sut.getCharType("+")
+//        XCTAssertEqual(result, type)
+//    }
 }

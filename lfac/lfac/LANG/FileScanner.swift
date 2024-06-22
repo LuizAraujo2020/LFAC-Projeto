@@ -16,7 +16,7 @@ class FileScanner {
             appropriateFor: nil,
             create: false) {
 
-            let fileURL = folderURL.appendingPathComponent(fileName.rawValue + "." + fileExtension.rawValue)
+            let fileURL = folderURL.appendingPathComponent(fileName.rawValue + "_edited" + "." + fileExtension.rawValue)
 
             guard let outputStream = OutputStream(url: fileURL, append: true) else {
                 print("Unable to open file")
@@ -52,10 +52,23 @@ class FileScanner {
 
 extension FileScanner {
 
-    enum FilesName: String {
-    case code = "code"
-    case code1 = "code1"
-    case tokenList = "token-list"
+    enum FilesName: String, Identifiable, Hashable, CaseIterable {
+    case code1
+    case code2
+    case code3
+    case code4
+//    case tokenList = "token-list"
+
+        var id: String { self.rawValue }
+
+        var name: String {
+            switch self {
+            case .code1: "Código 1"
+            case .code2: "Código 2"
+            case .code3: "Código 3"
+            case .code4: "Código 4"
+            }
+        }
     }
 
     enum FilesExtenstion: String {
