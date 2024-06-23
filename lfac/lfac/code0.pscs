@@ -1,18 +1,13 @@
 program prog0;
-var valido: boolean;
+var
+    valido, valid, validade: boolean;
     inteiro: integer;
     decimal: real;
 
-var
-    valido1: boolean;
-    inteiro1: integer;
-    decimal1: real;
 begin
     begin
-        begin
-        valido := false;
-        valido1 := true;
-        inteiro := 21;
+        soma := 12;
     end;
 end
 .
+
