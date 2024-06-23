@@ -9,7 +9,7 @@ import Foundation
 
 final class SyntacticalAnalyzer {
     // MARK: - Properties
-    
+
     /// Tokens
     private var tokens: [PToken]
 
@@ -43,30 +43,30 @@ final class SyntacticalAnalyzer {
 
         do {
             try programa()
-//        } catch let error as ErrorState {
-//            errors.append(error)
-//        } catch {
-//            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
-//        }
+            //        } catch let error as ErrorState {
+            //            errors.append(error)
+            //        } catch {
+            //            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+            //        }
 
-//        do {
+            //        do {
             nextSymbol()
             try fimCodigo()
-//        } catch let error as ErrorState {
-//            errors.append(error)
-//        } catch {
-//            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
-//        }
+            //        } catch let error as ErrorState {
+            //            errors.append(error)
+            //        } catch {
+            //            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+            //        }
 
-//        do {
+            //        do {
             try bloco()
-//        } catch let error as ErrorState {
-//            errors.append(error)
-//        } catch {
-//            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
-//        }
+            //        } catch let error as ErrorState {
+            //            errors.append(error)
+            //        } catch {
+            //            print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
+            //        }
 
-//        do {
+            //        do {
             nextSymbol()
             try fimCodigo()
         } catch let error as ErrorState {
@@ -86,7 +86,7 @@ final class SyntacticalAnalyzer {
             currentTokenIndex += 1
         }
     }
-    
+
     func previousSymbol() {
         currentTokenIndex -= 1
     }
@@ -95,11 +95,15 @@ final class SyntacticalAnalyzer {
 
     func fimCodigo() throws {
         if currentTokenIndex < tokens.count - 1 && tokens[currentTokenIndex].value == "." {
-            throw ErrorState.f1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .f1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
         if currentTokenIndex == tokens.count - 1 && tokens[currentTokenIndex].value != "." {
-            throw ErrorState.f2(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .f2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+
+        if tokens[tokens.count - 1].value != "." {
+            throw ErrorState(type: .f2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -107,17 +111,17 @@ final class SyntacticalAnalyzer {
     ///     program <identificador> ; <bloco> .
     func programa() throws {
         guard tokens[currentTokenIndex].value == "program" else {
-            throw ErrorState.p1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .p1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-        
+
         nextSymbol()
         guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.i1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .i1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
-            throw ErrorState.t2(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .t2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -128,16 +132,19 @@ final class SyntacticalAnalyzer {
     func bloco() throws {
         try parteDeDeclaracoesDeVariaveis()
 
-        try comandoComposto()
+
+        guard tokens[currentTokenIndex].value == "begin" else {
+            throw ErrorState(type: .c1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+//        try comandoComposto()
 
         nextSymbol()
-        guard tokens[currentTokenIndex].value == "." else {
-            throw ErrorState.t3(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+        guard tokens[currentTokenIndex].value == "end" else {
+            throw ErrorState(type: .c2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
-        guard currentTokenIndex == tokens.count - 1 else {
-            throw ErrorState.f1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
-        }
+        nextSymbol()
+        try fimCodigo()
 
         print("Bloco de código livre de erros")
     }
@@ -172,7 +179,7 @@ final class SyntacticalAnalyzer {
         try listaDeIdentificadores()
 
         guard tokens[currentTokenIndex].value == ":" else {
-            throw ErrorState.d3(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d3, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
         nextSymbol()
@@ -180,15 +187,15 @@ final class SyntacticalAnalyzer {
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
-            throw ErrorState.t4(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
-    /// <lista de identificadores> ::= 
+    /// <lista de identificadores> ::=
     ///     <identificador> { , <identificador> }
     func listaDeIdentificadores() throws {
         guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.d1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
         nextSymbol()
@@ -196,7 +203,7 @@ final class SyntacticalAnalyzer {
 
             nextSymbol()
             guard tokens[currentTokenIndex].type == .identifiers else {
-                throw ErrorState.d2(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+                throw ErrorState(type: .d2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
             }
 
             nextSymbol()
@@ -207,7 +214,7 @@ final class SyntacticalAnalyzer {
     ///     integer  | real | boolean
     func tipo() throws {
         guard tokens[currentTokenIndex].type == .integers || tokens[currentTokenIndex].type == .reals || tokens[currentTokenIndex].type == .booleans else {
-            throw ErrorState.e8(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .e8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -215,22 +222,22 @@ final class SyntacticalAnalyzer {
     ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
     func declarationProcedure() throws {
         guard tokens[currentTokenIndex].value == "procedure" else {
-            throw ErrorState.d6(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d6, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-        
+
         nextSymbol()
         guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.i1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .i1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
         nextSymbol()
         try declarationFormalParameter()
-        
+
         nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
-            throw ErrorState.t4(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-        
+
         nextSymbol()
         try bloco()
     }
@@ -240,9 +247,9 @@ final class SyntacticalAnalyzer {
     func declarationFormalParameter() throws {
         var continuarSecao = false
         guard tokens[currentTokenIndex].value == "(" else {
-            throw ErrorState.d4(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-        
+
         try declarationFormalParameterSection()
 
         let nextSymbolValue = tokens[currentTokenIndex + 1].value
@@ -250,23 +257,23 @@ final class SyntacticalAnalyzer {
             continuarSecao = true
             nextSymbol()
         }
-        
+
         while continuarSecao {
             continuarSecao = false
 
             nextSymbol()
             try declarationFormalParameterSection()
-            
+
             let nextSymbolValue = tokens[currentTokenIndex + 1].value
             if nextSymbolValue == ";" {
                 continuarSecao = true
                 nextSymbol()
             }
         }
-        
+
         nextSymbol()
         guard tokens[currentTokenIndex].value == ")" else {
-            throw ErrorState.d5(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d5, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -276,26 +283,26 @@ final class SyntacticalAnalyzer {
         if tokens[currentTokenIndex].value == "var" {
             nextSymbol()
         }
-        
+
         try listaDeIdentificadores()
-        
+
         nextSymbol()
         guard tokens[currentTokenIndex].value == ":" else {
-            throw ErrorState.d3(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d3, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-        
+
         nextSymbol()
         try tipo()
     }
 
 
     // MARK: - Comandos
-    /// <comando composto> ::= 
+    /// <comando composto> ::=
     ///     begin <comando> { ; <comando> } end
     func comandoComposto() throws {
         guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "begin" else {
             // Ver se esse next é necessário
-//            nextSymbol()
+            //            nextSymbol()
 
             try fimCodigo()
             return
@@ -309,55 +316,139 @@ final class SyntacticalAnalyzer {
         ///     - comando condicional 1;
         ///     - comando repetitivo 1.
         var shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
-                        tokens[currentTokenIndex + 1].value == "begin" ||
-                        tokens[currentTokenIndex + 1].value == "if" ||
-                        tokens[currentTokenIndex + 1].value == "while"
+        tokens[currentTokenIndex + 1].value == "begin" ||
+        tokens[currentTokenIndex + 1].value == "if" ||
+        tokens[currentTokenIndex + 1].value == "while" ||
+        tokens[currentTokenIndex + 1].value == "readln" ||
+        tokens[currentTokenIndex + 1].value == "READ" ||
+        tokens[currentTokenIndex + 1].value == "writeln" ||
+        tokens[currentTokenIndex + 1].value == "WRITE"
 
         while shouldLoop {
             nextSymbol()
             try comando()
 
             shouldLoop = tokens[currentTokenIndex + 1].type == .identifiers ||
-                        tokens[currentTokenIndex + 1].value == "begin" ||
-                        tokens[currentTokenIndex + 1].value == "if" ||
-                        tokens[currentTokenIndex + 1].value == "while"
+            tokens[currentTokenIndex + 1].value == "begin" ||
+            tokens[currentTokenIndex + 1].value == "if" ||
+            tokens[currentTokenIndex + 1].value == "while" ||
+            tokens[currentTokenIndex + 1].value == "readln" ||
+            tokens[currentTokenIndex + 1].value == "READ" ||
+            tokens[currentTokenIndex + 1].value == "writeln" ||
+            tokens[currentTokenIndex + 1].value == "WRITE"
         }
 
         nextSymbol()
         guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
-            throw ErrorState.c2(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .c2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
+
+//        nextSymbol()
+//        try fimCodigo()
+//        guard tokens[currentTokenIndex].value == ";" else {
+//            throw ErrorState(type: .c2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+//        }
     }
 
     /// <comado> ::=
     ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
+
+        print("⚠️1 comando: ")
+        print("✅ tokens[currentTokenIndex].value: \(tokens[currentTokenIndex].value) | \(tokens[currentTokenIndex].type)")
+        print("✅ tokens[currentTokenIndex + 1].value: \(tokens[currentTokenIndex + 1].value)")
+
+
         /// atribuição
         if tokens[currentTokenIndex].type == .identifiers {
             try atribuicao()
+            return
+        }
 
         /// comando composto.
-        } else if tokens[currentTokenIndex].value == "begin" {
-            try comandoComposto()
+        if tokens[currentTokenIndex].value == "begin" {
+            nextSymbol()
+            try comando()
+
+//            nextSymbol()
+//            guard tokens[currentTokenIndex].value == "end" else {
+//                throw ErrorState(type: .c4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+//            }
+
+//            nextSymbol()
+            guard tokens[currentTokenIndex].value == ";" else {
+                throw ErrorState(type: .c8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            }
+
+            return
+        }
 
         /// comando condicional 1.
-        } else if tokens[currentTokenIndex].value == "if" {
+        if tokens[currentTokenIndex].value == "if" {
             try comandoCondicional()
 
+            return
+        }
+
         /// comando repetitivo 1.
-        } else if tokens[currentTokenIndex].value == "while" {
+        if tokens[currentTokenIndex].value == "while" {
             try comandoRepetitivo()
+
+            return
+        } 
+
+        /// readln e writeln
+        if tokens[currentTokenIndex].value == "readln" ||
+                    tokens[currentTokenIndex].value == "READ" ||
+                    tokens[currentTokenIndex].value == "writeln" ||
+                    tokens[currentTokenIndex].value == "WRITE" {
+            try readWriteln()
+            return
         }
     }
 
-    /// <atribuição> ::= 
+    /// leitura e gravação
+    /// readln(numero);
+    /// writeln(0);
+    func readWriteln() throws {
+        if tokens[currentTokenIndex].value == "readln" ||
+            tokens[currentTokenIndex].value == "READ" ||
+            tokens[currentTokenIndex].value == "writeln" ||
+            tokens[currentTokenIndex].value == "WRITE" {
+
+            nextSymbol()
+            guard tokens[currentTokenIndex].value == "(" else {
+                throw ErrorState(type: .c5, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            }
+
+            nextSymbol()
+            // TODO: ⚠️ Deveria ser FATOR?
+            guard tokens[currentTokenIndex].type == .identifiers ||
+                    tokens[currentTokenIndex].type == .integers ||
+                    tokens[currentTokenIndex].type == .reals else {
+                throw ErrorState(type: .c7, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            }
+
+            nextSymbol()
+            guard tokens[currentTokenIndex].value == ")" else {
+                throw ErrorState(type: .c5, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            }
+
+            nextSymbol()
+            guard tokens[currentTokenIndex].value == ";" else {
+                throw ErrorState(type: .c6, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            }
+        }
+    }
+
+    /// <atribuição> ::=
     ///     <variável> := <expressão>
     func atribuicao() throws {
         try variavel()
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == ":=" else {
-            throw ErrorState.e7(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .e7, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
@@ -365,7 +456,7 @@ final class SyntacticalAnalyzer {
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
-            throw ErrorState.t4(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -373,7 +464,7 @@ final class SyntacticalAnalyzer {
     ///     <identificador> [ ( <lista de expressões> ) ]
     func commandProcedureCall() throws {
         guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.i1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .i1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         try listaDeExpressoes()
@@ -383,7 +474,7 @@ final class SyntacticalAnalyzer {
     ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
         guard tokens[currentTokenIndex].value == "if" else {
-            throw ErrorState.d7(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d7, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
@@ -391,7 +482,7 @@ final class SyntacticalAnalyzer {
         
         nextSymbol()
         guard tokens[currentTokenIndex].value == "then" else {
-            throw ErrorState.d8(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
@@ -410,7 +501,7 @@ final class SyntacticalAnalyzer {
     ///     while <expressão> do <comando>
     func comandoRepetitivo() throws {
         guard tokens[currentTokenIndex].value == "while" else {
-            throw ErrorState.d9(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d9, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
@@ -418,7 +509,7 @@ final class SyntacticalAnalyzer {
         
         nextSymbol()
         guard tokens[currentTokenIndex].value == "do" else {
-            throw ErrorState.d9(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d9, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
@@ -451,7 +542,7 @@ final class SyntacticalAnalyzer {
                 tokens[currentTokenIndex].value == "<=" ||
                 tokens[currentTokenIndex].value == ">=" ||
                 tokens[currentTokenIndex].value == ">" else {
-            throw ErrorState.e7(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .e7, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -539,14 +630,14 @@ final class SyntacticalAnalyzer {
             return
         } catch { }
 
-        throw ErrorState.e9(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+        throw ErrorState(type: .e9, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
     }
 
     /// <variável> ::=
     ///     <identificador>
     func variavel() throws {
         guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState.i1(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .i1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 

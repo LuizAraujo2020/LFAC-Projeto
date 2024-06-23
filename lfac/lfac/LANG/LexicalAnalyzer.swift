@@ -40,7 +40,7 @@ class LexicalAnalyzer {
             guard alphabet.alphabet.contains(currentSymbol) else {
                 print("Caracter inválido: \(currentSymbol)")
 //                errors.append(ErrorState.e1(currentSymbol))
-                errors.append(ErrorState.e1(currentRow, currentColumn, currentSymbol))
+                errors.append(ErrorState(type: .e1(currentSymbol), row: currentRow, col: currentColumn))
                 return
             }
 
@@ -79,9 +79,7 @@ class LexicalAnalyzer {
 
                 /// Increment the row counter.
                 let regexRowCol = Regex(/^([\n]+)$/)
-//                let regexRowCol = ["\n"]
                 if code[currentIndex].contains(regexRowCol) {
-//                if regexRowCol.contains(code[currentIndex]) {
                     currentRow += 1
                     currentColumn = 1
                 }
