@@ -73,6 +73,7 @@ final class SyntacticalAnalyzer {
         } catch {
             print("🚨 ERRO NÃO TRATADO: \(error.localizedDescription)")
         }
+
     }
 
     // MARK: - Programa e Bloco
@@ -118,7 +119,7 @@ final class SyntacticalAnalyzer {
         
         try parteDeDeclaracoesDeVariaveis()
 
-//        nextSymbol()
+        nextSymbol()
         guard tokens[currentTokenIndex].value == "begin" else {
             try fimCodigo()
             print("✅ Bloco de código livre de erros")
@@ -159,11 +160,11 @@ final class SyntacticalAnalyzer {
             try declaracaoDeVariaveis()
 
             newIteration = tokens[currentTokenIndex + 1].type == .identifiers
+
         }
 
-        if tokens[currentTokenIndex + 1].value == "var" {
-            nextSymbol()
-            try parteDeDeclaracoesDeVariaveis()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
@@ -212,83 +213,6 @@ final class SyntacticalAnalyzer {
         guard tokens[currentTokenIndex].type == .type else {
             throw ErrorState(type: .e8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-    }
-
-    /// <declaração de procedimento> ::=
-    ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
-    func declarationProcedure() throws {
-        guard tokens[currentTokenIndex].value == "procedure" else {
-            throw ErrorState(type: .d6, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
-
-        nextSymbol()
-        guard tokens[currentTokenIndex].type == .identifiers else {
-            throw ErrorState(type: .i1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
-
-        nextSymbol()
-        try declarationFormalParameter()
-
-        nextSymbol()
-        guard tokens[currentTokenIndex].value == ";" else {
-            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
-
-        nextSymbol()
-        try bloco()
-    }
-
-    /// <parâmetros formais> ::=
-    ///     ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
-    func declarationFormalParameter() throws {
-        var continuarSecao = false
-        guard tokens[currentTokenIndex].value == "(" else {
-            throw ErrorState(type: .d4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
-
-        try declarationFormalParameterSection()
-
-        let nextSymbolValue = tokens[currentTokenIndex + 1].value
-        if nextSymbolValue == ";" {
-            continuarSecao = true
-            nextSymbol()
-        }
-
-        while continuarSecao {
-            continuarSecao = false
-
-            nextSymbol()
-            try declarationFormalParameterSection()
-
-            let nextSymbolValue = tokens[currentTokenIndex + 1].value
-            if nextSymbolValue == ";" {
-                continuarSecao = true
-                nextSymbol()
-            }
-        }
-
-        nextSymbol()
-        guard tokens[currentTokenIndex].value == ")" else {
-            throw ErrorState(type: .d5, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
-    }
-
-    /// <seção de parâmetros formais> ::=
-    ///     [ var ]  <lista de identificadores> : <tipo>
-    func declarationFormalParameterSection() throws {
-        if tokens[currentTokenIndex].value == "var" {
-            nextSymbol()
-        }
-
-        try listaDeIdentificadores()
-
-        nextSymbol()
-        guard tokens[currentTokenIndex].value == ":" else {
-            throw ErrorState(type: .d3, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
-
-        nextSymbol()
-        try tipo()
     }
 
 
@@ -671,6 +595,83 @@ final class SyntacticalAnalyzer {
                 nextSymbol()
             }
         }
+    }
+
+    /// <declaração de procedimento> ::=
+    ///     { procedure <identificador> [ <parâmetros formais>] ; <bloco> }
+    func declarationProcedure() throws {
+        guard tokens[currentTokenIndex].value == "procedure" else {
+            throw ErrorState(type: .d6, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].type == .identifiers else {
+            throw ErrorState(type: .i1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+
+        nextSymbol()
+        try declarationFormalParameter()
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+
+        nextSymbol()
+        try bloco()
+    }
+
+    /// <parâmetros formais> ::=
+    ///     ( <seção de parâmetros formais> { ; <seção de parâmetros formais>} )
+    func declarationFormalParameter() throws {
+        var continuarSecao = false
+        guard tokens[currentTokenIndex].value == "(" else {
+            throw ErrorState(type: .d4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+
+        try declarationFormalParameterSection()
+
+        let nextSymbolValue = tokens[currentTokenIndex + 1].value
+        if nextSymbolValue == ";" {
+            continuarSecao = true
+            nextSymbol()
+        }
+
+        while continuarSecao {
+            continuarSecao = false
+
+            nextSymbol()
+            try declarationFormalParameterSection()
+
+            let nextSymbolValue = tokens[currentTokenIndex + 1].value
+            if nextSymbolValue == ";" {
+                continuarSecao = true
+                nextSymbol()
+            }
+        }
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ")" else {
+            throw ErrorState(type: .d5, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+    }
+
+    /// <seção de parâmetros formais> ::=
+    ///     [ var ]  <lista de identificadores> : <tipo>
+    func declarationFormalParameterSection() throws {
+        if tokens[currentTokenIndex].value == "var" {
+            nextSymbol()
+        }
+
+        try listaDeIdentificadores()
+
+        nextSymbol()
+        guard tokens[currentTokenIndex].value == ":" else {
+            throw ErrorState(type: .d3, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
+
+        nextSymbol()
+        try tipo()
     }
 }
 
