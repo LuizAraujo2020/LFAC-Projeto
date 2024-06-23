@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ErrorsView: View {
-    let errors: [ErrorState]
+    var errors: [ErrorState]
 
     var plural: String { errors.count > 1 ? "S" : "" }
 
@@ -34,6 +34,12 @@ struct ErrorsView: View {
 
 #Preview {
     ErrorsView(
-        errors: [.c2, .c3, .e6, .e8, .f2]
+        errors: [
+            .c2(1),
+            .c3(2),
+            .e6(3),
+            .e8(4),
+            .f2(5)
+        ]
     )
 }

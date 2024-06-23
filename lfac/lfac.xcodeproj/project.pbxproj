@@ -53,6 +53,7 @@
 		6F95EC4B2C27853100FD4A81 /* AnalysisTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95EC4A2C27853100FD4A81 /* AnalysisTypePicker.swift */; };
 		6F95EC4E2C278AD200FD4A81 /* SyntacticalAnalysisCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95EC4D2C278AD200FD4A81 /* SyntacticalAnalysisCompactView.swift */; };
 		6F95EC502C278ADB00FD4A81 /* SyntacticalAnalysisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F95EC4F2C278ADB00FD4A81 /* SyntacticalAnalysisViewModel.swift */; };
+		6F95EC522C279FD700FD4A81 /* code0.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6F95EC512C279FD700FD4A81 /* code0.pscs */; };
 		6F99C7772C23283200B7A90B /* SyntacticalAnalyzerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F99C7762C23283200B7A90B /* SyntacticalAnalyzerTests.swift */; };
 		6F99C7792C232D3B00B7A90B /* code3.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6F99C7782C232D3B00B7A90B /* code3.pscs */; };
 		6F99C77B2C232D6000B7A90B /* code4.pscs in Resources */ = {isa = PBXBuildFile; fileRef = 6F99C77A2C232D6000B7A90B /* code4.pscs */; };
@@ -128,6 +129,7 @@
 		6F95EC4A2C27853100FD4A81 /* AnalysisTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisTypePicker.swift; sourceTree = "<group>"; };
 		6F95EC4D2C278AD200FD4A81 /* SyntacticalAnalysisCompactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntacticalAnalysisCompactView.swift; sourceTree = "<group>"; };
 		6F95EC4F2C278ADB00FD4A81 /* SyntacticalAnalysisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntacticalAnalysisViewModel.swift; sourceTree = "<group>"; };
+		6F95EC512C279FD700FD4A81 /* code0.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code0.pscs; sourceTree = "<group>"; };
 		6F99C7762C23283200B7A90B /* SyntacticalAnalyzerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntacticalAnalyzerTests.swift; sourceTree = "<group>"; };
 		6F99C7782C232D3B00B7A90B /* code3.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code3.pscs; sourceTree = "<group>"; };
 		6F99C77A2C232D6000B7A90B /* code4.pscs */ = {isa = PBXFileReference; lastKnownFileType = text; path = code4.pscs; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				6F8B6C2C2BEBADE000887CE7 /* lfac.entitlements */,
+				6F95EC512C279FD700FD4A81 /* code0.pscs */,
 				6FA365442BFAF19800558AFD /* code1.pscs */,
 				6F9535462C22597600ECE3EA /* code2.pscs */,
 				6F99C7782C232D3B00B7A90B /* code3.pscs */,
@@ -539,6 +542,7 @@
 				6F9535472C22597600ECE3EA /* code2.pscs in Resources */,
 				6F8B6C5C2BEBB55100887CE7 /* diagram-token-recko.pdf in Resources */,
 				6FA365452BFAF19800558AFD /* code1.pscs in Resources */,
+				6F95EC522C279FD700FD4A81 /* code0.pscs in Resources */,
 				6F99C77B2C232D6000B7A90B /* code4.pscs in Resources */,
 				6F8B6C2F2BEBADE000887CE7 /* Preview Assets.xcassets in Resources */,
 				6F99C7792C232D3B00B7A90B /* code3.pscs in Resources */,

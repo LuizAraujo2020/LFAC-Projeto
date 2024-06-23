@@ -53,6 +53,7 @@ class FileScanner {
 extension FileScanner {
 
     enum FilesName: String, Identifiable, Hashable, CaseIterable {
+    case code0
     case code1
     case code2
     case code3
@@ -63,6 +64,7 @@ extension FileScanner {
 
         var name: String {
             switch self {
+            case .code0: "Código 0"
             case .code1: "Código 1"
             case .code2: "Código 2"
             case .code3: "Código 3"

@@ -25,7 +25,7 @@ struct ContentView: View {
                         CodePickerView(code: $vm.codeFile)
 
                         Button {
-                            vm.exportCode()
+                            vm.runAnalysis()
                         } label: {
                             Label(
                                 "Analyze",

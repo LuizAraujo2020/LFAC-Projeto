@@ -31,13 +31,14 @@ class LexicalAnalyzer {
         analyze()
     }
 
-    private func analyze() {
+    func analyze() {
         while currentIndex < code.count {
             let currentSymbol = code[currentIndex]
 
             guard alphabet.alphabet.contains(currentSymbol) else {
                 print("Caracter inválido: \(currentSymbol)")
-                errors.append(ErrorState.e1(currentSymbol))
+//                errors.append(ErrorState.e1(currentSymbol))
+                errors.append(ErrorState.e1(currentRow, currentSymbol))
                 return
             }
 
