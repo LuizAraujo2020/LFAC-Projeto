@@ -1,3 +1,7 @@
 program prog0;
 begin
+    begin
+        soma := 123;
+        soma := numero;
+    end;
 end.

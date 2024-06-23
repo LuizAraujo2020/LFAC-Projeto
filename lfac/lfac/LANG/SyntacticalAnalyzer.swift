@@ -132,11 +132,13 @@ final class SyntacticalAnalyzer {
     func bloco() throws {
         try parteDeDeclaracoesDeVariaveis()
 
-
         guard tokens[currentTokenIndex].value == "begin" else {
             throw ErrorState(type: .c1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
-//        try comandoComposto()
+
+        nextSymbol()
+//        try comando()
+        try comandoComposto()
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == "end" else {
@@ -340,14 +342,14 @@ final class SyntacticalAnalyzer {
 
         nextSymbol()
         guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
-            throw ErrorState(type: .c2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            throw ErrorState(type: .c4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
-//        nextSymbol()
-//        try fimCodigo()
-//        guard tokens[currentTokenIndex].value == ";" else {
-//            throw ErrorState(type: .c2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-//        }
+        nextSymbol()
+        try fimCodigo()
+        guard tokens[currentTokenIndex].value == ";" else {
+            throw ErrorState(type: .c2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
     }
 
     /// <comado> ::=
@@ -370,14 +372,14 @@ final class SyntacticalAnalyzer {
             nextSymbol()
             try comando()
 
-//            nextSymbol()
-//            guard tokens[currentTokenIndex].value == "end" else {
-//                throw ErrorState(type: .c4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-//            }
-
-//            nextSymbol()
-            guard tokens[currentTokenIndex].value == ";" else {
+            nextSymbol()
+            guard tokens[currentTokenIndex].value == "end" else {
                 throw ErrorState(type: .c8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            }
+
+            nextSymbol()
+            guard tokens[currentTokenIndex].value == ";" else {
+                throw ErrorState(type: .c9, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
             }
 
             return
@@ -405,6 +407,8 @@ final class SyntacticalAnalyzer {
             try readWriteln()
             return
         }
+
+        previousSymbol()
     }
 
     /// leitura e gravação
@@ -452,11 +456,17 @@ final class SyntacticalAnalyzer {
         }
         
         nextSymbol()
-        try expressao()
+//        try expressao()
+
+        guard tokens[currentTokenIndex].type == .identifiers ||
+            tokens[currentTokenIndex].type == .integers ||
+            tokens[currentTokenIndex].type == .reals else {
+            throw ErrorState(type: .a2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {
-            throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+            throw ErrorState(type: .a3, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
     }
 
