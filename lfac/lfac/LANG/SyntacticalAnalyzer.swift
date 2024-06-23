@@ -52,7 +52,11 @@ final class SyntacticalAnalyzer {
         ]
         
         guard currentTokenIndex < tokens.count else { return }
-        
+
+        if checkOpenCloseScope() {
+            return
+        }
+
         do {
             try programa()
 
@@ -672,7 +676,7 @@ final class SyntacticalAnalyzer {
 
 // MARK: - HELPERS
 extension SyntacticalAnalyzer {
-    func printError(_ error: LocalizedError) {
+    private func printError(_ error: LocalizedError) {
         let token = tokens[currentTokenIndex]
 
         print("🚨 ERRO ENCONTRADO 🚨")
@@ -681,20 +685,20 @@ extension SyntacticalAnalyzer {
         print(error.localizedDescription)
     }
 
-    func getNextSymbol() -> PToken {
+    private func getNextSymbol() -> PToken {
         currentTokenIndex += 1
         return tokens[currentTokenIndex]
     }
 
-    func nextSymbol() {
+    private func nextSymbol() {
         if currentTokenIndex < tokens.count - 1 {
             currentTokenIndex += 1
         }
     }
 
-    func previousSymbol() {
-        currentTokenIndex -= 1
-    }
+    private func previousSymbol() {
+    currentTokenIndex -= 1
+}
 
     private func findEndIndex(beginIndex: Int) -> Int {
         var index = beginIndex + 1
@@ -755,7 +759,7 @@ extension SyntacticalAnalyzer {
         }
     }
 
-    func runBeginEndScope(beginIndex: Int, endIndex: Int) throws {
+    private func runBeginEndScope(beginIndex: Int, endIndex: Int) throws {
         while currentTokenIndex < endIndex {
             nextSymbol()
 
@@ -794,5 +798,50 @@ extension SyntacticalAnalyzer {
 
     private func currentToken() -> PToken {
         return tokens[currentTokenIndex]
+    }
+
+    private func checkOpenCloseScope() -> Bool {
+        var hasError = false
+
+        var tempIndex = currentTokenIndex
+
+        var countBegin = 0
+        var countEnd = 0
+        var countParenthesisOpenning = 0
+        var countParenthesisClosing = 0
+
+        while tempIndex < tokens.count {
+            if tokens[tempIndex].value == "begin" { countBegin += 1 }
+            if tokens[tempIndex].value == "end" { countEnd += 1 }
+
+            if tokens[tempIndex].value == "(" { countParenthesisOpenning += 1 }
+            if tokens[tempIndex].value == ")" { countParenthesisClosing += 1 }
+
+            tempIndex += 1
+        }
+
+        if countBegin != countEnd {
+            errors.append(
+                ErrorState(
+                    type: .e10(countBegin, countEnd),
+                    row: nil,
+                    col: nil
+                )
+            )
+            hasError = true
+        }
+
+        if countParenthesisOpenning != countParenthesisClosing {
+            errors.append(
+                ErrorState(
+                    type: .e11(countParenthesisOpenning, countParenthesisClosing),
+                    row: nil,
+                    col: nil
+                )
+            )
+            hasError = true
+        }
+
+        return hasError
     }
 }

@@ -10,12 +10,12 @@ import Foundation
 struct ErrorState: LocalizedError, Identifiable, Hashable {
     
     let type: ErrorType
-    let row: Int
-    let col: Int
+    let row: Int?
+    let col: Int?
 
     var id: String { UUID().uuidString }
     
-    init(type: ErrorState.ErrorType, row: Int, col: Int) {
+    init(type: ErrorState.ErrorType, row: Int?, col: Int?) {
         self.type = type
         self.row = row
         self.col = col
@@ -40,6 +40,9 @@ struct ErrorState: LocalizedError, Identifiable, Hashable {
         case .e7: errorMessage += "Operador inválido."
         case .e8: errorMessage += "Tipo inválido."
         case .e9: errorMessage += "Fator inválido. Espera-se um número, variável, expressão ou outro fator."
+        case .e10(let open, let close): errorMessage += "Há \(open) `begin` e \(close) `end`."
+        case .e11(let open, let close): errorMessage += "Há \(open) `(` e \(close) `)`."
+
 
 
             /// Program errors.
@@ -97,7 +100,7 @@ extension ErrorState {
 
     enum ErrorType: Hashable {
         case a1, a2, a3
-        case e1(String), e2, e3, e4, e5, e6, e7, e8, e9
+        case e1(String), e2, e3, e4, e5, e6, e7, e8, e9, e10(Int, Int), e11(Int, Int)
         case p1, p2(String)
         case c1, c2, c3, c4, c5, c6, c7, c8, c9
         case d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11
@@ -112,7 +115,8 @@ extension ErrorState {
             case .a1: return "a1"
             case .a2: return "a2"
             case .a3: return "a3"
-            case .e1(let string): return "e1"
+
+            case .e1(_): return "e1"
             case .e2: return "e2"
             case .e3: return "e3"
             case .e4: return "e4"
@@ -121,8 +125,12 @@ extension ErrorState {
             case .e7: return "e7"
             case .e8: return "e8"
             case .e9: return "e9"
+            case .e10(_, _): return "e10"
+            case .e11(_, _): return "e11"
+
             case .p1: return "p1"
-            case .p2(let string): return "p2"
+            case .p2(_): return "p2"
+
             case .c1: return "c1"
             case .c2: return "c2"
             case .c3: return "c3"
@@ -132,6 +140,7 @@ extension ErrorState {
             case .c7: return "c7"
             case .c8: return "c8"
             case .c9: return "c9"
+
             case .d1: return "d1"
             case .d2: return "d2"
             case .d3: return "d3"
@@ -143,9 +152,12 @@ extension ErrorState {
             case .d9: return "d9"
             case .d10: return "d10"
             case .d11: return "d11"
+
             case .f1: return "f1"
             case .f2: return "f2"
+
             case .i1: return "i1"
+
             case .t1: return "t1"
             case .t2: return "t2"
             case .t3: return "t3"
