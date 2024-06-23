@@ -22,6 +22,7 @@ protocol Dictionaryable {
     var integers: Regex<(Substring, Substring)> { get }
     var identifiers: Regex<(Substring)> { get }
     var symbols: [String] { get }
+    var types: [String] { get }
 }
 struct Dictionary: Dictionaryable {
     
@@ -31,7 +32,9 @@ struct Dictionary: Dictionaryable {
                     "=", ">", "<", "+", "-", "*", "/", "!", ".", ",", ":", ";", "(", ")", ";", "\r", "\n", "\t", "\0", "", " "
     ]
     
-    var keywords = ["program", "var", "integer", "real", "boolean", "procedure", "begin", "end", "if", "then", "else", "while", "do", "or", "div", "and", "not", "READ", "WRITE", "readln", "writeln"]
+    var types = ["integer", "boolean", "real"]
+    
+    var keywords = ["program", "var", "procedure", "begin", "end", "if", "then", "else", "while", "do", "or", "div", "and", "not", "READ", "WRITE", "readln", "writeln"]
     
     var relationals = ["=", "<>", "<", "<=", ">=", ">"]
     var operators = ["+", "*", "/", "-"]

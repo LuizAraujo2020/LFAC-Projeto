@@ -170,6 +170,8 @@ final class SyntacticalAnalyzer {
             try declaracaoDeVariaveis()
 
             newIteration = tokens[currentTokenIndex + 1].type == .identifiers || tokens[currentTokenIndex + 1].value == "var"
+            
+            nextSymbol()
         }
     }
 
@@ -188,6 +190,7 @@ final class SyntacticalAnalyzer {
         try tipo()
 
         nextSymbol()
+        
         guard tokens[currentTokenIndex].value == ";" else {
             throw ErrorState(type: .t4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
@@ -196,13 +199,15 @@ final class SyntacticalAnalyzer {
     /// <lista de identificadores> ::=
     ///     <identificador> { , <identificador> }
     func listaDeIdentificadores() throws {
+        
+        
         guard tokens[currentTokenIndex].type == .identifiers else {
             throw ErrorState(type: .d1, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
 
         nextSymbol()
         while tokens[currentTokenIndex].value == "," {
-
+            
             nextSymbol()
             guard tokens[currentTokenIndex].type == .identifiers else {
                 throw ErrorState(type: .d2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
@@ -215,9 +220,8 @@ final class SyntacticalAnalyzer {
     /// <tipo> ::=
     ///     integer  | real | boolean
     func tipo() throws {
-        guard tokens[currentTokenIndex].type == .integers || tokens[currentTokenIndex].type == .reals || tokens[currentTokenIndex].type == .booleans else {
+        guard tokens[currentTokenIndex].type == .type else {
             throw ErrorState(type: .e8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
     }
 
     /// <declaração de procedimento> ::=
@@ -297,7 +301,71 @@ final class SyntacticalAnalyzer {
         try tipo()
     }
 
-
+    
+    private func findEndIndex(beginIndex: Int) -> Int {
+        
+        
+        var index = beginIndex + 1
+        var beginCount = 0
+        
+        while index < tokens.count {
+            
+            let currentToken = tokens[index]
+            
+            if (currentToken.value == "begin") {
+                beginCount += 1
+            }
+            
+            if (currentToken.value == "end") {
+                if (beginCount == 0) {
+                    
+                    return index
+                    
+                } else {
+                    beginCount -= 1
+                }
+            }
+            
+            index += 1
+        }
+        
+        return -1
+    }
+    
+    func runBeginEndScope(beginIndex: Int, endIndex: Int) throws {
+        
+        
+        while currentTokenIndex < endIndex {
+            nextSymbol()
+            
+            let token = currentToken()
+            
+            if (token.type == .identifiers) {
+                try atribuicao()
+                
+                continue
+            }
+            
+            switch (token.value) {
+                case "if":
+                    try comandoCondicional()
+                case "while":
+                    try comandoRepetitivo()
+                case "begin":
+                    let beginIndex: Int = findEndIndex(beginIndex: currentTokenIndex)
+                    try runBeginEndScope(beginIndex: currentTokenIndex, endIndex: beginIndex)
+                default:
+                    break
+            }
+        }
+        
+        
+    }
+            
+    private func currentToken() -> PToken {
+        return tokens[currentTokenIndex]
+    }
+    
     // MARK: - Comandos
     /// <comando composto> ::=
     ///     begin <comando> { ; <comando> } end
@@ -309,6 +377,12 @@ final class SyntacticalAnalyzer {
             try fimCodigo()
             return
         }
+//            nextSymbol()
+            
+    
+        try runBeginEndScope(beginIndex: currentTokenIndex, endIndex: beginIndex)
+        
+        return
 
         /// Comandos
 
@@ -341,6 +415,8 @@ final class SyntacticalAnalyzer {
         }
 
         nextSymbol()
+        
+        
         guard tokens[currentTokenIndex].type == .keyword, tokens[currentTokenIndex].value == "end" else {
             throw ErrorState(type: .c4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
@@ -482,7 +558,21 @@ final class SyntacticalAnalyzer {
         }
         
         nextSymbol()
+        
+        // TODO: MUDAR DPS
+        guard tokens[currentTokenIndex].value == "(" else {
+            throw ErrorState.d4(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+        }
+        
+        nextSymbol()
+        
         try expressao()
+        
+        nextSymbol()
+        
+        guard tokens[currentTokenIndex].value == ")" else {
+            throw ErrorState.d5(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+        }
         
         nextSymbol()
         guard tokens[currentTokenIndex].value == "then" else {
@@ -526,6 +616,7 @@ final class SyntacticalAnalyzer {
     /// <expressão> ::=
     ///     <expressão simples> [ <relação> <expressão simples> ]
     func expressao() throws {
+
         try expressaoSimples()
 
         var shouldLoop = tokens[currentTokenIndex + 1].type == .relationals
@@ -553,6 +644,8 @@ final class SyntacticalAnalyzer {
     /// <expressão simples> ::=
     ///     [ + | - ] <termo> { ( + | - | or ) <termo> }
     func expressaoSimples() throws {
+    
+        
         var continuarTermo = false
         
         if tokens[currentTokenIndex].value == "+" || tokens[currentTokenIndex].value == "-" {

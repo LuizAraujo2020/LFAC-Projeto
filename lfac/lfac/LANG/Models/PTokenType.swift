@@ -17,7 +17,9 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
     case operators
     case relationals
     case attribution
-
+    
+    
+    case type
     case keyword
     case booleans
     case integers
@@ -54,6 +56,8 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
             return "ESPACO"
         case .commentary:
             return "COMENTARIO"
+        case .type:
+            return "TIPO"
         case .booleans:
             return "BOOLEANO"
         case .integers:
@@ -79,6 +83,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         case .relationals: return Color.orange
         case .attribution: return Color.orange
         case .keyword: return Color.blue
+        case .type: return Color.blue
         case .booleans: return Color.green
         case .integers: return Color.green
         case .reals: return Color.green
@@ -101,7 +106,9 @@ extension PTokenType {
         guard !dict.terminators.contains(lexeme) else { return .terminators }
         guard !dict.separators.contains(lexeme) else { return .separators }
         guard !dict.symbols.contains(lexeme) else { return .symbols }
-
+        
+        guard !dict.types.contains(lexeme) else { return .type }
+        
         guard !lexeme.contains(dict.integers) else { return .integers }
 
         guard !dict.booleans.contains(lexeme) else { return .booleans }
