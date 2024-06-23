@@ -564,7 +564,7 @@ final class SyntacticalAnalyzer {
         
         // TODO: MUDAR DPS
         guard tokens[currentTokenIndex].value == "(" else {
-            throw ErrorState.d4(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d4, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
@@ -574,7 +574,7 @@ final class SyntacticalAnalyzer {
         nextSymbol()
         
         guard tokens[currentTokenIndex].value == ")" else {
-            throw ErrorState.d5(tokens[currentTokenIndex].line, tokens[currentTokenIndex].column)
+            throw ErrorState(type: .d5, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
         }
         
         nextSymbol()
