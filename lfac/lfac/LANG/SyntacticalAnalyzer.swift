@@ -18,7 +18,10 @@ final class SyntacticalAnalyzer {
 
     /// States
     private var currentTokenIndex: Int
-
+    
+    private var keywordCommands: [String: (() throws -> Void)]!
+    
+   
 
     internal init(
         tokens: [PToken],
@@ -26,7 +29,7 @@ final class SyntacticalAnalyzer {
     ) {
         self.tokens = tokens
         self.currentTokenIndex = currentTokenIndex
-
+        keywordCommands = [:]
         do {
             try analyze()
         } catch let error as ErrorState {
@@ -39,8 +42,17 @@ final class SyntacticalAnalyzer {
 
     // MARK: - Methods
     func analyze() throws {
+        
+        self.keywordCommands = [
+            "if": comandoCondicional,
+            "while": comandoRepetitivo,
+            "do": doCommand,
+            "begin": beginCommand,
+            "else": elseCommand,
+        ]
+        
         guard currentTokenIndex < tokens.count else { return }
-
+        
         do {
             try programa()
 
@@ -98,6 +110,8 @@ final class SyntacticalAnalyzer {
     ///     <parte de declarações de procedimentos>
     ///     <comando composto>
     func bloco() throws {
+        
+        
         try parteDeDeclaracoesDeVariaveis()
 
 //        nextSymbol()
@@ -284,7 +298,13 @@ final class SyntacticalAnalyzer {
             try fimCodigo()
             return
         }
-
+        
+        let endIndex: Int = findEndIndex(beginIndex: currentTokenIndex)
+        
+        try runBeginEndScope(beginIndex: currentTokenIndex, endIndex: endIndex)
+        
+        return
+        
         /// Comandos
 
         /// Verifica se o próximo token inicia um dos seguintes comandos:
@@ -703,6 +723,37 @@ extension SyntacticalAnalyzer {
 
         return -1
     }
+    
+    // TODO: IF COMMAND
+    private func ifCommand() throws {
+        
+    }
+    
+    // TODO: WHILE COMMAND
+    private func whileCommand() throws {
+        
+    }
+    
+    // TODO: DO COMMAND
+    private func doCommand() throws {
+        
+    }
+    
+    // TODO: BEGIN COMMAND
+    private func beginCommand() throws {
+        
+    }
+    
+    private func elseCommand() throws {
+        
+    }
+    
+    private func assertToken(tokenValue: String, error: ErrorState) throws {
+        
+        if (currentToken().value != tokenValue) {
+            throw error
+        }
+    }
 
     func runBeginEndScope(beginIndex: Int, endIndex: Int) throws {
         while currentTokenIndex < endIndex {
@@ -714,6 +765,15 @@ extension SyntacticalAnalyzer {
                 try atribuicao()
 
                 continue
+            }
+            
+            if (token.type == .keyword) {
+                if let command = keywordCommands[token.value] {
+                    try command()
+                } else {
+                    // TODO: TRATAR O QUE ACONTECE QUANDO NAO HA
+                    // IMPLEMENTACAO DA KEYWORKD
+                }
             }
 
             switch (token.value) {
