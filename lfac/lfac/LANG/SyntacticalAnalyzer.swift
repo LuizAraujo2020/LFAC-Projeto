@@ -456,13 +456,7 @@ final class SyntacticalAnalyzer {
         }
         
         nextSymbol()
-//        try expressao()
-
-        guard tokens[currentTokenIndex].type == .identifiers ||
-            tokens[currentTokenIndex].type == .integers ||
-            tokens[currentTokenIndex].type == .reals else {
-            throw ErrorState(type: .a2, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
-        }
+        try expressao()
 
         nextSymbol()
         guard tokens[currentTokenIndex].value == ";" else {

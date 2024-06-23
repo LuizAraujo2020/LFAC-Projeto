@@ -1,7 +1,11 @@
 program prog0;
 begin
     begin
-        soma := 123;
+        soma := -123;
         soma := numero;
+        soma := 10 + 23;
+        teste2 := soma;
+        teste3 := +10;
+        teste3 := soma < 10;
     end;
 end.
