@@ -3,9 +3,11 @@ var valido: boolean;
     inteiro: integer;
     decimal: real;
 
-
 var
     valido1: boolean;
     inteiro1: integer;
     decimal1: real;
+begin
+
+end
 .
