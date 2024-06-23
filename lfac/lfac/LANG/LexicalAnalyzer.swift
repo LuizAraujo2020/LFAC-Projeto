@@ -40,7 +40,7 @@ class LexicalAnalyzer {
             guard alphabet.alphabet.contains(currentSymbol) else {
                 print("Caracter inválido: \(currentSymbol)")
 //                errors.append(ErrorState.e1(currentSymbol))
-                errors.append(ErrorState.e1(currentRow, currentSymbol))
+                errors.append(ErrorState.e1(currentRow, currentColumn, currentSymbol))
                 return
             }
 
@@ -83,7 +83,7 @@ class LexicalAnalyzer {
                 if code[currentIndex].contains(regexRowCol) {
 //                if regexRowCol.contains(code[currentIndex]) {
                     currentRow += 1
-                    currentColumn = 0
+                    currentColumn = 1
                 }
             }
 

@@ -30,9 +30,15 @@ struct LexicalAnalysisCompactView: View {
                             Text("VALOR:\t").bold()
                             Text(token.value)
                         }
+
                         HStack {
-                            Text("LINHA:\t\t").bold()
+                            Text("LINHA:\t").bold()
                             Text("\(token.line)")
+                        }
+
+                        HStack {
+                            Text("COLUNA:\t").bold()
+                            Text("\(token.column)")
                         }
                     }
                 }
