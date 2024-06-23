@@ -25,14 +25,18 @@ struct ErrorsView: View {
                         .font(.title3)
                         .padding(2)
 
-                    HStack {
-                        Text("LINHA:\t").bold()
-                        Text("\(element.row)")
+                    if let row = element.row{
+                        HStack {
+                            Text("LINHA:\t").bold()
+                            Text("\(row)")
+                        }
                     }
 
-                    HStack {
-                        Text("COLUNA:\t").bold()
-                        Text("\(element.row)")
+                    if let col = element.col {
+                        HStack {
+                            Text("COLUNA:\t").bold()
+                            Text("\(col)")
+                        }
                     }
                 }
             }
