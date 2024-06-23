@@ -5,7 +5,7 @@
 //  Created by Luiz Araujo on 12/05/24.
 //
 
-import Foundation
+import SwiftUI
 
 class LexicalAnalyzer {
     var tokens = [PToken]()
@@ -15,8 +15,8 @@ class LexicalAnalyzer {
 
     private var currentIndex = 0
 
-    private var currentRow = 0
-    private var currentColumn = 0
+    private var currentRow = 1
+    private var currentColumn = 1
 
     private var lexeme = ""
 
@@ -32,13 +32,15 @@ class LexicalAnalyzer {
     }
 
     func analyze() {
+        resetAnalyzer()
+        
         while currentIndex < code.count {
             let currentSymbol = code[currentIndex]
 
             guard alphabet.alphabet.contains(currentSymbol) else {
                 print("Caracter inválido: \(currentSymbol)")
 //                errors.append(ErrorState.e1(currentSymbol))
-                errors.append(ErrorState.e1(currentRow, currentSymbol))
+                errors.append(ErrorState.e1(currentRow, currentColumn, currentSymbol))
                 return
             }
 
@@ -76,10 +78,12 @@ class LexicalAnalyzer {
                 }
 
                 /// Increment the row counter.
-                let regexRowCol = Regex(/^([\n|\0|\r]+)$/)
-                if !code[currentIndex].contains(regexRowCol) {
+                let regexRowCol = Regex(/^([\n]+)$/)
+//                let regexRowCol = ["\n"]
+                if code[currentIndex].contains(regexRowCol) {
+//                if regexRowCol.contains(code[currentIndex]) {
                     currentRow += 1
-                    currentColumn = 0
+                    currentColumn = 1
                 }
             }
 
@@ -87,6 +91,7 @@ class LexicalAnalyzer {
             currentColumn += 1
         }
     }
+
 
     // MARK: - Helpers
 
@@ -100,11 +105,30 @@ class LexicalAnalyzer {
             name: type.name,
             value: self.lexeme,
             line: currentRow,
-            column: currentColumn
+            column: currentColumn - self.lexeme.count
         )
 
         tokens.append(token)
 
         self.lexeme = ""
     }
+
+    private func resetAnalyzer() {
+        currentIndex = 0
+        currentRow = 1
+        currentColumn = 1
+    }
+}
+
+#Preview {
+    LexicalAnalysisView(
+        analyzer: LexicalAnalyzer(
+            code: """
+program testeA
+var qtd = 12
+var numero = 3245
+
+"""
+        )
+    )
 }

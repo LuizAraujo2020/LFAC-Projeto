@@ -83,6 +83,8 @@ struct ContentView: View {
                                 }
                             }
                         }
+
+                        Spacer()
                     }
                 }
             }

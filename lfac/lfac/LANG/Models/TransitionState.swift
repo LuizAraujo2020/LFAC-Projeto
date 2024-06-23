@@ -44,98 +44,99 @@ enum TransitionState: String, Identifiable, CaseIterable {
 }
 
 enum ErrorState: LocalizedError, Identifiable, Hashable {
-    case e1(Int, String), e2(Int), e3(Int), e4(Int), e5(Int), e6(Int), e7(Int), e8(Int), e9(Int)
-    case p1(Int)
-    case c1(Int), c2(Int), c3(Int)
-    case d1(Int), d2(Int), d3(Int), d4(Int), d5(Int), d6(Int), d7(Int), d8(Int), d9(Int), d10(Int), d11(Int)
-    case f1(Int), f2(Int)
-    case i1(Int)
-    case t1(Int), t2(Int), t3(Int), t4(Int)
+    case e1(Int, Int, String), e2(Int, Int), e3(Int, Int), e4(Int, Int), e5(Int, Int), e6(Int, Int), e7(Int, Int), e8(Int, Int), e9(Int, Int)
+    case p1(Int, Int)
+    case c1(Int, Int), c2(Int, Int), c3(Int, Int)
+    case d1(Int, Int), d2(Int, Int), d3(Int, Int), d4(Int, Int), d5(Int, Int), d6(Int, Int), d7(Int, Int), d8(Int, Int), d9(Int, Int), d10(Int, Int), d11(Int, Int)
+    case f1(Int, Int), f2(Int, Int)
+    case i1(Int, Int)
+    case t1(Int, Int), t2(Int, Int), t3(Int, Int), t4(Int, Int)
 
     var id: String { UUID().uuidString }
 
     var errorDescription: String? {
+        var errorMessage = ""
         switch self {
             /// Generic errors.
-        case .e1(let row, let char):
-            return "LINHA\(row): Caracter inválido: \(char)"
-        case .e2(let row):
-            return "LINHA\(row): Identificadores não podem conter caracteres especiais."
-        case .e3(let row):
-            return "LINHA\(row): Números não podem conter letras."
-        case .e4(let row):
-            return "LINHA\(row): Números não podem conter caracteres especiais, separe-os com espaço."
-        case .e5(let row):
-            return "LINHA\(row): Números não podem conter mais que um ponto `.`."
-        case .e6(let row):
-            return "LINHA\(row): Símbolo inválido."
-        case .e7(let row):
-            return "LINHA\(row): Operador inválido."
-        case .e8(let row):
-            return "LINHA\(row): Tipo inválido."
-        case .e9(let row):
-            return "LINHA\(row): Fator inválido. Espera-se um número, variável, expressão ou outro fator."
+        case .e1(let row, let col, let char):
+            return "Caracter inválido: \(char)\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e2(let row, let col):
+            return "Identificadores não podem conter caracteres especiais.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e3(let row, let col):
+            return "Números não podem conter letras.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e4(let row, let col):
+            return "Números não podem conter caracteres especiais, separe-os com espaço.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e5(let row, let col):
+            return "Números não podem conter mais que um ponto `.`.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e6(let row, let col):
+            return "Símbolo inválido.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e7(let row, let col):
+            return "Operador inválido.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e8(let row, let col):
+            return "Tipo inválido.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .e9(let row, let col):
+            return "Fator inválido. Espera-se um número, variável, expressão ou outro fator.\nLINHA: \(row)\nCOLUNA: \(col)"
 
 
             /// Program errors.
-        case .p1(let row):
-            return "LINHA\(row): O programa deve iniciar com `program`"
+        case .p1(let row, let col):
+            return "O programa deve iniciar com `program`\nLINHA: \(row)\nCOLUNA: \(col)"
 
 
             /// Comandos
-        case .c1(let row):
-            return "LINHA\(row): A parte de Comandos deve começar com `begin`"
-        case .c2(let row):
-            return "LINHA\(row): A parte de Comandos deve fechar com com `end`"
-        case .c3(let row):
-            return "LINHA\(row): A parte de Comandos deve terminar com `.`"
+        case .c1(let row, let col):
+            return "A parte de Comandos deve começar com `begin`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .c2(let row, let col):
+            return "A parte de Comandos deve fechar com com `end`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .c3(let row, let col):
+            return "A parte de Comandos deve terminar com `.`\nLINHA: \(row)\nCOLUNA: \(col)"
 
 
             /// Declaration errors.
-        case .d1(let row):
-            return "LINHA\(row): Declaração de variáveis deve começar com um Identificador."
-        case .d2(let row):
-            return "LINHA\(row): Declaração de múltiplas variáveis devem ter uma sequencia de Identificadores separados por vírgula."
-        case .d3(let row):
-            return "LINHA\(row): Declaração de variáveis deve ter um `:` entre os Identificadores e o Tipo de variável."
-        case .d4(let row):
-            return "LINHA\(row): Declaração de parâmetros formais deve iniciar com `(`"
-        case .d5(let row):
-            return "LINHA\(row): O fim da declaração de parâmetros formais deve finalizar com `)`"
-        case .d6(let row):
-            return "LINHA\(row): Declaração de procedimentos deve começar com `procedure"
-        case .d7(let row):
-            return "LINHA\(row): Comando condicional deve começar com `if`"
-        case .d8(let row):
-            return "LINHA\(row): Comando condicional deve conter `then`"
-        case .d9(let row):
-            return "LINHA\(row): Comando repetitivo deve começar com `while`"
-        case .d10(let row):
-            return "LINHA\(row): Comando repetitivo deve conter `do`"
-        case .d11(let row):
-            return "LINHA\(row): Declaração de variáveis com valoresdeve ter um `:` antes do `=`."
+        case .d1(let row, let col):
+            return "Declaração de variáveis deve começar com um Identificador.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d2(let row, let col):
+            return "Declaração de múltiplas variáveis devem ter uma sequencia de Identificadores separados por vírgula.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d3(let row, let col):
+            return "Declaração de variáveis deve ter um `:` entre os Identificadores e o Tipo de variável.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d4(let row, let col):
+            return "Declaração de parâmetros formais deve iniciar com `(`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d5(let row, let col):
+            return "O fim da declaração de parâmetros formais deve finalizar com `)`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d6(let row, let col):
+            return "Declaração de procedimentos deve começar com `procedure\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d7(let row, let col):
+            return "Comando condicional deve começar com `if`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d8(let row, let col):
+            return "Comando condicional deve conter `then`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d9(let row, let col):
+            return "Comando repetitivo deve começar com `while`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d10(let row, let col):
+            return "Comando repetitivo deve conter `do`\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .d11(let row, let col):
+            return "Declaração de variáveis com valoresdeve ter um `:` antes do `=`.\nLINHA: \(row)\nCOLUNA: \(col)"
 
             /// Identifier errors.
-        case .i1(let row):
-            return "LINHA\(row): Um Identificador é esperado."
+        case .i1(let row, let col):
+            return "Um Identificador é esperado.\nLINHA: \(row)\nCOLUNA: \(col)"
 
 
             /// Terminator errors.
-        case .t1(let row):
-            return "LINHA\(row): Terminador necessário."
-        case .t2(let row):
-            return "LINHA\(row): Terminador inválido."
-        case .t3(let row):
-            return "LINHA\(row): Terminador de bloco inválido."
-        case .t4(let row):
-            return "LINHA\(row): Terminador de instruções inválido, deve ser `;`."
+        case .t1(let row, let col):
+            return "Terminador necessário.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .t2(let row, let col):
+            return "Terminador inválido.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .t3(let row, let col):
+            return "Terminador de bloco inválido.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .t4(let row, let col):
+            return "Terminador de instruções inválido, deve ser `;`.\nLINHA: \(row)\nCOLUNA: \(col)"
 
 
         /// Final errors
-        case .f1(let row):
-            return "LINHA\(row): Programa terminou inesperadamente."
-        case .f2(let row):
-            return "LINHA\(row): Programa deve terminar com `.`."
+        case .f1(let row, let col):
+            return "Programa terminou inesperadamente.\nLINHA: \(row)\nCOLUNA: \(col)"
+        case .f2(let row, let col):
+            return "Programa deve terminar com `.`.\nLINHA: \(row)\nCOLUNA: \(col)"
         }
     }
 }
