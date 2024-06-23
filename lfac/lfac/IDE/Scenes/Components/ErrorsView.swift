@@ -14,7 +14,7 @@ struct ErrorsView: View {
 
     var body: some View {
         VStack {
-            Text("⚠️  \(errors.count) ERRO\(plural) ENCONTRADO\(plural)")
+            Text("⚠️ ERRO ENCONTRADO")
                 .font(.title2)
                 .fontWeight(.bold)
                 .padding(.bottom)

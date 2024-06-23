@@ -19,8 +19,6 @@ struct TokenListItem: View {
                 .foregroundStyle(Color(uiColor: .opaqueSeparator))
                 .clipShape(RoundedRectangle(cornerRadius: 12), style: FillStyle())
             
-            
-            
             HStack {
                 ZStack {
                     Rectangle()
