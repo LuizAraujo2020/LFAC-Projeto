@@ -9,6 +9,7 @@ var
     decimal1: real;
 begin
     begin
+        begin
         valido := false;
         valido1 := true;
         inteiro := 21;
