@@ -334,12 +334,6 @@ final class SyntacticalAnalyzer {
     /// <comado> ::=
     ///     <atribuição> | <chamada de procedimento> | <comando composto> | <comando condicional 1> | <comando repetitivo 1>
     func comando() throws {
-
-        print("⚠️1 comando: ")
-        print("✅ tokens[currentTokenIndex].value: \(tokens[currentTokenIndex].value) | \(tokens[currentTokenIndex].type)")
-        print("✅ tokens[currentTokenIndex + 1].value: \(tokens[currentTokenIndex + 1].value)")
-
-
         /// atribuição
         if tokens[currentTokenIndex].type == .identifiers {
             try atribuicao()

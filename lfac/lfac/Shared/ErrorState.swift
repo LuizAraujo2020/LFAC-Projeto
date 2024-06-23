@@ -15,7 +15,7 @@ struct ErrorState: LocalizedError, Identifiable, Hashable {
 
     var id: String { UUID().uuidString }
     
-    init(type: ErrorState.ErrorType, row: Int?, col: Int?) {
+    init(type: ErrorState.ErrorType, row: Int? = nil, col: Int? = nil) {
         self.type = type
         self.row = row
         self.col = col

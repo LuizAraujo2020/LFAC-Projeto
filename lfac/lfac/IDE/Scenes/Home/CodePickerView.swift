@@ -23,5 +23,5 @@ struct CodePickerView: View {
 }
 
 #Preview {
-    CodePickerView(code: .constant(.code1))
+    CodePickerView(code: .constant(.code3))
 }

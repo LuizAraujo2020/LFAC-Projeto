@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    @Published var codeFile: FileScanner.FilesName = .code0
+    @Published var codeFile: FileScanner.FilesName = .code3
     @Published var lexicalAnalyzer: LexicalAnalyzer
     @Published var syntacticalAnalyzer: SyntacticalAnalyzer
 
@@ -83,13 +83,13 @@ class ContentViewModel: ObservableObject {
         .store(in: &cancellables)
     }
 
-    func exportCode(_ file: FileScanner.FilesName = .code1) {
+    func exportCode(_ file: FileScanner.FilesName = .code3) {
         codeFile = file
         fileScanner.writeTo(fileName: file, value: code)
         savedCode = code
     }
 
-    func importCode(_ file: FileScanner.FilesName = .code1) {
+    func importCode(_ file: FileScanner.FilesName = .code3) {
         let data = fileScanner.readFrom(fileName: file)
         code = data
 

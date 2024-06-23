@@ -39,7 +39,7 @@ class FileScanner {
         }
     }
 
-    func readFrom(fileName: FilesName = .code1, fileExtension: FilesExtenstion = .pascalSwift) -> String {
+    func readFrom(fileName: FilesName = .code3, fileExtension: FilesExtenstion = .pascalSwift) -> String {
         if let fileURL = Bundle.main.url(forResource: fileName.rawValue, withExtension: fileExtension.rawValue) {
             if let dataFile = try? String(contentsOf: fileURL) {
                 return dataFile
@@ -53,9 +53,9 @@ class FileScanner {
 extension FileScanner {
 
     enum FilesName: String, Identifiable, Hashable, CaseIterable {
-    case code0
-    case code1
-    case code2
+//    case code0
+//    case code1
+//    case code2
     case code3
     case code4
 //    case tokenList = "token-list"
@@ -64,9 +64,9 @@ extension FileScanner {
 
         var name: String {
             switch self {
-            case .code0: "Código 0"
-            case .code1: "Código 1"
-            case .code2: "Código 2"
+//            case .code0: "Código 0"
+//            case .code1: "Código 1"
+//            case .code2: "Código 2"
             case .code3: "Código 3"
             case .code4: "Código 4"
             }

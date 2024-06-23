@@ -13,7 +13,7 @@ struct LexicalAnalysisCompactView: View {
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(
-                analyzer.tokens//.filter({ $0.type == .keyword || $0.type == .identifiers })
+                analyzer.tokens.filter({ $0.type == .keyword || $0.type == .identifiers })
             ) { token in
                 HStack {
                     Rectangle()
