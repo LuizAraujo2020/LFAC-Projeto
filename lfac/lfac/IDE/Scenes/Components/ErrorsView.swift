@@ -20,9 +20,21 @@ struct ErrorsView: View {
                 .padding(.bottom)
 
             List(errors) { element in
-                Text("🔴  " + element.localizedDescription)
-                    .font(.title3)
-                    .padding(2)
+                VStack(alignment: .leading) {
+                    Text("🔴  " + element.localizedDescription)
+                        .font(.title3)
+                        .padding(2)
+
+                    HStack {
+                        Text("LINHA:\t").bold()
+                        Text("\(element.row)")
+                    }
+
+                    HStack {
+                        Text("COLUNA:\t").bold()
+                        Text("\(element.row)")
+                    }
+                }
             }
 
             Spacer()
@@ -35,11 +47,11 @@ struct ErrorsView: View {
 #Preview {
     ErrorsView(
         errors: [
-            .c2(1, 0),
-            .c3(2, 4),
-            .e6(3, 7),
-            .e8(4, 3),
-            .f2(5, 9)
+            ErrorState(type: .c2, row: 1, col: 0),
+            ErrorState(type: .c3, row: 2, col: 4),
+            ErrorState(type: .e6, row: 3, col: 7),
+            ErrorState(type: .e8, row: 4, col: 3),
+            ErrorState(type: .f2, row: 5, col: 9)
         ]
     )
 }

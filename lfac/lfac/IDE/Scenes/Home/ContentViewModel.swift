@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    @Published var codeFile: FileScanner.FilesName = .code1
+    @Published var codeFile: FileScanner.FilesName = .code0
     @Published var lexicalAnalyzer: LexicalAnalyzer
     @Published var syntacticalAnalyzer: SyntacticalAnalyzer
 

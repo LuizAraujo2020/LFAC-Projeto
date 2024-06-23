@@ -83,7 +83,7 @@ enum PTokenType: String, Identifiable, CaseIterable, Hashable {
         case .relationals: return Color.orange
         case .attribution: return Color.orange
         case .keyword: return Color.blue
-        case .type: return Color.blue
+        case .type: return Color.green
         case .booleans: return Color.green
         case .integers: return Color.green
         case .reals: return Color.green
