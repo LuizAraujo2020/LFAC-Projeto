@@ -10,6 +10,7 @@ import Foundation
 final class SyntacticalAnalyzer {
     // MARK: - Properties
 
+
     /// Tokens
     private var tokens: [PToken]
 
@@ -222,6 +223,7 @@ final class SyntacticalAnalyzer {
     func tipo() throws {
         guard tokens[currentTokenIndex].type == .type else {
             throw ErrorState(type: .e8, row: tokens[currentTokenIndex].line, col: tokens[currentTokenIndex].column)
+        }
     }
 
     /// <declaração de procedimento> ::=
@@ -379,7 +381,8 @@ final class SyntacticalAnalyzer {
         }
 //            nextSymbol()
             
-    
+        let beginIndex: Int = findEndIndex(beginIndex: currentTokenIndex)
+
         try runBeginEndScope(beginIndex: currentTokenIndex, endIndex: beginIndex)
         
         return
@@ -550,7 +553,7 @@ final class SyntacticalAnalyzer {
         try listaDeExpressoes()
     }
 
-    /// <comando condicional 1> ::=
+    /// <comanxdo condicional 1> ::=
     ///     if <expressão> then <comando> [ else <comando> ]
     func comandoCondicional() throws {
         guard tokens[currentTokenIndex].value == "if" else {
