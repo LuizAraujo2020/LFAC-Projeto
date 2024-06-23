@@ -71,11 +71,21 @@ class ContentViewModel: ObservableObject {
     func observeCodePicker() {
         self.$codeFile.sink { [unowned self] value in
             self.importCode(value)
+            self.runAnalysis()
+        }
+        .store(in: &cancellables)
+    }
+
+    func observeCodeChanges() {
+        self.$code.sink { [unowned self] value in
+            self.importCode(codeFile)
+            self.runAnalysis()
         }
         .store(in: &cancellables)
     }
 
     func exportCode(_ file: FileScanner.FilesName = .code1) {
+        codeFile = file
         fileScanner.writeTo(fileName: file, value: code)
         savedCode = code
     }
@@ -88,6 +98,11 @@ class ContentViewModel: ObservableObject {
         self.syntacticalAnalyzer = SyntacticalAnalyzer(tokens: self.lexicalAnalyzer.tokens)
 
         styled = AttributedString(data)
+    }
+
+    func runAnalysis() {
+        self.lexicalAnalyzer = LexicalAnalyzer(code: code)
+        self.syntacticalAnalyzer = SyntacticalAnalyzer(tokens: self.lexicalAnalyzer.tokens)
     }
 
     private func validateInput(_ input: String) -> Bool {
